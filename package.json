@@ -17,7 +17,8 @@
     "@oddbird/slide-deck": "^0.2.1",
     "@terriblemia/ground-control": "^0.3.0",
     "js-yaml": "^4.1.1",
-    "lite-youtube-embed": "^0.3.4"
+    "lite-youtube-embed": "^0.3.4",
+    "node-fetch": "^3.3.2"
   },
   "type": "module",
   "devDependencies": {

@@ -99,3 +99,6 @@ env/
 
 # Cache file for 11ty processed images
 /src/filters/image_cache.json
+
+# Local Netlify folder
+.netlify
