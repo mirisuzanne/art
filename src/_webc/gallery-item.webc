@@ -1,0 +1,16 @@
+<img
+  webc:if="item.image"
+  :src="item.image"
+  :alt="item.alt || ''"
+  sizes="auto"
+>
+<lite-youtube
+  webc:elseif="item.youtube"
+  :videoid="item.youtube"
+  :style="`background-image: url('https://v1.opengraph.11ty.dev/https%3A%2F%2Fyoutube.com%2Fwatch%3Fv%3D${item.youtube}/auto/jpeg/');`"
+  @text="item.alt || ''"
+></lite-youtube>
+
+<style>
+  gallery-item { display: block; }
+</style>

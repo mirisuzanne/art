@@ -1,0 +1,4 @@
+<style
+  webc:keep
+  @raw="getBundle('css', this.css)"
+></style>

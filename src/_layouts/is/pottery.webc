@@ -1,0 +1,56 @@
+---
+layout: is/page
+tags:
+  - pottery
+  - product
+---
+
+<header>
+  <h1 @text="this.title"></h1>
+  <time
+    :datetime="this.page.date.toISOString()"
+    @text="dateFormat(this.page.date)"
+  ></time>
+  –
+  <em webc:if="this.sub" @text="this.sub"></em>
+</header>
+
+<p>
+  Made by hand in Denver,
+  using <em @text="this.clay"></em>
+  with <span @text="this.glaze"></span>.
+
+  <span
+    webc:if="this.summary"
+    @html="mdInline(this.summary)"
+  ></span>
+  <span @text="`${sizeToString(size)} inches`"></span>,
+  <span @text="`${lb || ozToLb(oz)}lb`"></span>.
+
+  <span webc:if="this.stock > 0">
+    <em @text="`${this.stock} in stock`"></em>.
+  </span>
+  <span webc:elseif="this.sold">
+    <em>Sold</em>.
+  </span>
+  <span webc:else>
+    <em>Available</em>.
+  </span>
+</p>
+
+<figure webc:if="this.gallery?.length > 0">
+  <art-gallery>
+    <gallery-item
+      webc:for="item of this.gallery"
+      :@item="item"
+    ></gallery-item>
+  </art-gallery>
+</figure>
+
+<div @raw="this.content"></div>
+
+<check-out
+  :@weight="this.lb || ozToLb(this.oz, 2)"
+  :@box="shippingBox(this.size, this.padding, this.boxes)"
+  :@price="this.price"
+></check-out>

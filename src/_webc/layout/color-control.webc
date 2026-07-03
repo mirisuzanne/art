@@ -1,0 +1,29 @@
+<toggle-control id="color-scheme" data-attr="color-scheme" data-local="color-scheme">
+  <button type="button">light</button>
+  <button type="button">dark</button>
+  <button type="button" aria-pressed="true">auto</button>
+</toggle-control>
+
+<input-control
+  data-prop="--filter-brightness"
+  data-local="css-filter-brightness"
+  data-event="input"
+>
+  <label for="filter-brightness">Brightness</label>
+  <input id="filter-brightness" type="range" min="0.2" value="1" max="2" step="0.1" list="filter-list">
+  <datalist id="filter-list"><option value="1">default</option></datalist>
+</input-control>
+
+<input-control
+  data-prop="--filter-contrast"
+  data-local="css-filter-contrast"
+  data-event="input"
+>
+  <label for="filter-contrast">Contrast</label>
+  <input id="filter-contrast" type="range" min="0.5" value="1" max="2" step="0.1" list="filter-list">
+</input-control>
+
+<button
+  data-reset="filter-contrast filter-brightness color-scheme"
+  type="button"
+>reset</button>

@@ -1,0 +1,8 @@
+<footer id="contentinfo">
+  <template webc:type="11ty" 11ty:type="md">
+    Keep an eye on me
+    using modern
+    [rss](/feed.rss) or [email](https://buttondown.com/MiaCulpa)
+    surveillance techniques.
+  </template>
+</footer>

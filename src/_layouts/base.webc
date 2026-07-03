@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title @text="title || 'Art by Miriam'"></title>
+  <style webc:keep>
+    @layer starter, tools, theme, slides;
+  </style>
+  <link rel="stylesheet" href="../_css/base.css">
+  <style @raw="getBundle('css')" webc:keep></style>
+  <meta
+    webc:nokeep
+    webc:if="this.css"
+    webc:for="styleSheet of this.css"
+    webc:is="template-styles"
+    :@css="styleSheet"
+  >
+</head>
+<body>
+  <template
+    webc:nokeep
+    @raw="this.content"
+  ></template>
+  <script webc:keep @raw="getBundle('js')"></script>
+</body>
+</html>

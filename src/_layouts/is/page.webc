@@ -1,0 +1,54 @@
+---
+layout: base
+css:
+  - fonts
+  - page
+# nav:
+#   pottery: '/pottery/'
+---
+
+<header id="banner">
+  <a href="/" rel="home">m</a>
+  <nav webc:if="this.nav">
+    <a
+      webc:for="(name, url) in this.nav"
+      :href="url"
+      @text="name"
+    ></a>
+  </nav>
+  <div>
+    <button popovertarget="color-controls">colors</button>
+    <dialog id="color-controls" popover>
+      <color-control></color-control>
+    </dialog>
+  </div>
+</header>
+
+<main @raw="this.content"></main>
+
+<link
+  rel="stylesheet"
+  href="../../_css/fonts.css"
+  webc:bucket="fonts"
+>
+
+<style webc:bucket="page">
+body {
+  max-inline-size: 60ch;
+  margin: 1lh auto;
+}
+
+#banner {
+  display: flex;
+  justify-content: space-between;
+  margin-block: 1lh;
+}
+
+sub-title {
+  font-style: italic;
+
+  time + &::before {
+    content: ' – ';
+  }
+}
+</style>

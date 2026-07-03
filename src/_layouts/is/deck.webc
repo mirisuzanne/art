@@ -1,0 +1,66 @@
+---
+layout: base
+tags: [deck]
+css:
+  - slides-layer-order
+  - slides-core
+  - slides-theme
+  - slides-local
+---
+
+<main>
+  <build-deck
+    webc:nokeep
+    :@slides="this.slideDeck"
+    slide-view="article"
+  >
+    <slide-controls slot="controls" webc:nokeep>
+      <h2>Colors</h2>
+      <color-control></color-control>
+    </slide-controls>
+  </build-deck>
+</main>
+
+<link
+  rel="stylesheet"
+  href="../../_css/fonts-recursive.css"
+  webc:bucket="slides-local"
+></link>
+
+<style webc:bucket="slides-local">
+body {
+  margin: unset;
+}
+
+slide-deck {
+  --slide-sans-font: "Recursive Variable", "Recursive Sans Linear";
+}
+
+h1, h2 {
+  font-size: var(--slide-title-text);
+}
+
+pre, code {
+  --mono: 1;
+}
+
+[slide-view=speaker] [slide-note] {
+  font-size: 1.5em;
+}
+
+[slide-view=slideshow] [slide-canvas=todo] {
+  background: url('/img/poetic-css.jpg') no-repeat scroll center center;
+  background-size: contain;
+
+  [slide-content] { visibility: hidden; }
+}
+
+::part(blank-slide) {
+  background: url('/img/poetic-css.jpg') no-repeat scroll center center;
+  background-size: contain;
+}
+
+::part(close-blank-slide):focus-visible {
+  outline: none;
+}
+</style>

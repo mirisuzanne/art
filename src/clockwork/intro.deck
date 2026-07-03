@@ -1,0 +1,444 @@
+---
+eleventyExcludeFromCollections: true
+layout: is/deck
+tags:
+  - clockwork
+---
+
+Hello
+
+<!-- @slide
+title: Clockwork **Utopia**
+sub: (In Mia's brain)
+-->
+
+<!-- @slide
+img: clockwork/movement.jpg
+caption: >
+  1920's **Mauthe** Wall Clock
+-->
+
+During the pandemic
+I got really into a British TV show called
+The Repair Shop,
+and particularly interested in clock repair.
+I wanted something to do with my hands,
+and I wanted it to feel _useful_,
+and I wanted to understand how clocks _work_.
+
+<!-- @slide
+img: clockwork/center-wheel.jpg
+caption: >
+  Early designs for my clock
+-->
+
+And I was excited to find out
+the basics are learnable!
+And I started working on designs for a clock of my own.
+
+<!-- @slide
+img: clockwork/clear-craze.jpg
+caption: 90's "clear craze"
+-->
+
+My plan is to laser cut and 3d print the parts
+using colorful plastic,
+aiming for a 90s clear craze aesthetic.
+
+<!-- @slide
+pre: A clock "_movement_"
+title: In Five Parts…
+-->
+
+There's some metaphor here
+with a society, or a political movement.
+
+<!-- @slide
+title: >
+  **Power** Source
+sub: Usually a spring (compact) or weight (consistent)
+caption: wants to unwind!
+-->
+
+The spring or weight is really a battery,
+storing the energy that we put in,
+and releasing it over time.
+If you have a clock that you wind,
+you are the power source.
+
+A self-winding watch
+just uses a small weight and ratchet
+so your arm-movements are constantly winding.
+
+By default, a spring will want to unwind immediately,
+releasing all the power at once.
+
+<!-- @slide
+title: >
+  Gear **Train**
+sub: Convert between speed & strength
+caption: how the power moves around
+-->
+
+The gear train is a series of levers
+that convert power between force and distance.
+We start with a lot of force concentrated at one end,
+in the spring or weight --
+and but each smaller gear
+will move faster with less force.
+At the other end of the gear train,
+it takes very little force
+to stop the entire thing from moving.
+
+But a full turn of the small gear
+might only release a small fraction of our power.
+The bigger the ratio,
+the longer our clock will run --
+but also the bigger weight we'll need
+to run it.
+
+but still,
+this will spin freely.
+
+<!-- @slide
+title: >
+  Periodic **Regulator**
+sub: A pendulum works pretty well
+caption: wants to remain constant!
+-->
+
+We also need something
+that we can use to keep time.
+Since the swing of a pendulum is consistent,
+that works pretty well.
+
+But because of friction,
+we can't have perpetual motion --
+so we'll need to give it more power on occasion.
+
+<!-- @slide
+title: >
+  **Escapement** Mechanism
+sub: What makes something a 'clockwork'
+caption: limits the flow of power
+-->
+
+The escapement is what connects these two parts.
+On either end of the pendulum swing,
+the anchor catches the gears
+to stop them from moving.
+On the return swing,
+power is allowed to escape,
+some of it pushing the pendulum.
+
+Tick tock,
+catch and release.
+
+<!-- @slide
+title: >
+  Dial & **Hands**
+sub: Called the 'motion works'
+caption: how we read the time
+-->
+
+Finally we need a display.
+These are a couple more gears
+that do the math we need for understanding.
+First converting from the speed of the pendulum
+to the speed of the second or minute hand
+(which rotates once per hour).
+Then again, dividing that speed by 12
+to get an hour hand
+rotating twice per day.
+
+<!-- @slide
+pre: Clockwork **math**
+title: Is **Not Reliable**
+-->
+
+There is _math_ involved with clockworks --
+most of it in gear ratios
+and choosing a pendulum length.
+
+But that math doesn't make it _reliable_,
+because friction is unpredictable, and it adds up.
+Friction in the works will depend on oil and dirt,
+Friction in the air will depend on
+temperature and humidity,
+the materials will expand and contract --
+even gravity is different
+depending where you are.
+
+<!-- @slide
+title: Everything **Adjusts**
+-->
+
+So the solution is to make everything _adjustable_.
+The math doesn't have to be perfect,
+because you can dial it in
+to get the result you want.
+
+This is currently where my project stalled.
+My measurement is correct based on the math,
+but I need to build in an adjustment
+because it's not working.
+
+<!-- @slide
+pre: The _tinkerer_
+title: Relationship to **Time**
+-->
+
+I also enjoy the relationship to time
+that comes from _tinkering on clocks_.
+Every clock repair person I've met
+is a _tinkerer_.
+
+They might be working on a clock,
+but they are clearly not _on the clock_.
+In fact, the clock isn't running.
+And I enjoy that.
+We repair clocks to pass the time,
+not to enforce a schedule.
+
+I think that's different
+from how most people relate to clocks.
+
+I used to work as an electrician,
+and there was a similar irony involved.
+When you're working on a light,
+you're always working in the dark.
+Working without access to power.
+
+<!-- @slide
+pre: 2020…
+img: clockwork/Timnit_Gebru.jpg
+title: Timnit Gebru
+sub: AI Ethicist fired from Google
+url: https://en.wikipedia.org/wiki/Stochastic_parrot
+source: >
+  On the Dangers of Stochastic Parrots: Can Language Models Be Too Big?
+-->
+
+Around the same time,
+there was a big scandal in tech circles
+when Google tried to block publishing of a paper
+written primarily by their own AI ethics researchers.
+Timnit Gebru write a public letter in response,
+asking for more transparency,
+and she was fired.
+
+<!-- @slide
+title: >
+  "Stochastic Parrots"
+md: >
+  Repeat the _likely text_,
+  without "_understanding_" it
+-->
+
+Stochastic often means
+random in the details,
+but predictable at a large scale.
+An educated guess.
+
+In this case,
+a program that returns a somewhat random,
+but statistically likely response to a prompt.
+
+<!-- @slide
+pre: Some concerns
+title: About the **Approach**
+md: |
+  - environmental footprint
+  - financial costs
+  - the inscrutability of large models (a black box!)
+  - bias is 'learned' without being 'taught'
+  - the inability of LLMs to understand the language they process
+  - spread of disinformation
+-->
+
+That paper specifically raises concerns
+about Large language models,
+
+<!-- @slide
+youtube: P7XT4TWLzJw
+caption: Timnit Gebru - Eugenics and the Promise of Utopia through AGI
+-->
+
+But Timnit was also drawing attention to
+the people hyping Large Language Models
+as a form of "Artificial Intelligence" --
+and specifically "Artificial General Intelligence" --
+many of them explicitly drawing on ideas of eugenics,
+and other techno-utopian philosophies.
+
+<!-- @slide
+pre: Ask them to define
+title: Artificial **General** Intelligence
+-->
+
+The idea of AGI is that
+we'll reach a point where intelligence is _exponential_.
+If we can build a machine that is smarter than us,
+it will be able to build something even smarter.
+
+Despite scientists arguing
+that we don't know what intelligence is,
+the only ways we measure it
+are biased and based in eugenics,
+and we don't have any reason to believe
+it can be _increased_ exponentially.
+
+Basically to describe AGI
+they have to describe an all-powerful being.
+
+<!-- @slide
+url: https://www.techdirt.com/2023/11/30/elon-says-copyright-ai-lawsuits-dont-matter-because-digital-god-will-arrive-before-theyre-decided/
+source: Tech Dirt
+-->
+
+A digital god
+that will either save or destroy humanity.
+
+And yeah,
+it's the same guys claiming it might save or destroy humanity.
+It doesn't matter which,
+as long as we understand they are creating a god.
+
+<!-- @slide
+img: clockwork/torment.jpg
+fit: contain
+-->
+
+They're the same guys
+telling us that they are Frankenstein,
+or naming their companies like
+_Skynet_ after Terminator movies.
+They constantly reference science fiction,
+with themselves as the bad guys.
+
+<!-- @slide
+title: Longtermism
+sub: Numbers are bigger when you multiply them
+-->
+
+Many of them --
+Elon Musk, etc --
+believe in some version of _longtermism_.
+
+This is not just the idea
+that we should care about the future,
+but that _mathematically_
+the future is _all that matters_.
+The whole philosophy is built on
+multiplying small numbers by long time periods.
+
+<!-- @slide
+pre: If _people have value_
+title: |
+  Then **more people** \
+  have **more value**
+-->
+
+<!-- @slide
+pre: There's finite room on Earth…
+title: But **Infinite Room** in Space!
+-->
+
+<!-- @slide
+pre: If we invent _digital people_
+title: Then We Need **Less Space**
+-->
+
+<!-- @slide
+sub: Don't worry about _suffering now_
+title: A **Far Future** Utopia
+md: |
+  All that matters is…
+  - Colonizing Mars
+  - Increasing birth rates
+  - Inventing digital people
+-->
+
+<!-- @slide
+img: clockwork/trolly.png
+fit: contain
+-->
+
+They present this as a Trolly problem,
+where you have a choice to kill some people now,
+but that will potentially save _hundreds of trillions_ of people
+in the far future.
+
+And it's purely accidental
+when their conclusion is
+the only people who matter today
+are the people colonizing space
+and building AI.
+
+Everything is a math problem,
+where anything can be multiplied by a trillion years.
+No one asks if maybe all these people tied to the track
+represent some more pressing issue
+that needs a systemic solution
+before it comes down to one person pulling a lever.
+
+<!-- @slide
+title: Roko's Basilisk
+-->
+
+Given enough time AGI is _inevitable_,
+so we should be the ones to build it.
+Once there are digital people,
+they will far outnumber organic people --
+so mathematically _this must already be a simulation_.
+
+If this is already a simulation,
+and we've already invented god,
+then what's to stop the AI from punishing people
+who refuse to invent AI?
+
+<!-- @slide
+source: Every Society Invents the Failed Utopia it Deserves
+url: https://publicdomainreview.org/essay/every-society-invents-the-failed-utopia-it-deserves/
+-->
+
+So these things were on my mind
+when I read
+_Every Society Invents the Failed Utopia it Deserves_.
+
+<!-- @slide
+img: clockwork/LouiseMichel.jpg
+title: Louise Michel
+sub: Teacher, revolutionary, sci-fi author
+-->
+
+<!-- @slide
+img: clockwork/commune.jpg
+caption: >
+  [Paris Commune](https://en.wikipedia.org/wiki/Paris_Commune),
+  March-May 1871
+-->
+
+<!-- @slide
+img: clockwork/orrery.jpg
+caption: >
+  Clockwork solar system
+-->
+
+<!-- @slide
+title: I'm **Less Interested** In…
+md: |
+  - Can we create sentient machines?
+  - Will they love us or kill us?
+-->
+
+<!-- @slide
+title: I'm **More Interested** In…
+md: |
+  - How does technology reflect utopian visions?
+  - A tension between theory & practice, math & friction
+  - How does the ability to tinker & make adjustments
+    change our relationship to technology?
+  - How has science fiction become a tool for propaganda?
+  - Relationship between utopias and perfection
+-->

@@ -1,0 +1,53 @@
+<h2>Interested?</h2>
+<p>
+  Everything is pay-what-you-want,
+  <em>if you want</em>.
+  If you're not in the Denver area,
+  please account for shipping.
+</p>
+
+<pop-over data-for="suggested-price" webc:if="this.price">
+  <button popovertarget="suggested-price">Not sure what to pay?</button>
+  <dialog id="suggested-price" popover>
+    <button popovertarget="suggested-price" popovertargetaction="close">close</button>
+
+    <p>
+      I would price this piece around
+      <strong @text="`$${this.price}`"></strong> USD.
+      But you really can pay whatever you want
+      (plus shipping).
+    </p>
+  </dialog>
+</pop-over>
+
+<shipping-rates
+  data-api="/api"
+  data-from="80205"
+  data-global="true"
+  :data-weight="this.weight"
+  :data-dimensions="this.box.size"
+>
+  <a href="https://postcalc.usps.com/Calculator/Index">Calculate</a>
+  the <strong>USPS Ground Advantage</strong> rate
+  from US Zip <strong>80205</strong>
+  to your location in a box that is
+  <output @text="sizeToString(this.box.size)"></output> inches
+  and weighs
+  <output @text="`${this.weight}lb`"></output>.
+</shipping-rates>
+
+<script src="./shipping-rates.js"></script>
+
+<style>
+@layer tools {
+  check-out {
+    display: grid;
+    gap: 1lh;
+    margin-block: 1lh;
+
+    & > * {
+      margin-block: unset;
+    }
+  }
+}
+</style>

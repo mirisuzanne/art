@@ -1,0 +1,25 @@
+<style>
+figure:has(art-gallery) {
+  container: gallery / inline-size;
+}
+
+art-gallery {
+  display: grid;
+  display: grid-lanes;
+  gap: 0.5lh;
+
+  @container gallery (inline-size > 40ch) {
+    grid-template-columns: repeat(2, 1fr);
+
+    & > :first-child,
+    & > :last-child:nth-child(even) {
+      --span: span 2;
+    }
+  }
+}
+
+gallery-item,
+[gallery-item] {
+  grid-column: var(--span, initial);
+}
+</style>

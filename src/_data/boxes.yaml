@@ -1,0 +1,34 @@
+- size: [6,6,6]
+  from: Office Depot
+
+- size: [9,9,9]
+  from: Office Depot
+
+- size: [8,8,8]
+  from: USPS
+
+- size: [20,14,10]
+  from: USPS
+
+- size: [12,10,8]
+  from: USPS
+
+- size: [24,18,18]
+  from: ACE
+  price: 6.6
+
+- size: [14,14,14]
+  from: ACE
+  price: 3
+
+- size: [16,16,15]
+  from: ACE
+  price: 5
+
+- size: [12,12,10]
+  from: ACE
+  price: 2.6
+
+- size: [16,15,15]
+  from: ACE
+  price: 5

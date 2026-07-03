@@ -1,0 +1,276 @@
+@layer starter.reset, starter.base;
+
+@layer starter.theme {
+  html {
+    /* brand colors */
+    --brand-blue: hsl(195 52% 31%);
+    --brand-orange: hsl(24 100% 62%);
+    --brand-pink: hsl(330 100% 45%);
+    --neutral: hsl(195deg 10% 50%);
+
+    /* generic */
+    --color-light: hsl(200 12% 95.098%);
+    --color-dark: hsl(200deg 12% 4.902%);
+
+    --color-light-callout: hsl(193 28% 87%);
+    --color-dark-callout: hsl(192.59 23.914% 23.567%);
+
+    --color-light-accent: hsl(337.28 98.75% 79.203%);
+    --color-dark-accent: hsl(330.2deg 67.742% 42.549%);
+
+    --color-light-action: hsl(196.57 76.878% 80.38%);
+    --color-dark-action: hsl(195deg 53% 27%);
+
+    --color-light-active: hsl(330 52.857% 87%);
+    --color-dark-active: hsl(330deg 52.857% 27.451%);
+
+    --color-light-feature: hsl(194.07 82.555% 45.938%);
+    --color-dark-feature: hsl(193.69 99.455% 22.7%);
+
+    /* background colors */
+    --background-color: var(--color-light, Canvas);
+    --callout-color: var(--color-light-callout);
+
+    /* content colors */
+    --text-color: var(--color-dark, CanvasText);
+    --accent-color: var(--color-dark-accent, AccentColor);
+    --border-color: var(--neutral, gray);
+    --shadow-color: black;
+    --action-color: var(--color-dark-action, LinkText);
+    --active-color: var(--color-dark-active, ActiveText);
+    --feature-color: var(--color-dark-feature, AccentColor);
+
+    font-size: max(1em, 20px);
+    color-scheme: light;
+    filter:
+      brightness(var(--filter-brightness, 1))
+      contrast(var(--filter-contrast, 1))
+    ;
+  }
+
+  html,
+  [color-scheme] {
+    color-scheme: light dark;
+
+    @supports (color: light-dark(pink, teal)) {
+      /* background colors */
+      --background-color: light-dark(
+        var(--color-light, Canvas),
+        var(--color-dark, Canvas)
+      );
+      --callout-color: light-dark(
+        var(--color-light-callout),
+        var(--color-dark-callout)
+      );
+
+      /* content colors */
+      --text-color: light-dark(
+        var(--color-dark, CanvasText),
+        var(--color-light, CanvasText)
+      );
+      --accent-color: light-dark(
+        var(--color-dark-accent, AccentColor),
+        var(--color-light-accent, AccentColor)
+      );
+      --action-color: light-dark(
+        var(--color-dark-action, LinkText),
+        var(--color-light-action, LinkText)
+      );
+      --active-color: light-dark(
+        var(--color-dark-active, ActiveText),
+        var(--color-light-active, ActiveText)
+      );
+      --feature-color: light-dark(
+        var(--color-dark-feature, AccentColor),
+        var(--color-light-feature, AccentColor)
+      );
+
+      --feature-gradient: linear-gradient(to top right,
+        var(--accent-color),
+        var(--feature-color)
+      );
+    }
+  }
+
+  [color-scheme=light] { color-scheme: light; }
+  [color-scheme=dark] { color-scheme: dark; }
+
+  ::selection {
+    background-color: var(--accent-color);
+    color: var(--background-color);
+  }
+
+  h1 {
+    margin: 0;
+  }
+
+  h1, h2, h3 {
+    line-height: normal;
+
+    @supports (background-clip: text) {
+      background: var(--feature-gradient);
+      background-clip: text;
+      color: transparent;
+      max-inline-size: max-content;
+
+    }
+  }
+
+  strong {
+    background: var(--feature-gradient);
+    color: var(--background-color);
+    filter: drop-shadow(1px 0 0 var(--feature-color));
+  }
+
+  a {
+    color: inherit;
+    text-decoration-color: var(--action-color);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.1em;
+  }
+
+  blockquote {
+    border-inline-start: thick solid;
+    border-image: var(--feature-gradient) 1;
+    margin-inline: unset;
+    padding-inline: 1ch;
+  }
+}
+
+@layer starter.base {
+  html {
+    --base-font-size: 20px;
+    --gap: round(up, 3vmin, 0.25lh);
+    --tab-size: 2;
+    --tab: calc(var(--tab-size, 2) * 1ch);
+    /* not fluid, just clamped by user preferences */
+    font-size: clamp(1em, var(--base-font-size), 1.25em);
+    interpolate-size: allow-keywords;
+    line-height: 1.5;
+    tab-size: var(--tab-size);
+  }
+
+  body {
+    margin: var(--gap);
+    font-size: clamp(1rem, 0.8rem + 0.5vi, 1.5rem);
+  }
+
+  body > :is(header, main, footer) {
+    container: layout / inline-size;
+  }
+
+  /* prose */
+  h1, h2, h3 {
+    margin-block: 0.75rlh 0.25rlh;
+  }
+
+  figure { margin-inline: unset; }
+  blockquote { margin-inline: var(--tab); }
+  p { margin-block: 0.5lh; }
+  ol, ul { padding-inline-start: var(--tab); }
+  dd { margin-inline-start: var(--tab); }
+  hr {
+    border: 0 dotted;
+    border-block-end-width: thin;
+    margin-block: 1.5lh;
+  }
+
+  /* controls */
+  :target { scroll-margin: 1lh; }
+  :focus { outline-offset: 4px; }
+  label { display: block; }
+  textarea {
+    field-sizing: content;
+    inline-size: 100%;
+    min-block-size: 4lh;
+  }
+
+  /* tables */
+  table {
+    border-collapse: collapse;
+    inline-size: 100%;
+    font-variant-numeric: tabular-nums;
+  }
+
+  th, td {
+    border: thin dotted;
+    text-align: left;
+    padding: 0.25lh 1ch;
+    vertical-align: top;
+  }
+
+  /* visibility */
+  [visually-hidden=skip-links]:focus-within {
+    background: Canvas;
+    border: thin solid grey;
+    color: CanvasText;
+    inset: 0 auto auto 0;
+    list-style: none;
+    margin: unset;
+    padding: 1em;
+    position: fixed;
+  }
+}
+
+@layer starter.reset {
+  html {
+    block-size: 100%;
+    color-scheme: light dark;
+    overflow-wrap: break-word;
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+  }
+
+  body { margin: unset; }
+
+  pre {
+    white-space: pre-wrap; /* old syntax */
+    white-space: preserve wrap; /* new syntax */
+  }
+
+  /* media */
+  picture { display: contents; }
+  source { display: none; }
+
+  img,
+  video,
+  iframe {
+    display: block;
+    block-size: auto;
+    max-inline-size: 100%;
+  }
+
+  /* controls */
+  input, button, textarea, select { font: inherit; }
+
+  button,
+  input:where(
+    [type="submit"],
+    [type="reset"],
+    [type="button"]
+  ) {
+    background: CanvasText;
+    color: Canvas;
+    border: thin solid grey;
+  }
+
+  [aria-expanded=true],
+  [aria-pressed=true] {
+    background: SelectedItem;
+    border-color: CanvasText;
+    color: SelectedItemText;
+  }
+
+  /* visibility */
+  [hidden] { display: none !important; }
+
+  visually-hidden,
+  [visually-hidden]:not(:focus-within):not(:active) {
+    clip-path: inset(50%) !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    position: absolute !important;
+    white-space: nowrap !important;
+    width: 1px !important;
+  }
+}

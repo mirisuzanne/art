@@ -1,0 +1,24 @@
+---
+layout: is/page
+---
+
+<header>
+  <h1 @text="this.title"></h1>
+  <sub-title webc:if="this.sub" @html="this.sub"></sub-title>
+</header>
+
+<figure webc:if="this.collections[this.list]?.length > 0">
+  <art-gallery>
+    <a
+      webc:for="item of this.collections[this.list]"
+      :href="item.url"
+      gallery-item
+    >
+      <img
+        webc:if="item.data.gallery.find((item) => item.image)"
+        :src="item.data.gallery.find((item) => item.image).image.replace('./', item.url)"
+        alt="" >
+      <span @text="item.data.title"></span>
+    </a>
+  </art-gallery>
+</figure>
