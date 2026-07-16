@@ -1,0 +1,18 @@
+<a href="https://postcalc.usps.com/Calculator/Index">Calculate</a>
+the <strong>USPS Ground Advantage</strong> rate
+from US Zip <strong>80205</strong>
+to your location in a box that is
+<output @text="sizeToString(this.dataDimensions)"></output> inches
+and weighs
+<output @text="`${this.weight}lb`"></output>.
+
+<script src="./shipping-rates.js"></script>
+
+<style>
+@layer tools {
+  shipping-rates {
+    background: var(--callout-color);
+    padding: var(--gap);
+  }
+}
+</style>

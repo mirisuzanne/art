@@ -1,0 +1,88 @@
+<span webc:if="this.content" webc:nokeep @text="this.content"></span>
+<slot></slot>
+
+<style>
+  @layer tools {
+    spoil-it {
+      --spoiler-background: var(--feature-gradient);
+
+      &::part(text) {
+        @supports (background-clip: text) {
+          background: var(--feature-gradient);
+          background-clip: text;
+          color: transparent;
+        }
+      }
+    }
+  }
+</style>
+
+<script>
+class SpoilIt extends HTMLElement {
+	static register(tagName) {
+		if ("customElements" in window) {
+			customElements.define(tagName || "spoil-it", SpoilIt);
+		}
+	}
+
+  static #appendShadowTemplate = (node) => {
+    const template = document.createElement("template");
+    template.innerHTML = `
+      <button part="button" aria-expanded="false" title="Spoiler">
+        <span part="text"><slot></slot></span>
+      </button>
+    `;
+    const shadowRoot = node.attachShadow({ mode: "open" });
+    shadowRoot.appendChild(template.content.cloneNode(true));
+  }
+
+  static #adoptShadowStyles = (node) => {
+    const shadowStyle = new CSSStyleSheet();
+    shadowStyle.replaceSync(`
+			button { all: unset; }
+
+      button:focus-visible {
+        outline: revert;
+        outline-offset: 2px;
+      }
+
+      button[aria-expanded="false"] {
+        background: var(--spoiler-background, currentColor);
+      }
+      button[aria-expanded="true"] {
+        color: var(--spoiler-text, inherit);
+      }
+
+      button[aria-expanded="false"] span {
+        visibility: hidden;
+      }
+    `);
+    node.shadowRoot.adoptedStyleSheets = [shadowStyle];
+  }
+
+  constructor() {
+    super();
+    SpoilIt.#appendShadowTemplate(this);
+    SpoilIt.#adoptShadowStyles(this);
+  }
+
+	#button;
+
+	connectedCallback() {
+    this.#button = this.shadowRoot.querySelector('[part=button]');
+		this.#button.addEventListener("click", this.#SpoilIt);
+	}
+
+	disconnectedCallback() {
+		this.#button.removeEventListener("click", this.#SpoilIt);
+	}
+
+	// private methods
+	#SpoilIt = (event) => {
+  	const isOpen = this.#button.getAttribute('aria-expanded') !== 'true';
+    this.#button.setAttribute('aria-expanded', isOpen);
+	}
+}
+
+SpoilIt.register();
+</script>

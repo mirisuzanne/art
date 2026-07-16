@@ -1,0 +1,78 @@
+<button aria-pressed="false">
+  Add to cart
+</button>
+
+<script>
+class AddToCart extends HTMLElement {
+	static register(tagName) {
+		if ("customElements" in window) {
+			customElements.define(tagName || "add-to-cart", AddToCart);
+		}
+	}
+
+  #shop;
+	#button;
+
+  get url() {
+    return this.dataset.url;
+  }
+
+  get item() {
+    return {
+      title: this.dataset.title,
+      url: this.dataset.url,
+      weight: this.dataset.weight,
+      size: this.dataset.size,
+      price: this.dataset.price,
+    };
+  }
+
+  get inCart() {
+    return this.#shop.getItem(this.item.url)?.count;
+  }
+
+	connectedCallback() {
+    this.#shop = document.querySelector('shop-keep');
+    this.#button = this.querySelector('button');
+
+    if (!this.#shop) throw new Error('This shopping cart needs a shop!');
+    if (!this.#button) throw new Error('Need a button for adding to cart');
+
+    this.#waitForShop();
+	}
+
+	disconnectedCallback() {
+		this.#button.removeEventListener("click", this.#AddToCart);
+    document.removeEventListener('cartChange', (e) => this.#SetButtonState());
+	}
+
+	// private methods
+  #waitForShop = async () => {
+    await customElements.whenDefined(this.#shop.localName);
+
+    this.#button.addEventListener("click", (e) => this.#AddToCart());
+    document.addEventListener('cartChange', (e) => this.#SetButtonState());
+
+    this.#SetButtonState();
+  }
+
+	#AddToCart = () => {
+    if (this.inCart > 0) return;
+
+    const item = this.item;
+    item.count = 1;
+
+    this.#shop.setItem(item);
+	}
+
+  #SetButtonState = () => {
+    this.#button.setAttribute('aria-pressed', this.inCart > 0);
+
+    this.#button.textContent = this.inCart > 0
+      ? `${this.inCart} in cart`
+      : `Add to cart`;
+	}
+}
+
+AddToCart.register();
+</script>

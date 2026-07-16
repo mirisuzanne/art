@@ -19,6 +19,7 @@ export default async function(eleventyConfig) {
     components: [
       'src/_webc/**/*.webc',
       'npm:@11ty/eleventy-img/*.webc',
+      'npm:@11ty/is-land/*.webc',
       'npm:@terriblemia/ground-control/*.webc',
       'npm:@oddbird/slide-deck/**/*.webc',
       'npm:@oddbird/eleventy-plugin-slide-deck/components/**/*.webc',

@@ -16,12 +16,15 @@
     webc:is="template-styles"
     :@css="styleSheet"
   >
+  <noscript>
+    <style>[show-when=js] { display: none !important; }</style>
+  </noscript>
 </head>
 <body>
   <template
     webc:nokeep
     @raw="this.content"
   ></template>
-  <script webc:keep @raw="getBundle('js')"></script>
+  <script type="module" webc:keep @raw="getBundle('js')"></script>
 </body>
 </html>

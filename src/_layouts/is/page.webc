@@ -7,6 +7,8 @@ css:
 #   pottery: '/pottery/'
 ---
 
+<shop-keep></shop-keep>
+
 <header id="banner">
   <a href="/" rel="home">m</a>
   <nav webc:if="this.nav">
@@ -16,15 +18,46 @@ css:
       @text="name"
     ></a>
   </nav>
-  <div>
+  <pop-over
+    data-for="color-control"
+    style="--area: top span-left"
+    show-when="js"
+  >
     <button popovertarget="color-controls">colors</button>
     <dialog id="color-controls" popover>
       <color-control></color-control>
     </dialog>
-  </div>
+  </pop-over>
 </header>
 
-<main @raw="this.content"></main>
+<main id="main" @raw="this.content"></main>
+
+<a href="#cart" id="cart-link" hidden>
+  Cart <shop-output data-stat="count" hide-zero></shop-output>
+</a>
+
+<aside shopping-cart>
+  <shopping-cart id="cart" show-when="defined"></shopping-cart>
+  <noscript>
+    <p>
+      The shopping cart requires Javascript,
+      but you can always email me instead:
+      <a href="mailto:miriam@miriamsuzanne.com">miriam@miriamsuzanne.com</a>
+    </p>
+  </noscript>
+</aside>
+
+<ul>
+  <li>separate forms, localStorage cart as source of truth…</li>
+  <li>✅ <code>add-to-cart</code> only adds a product to cart</li>
+  <li>✅ <code>cart-control</code> only edits price/count of items in the cart</li>
+  <li>✅ <code>shopping-cart</code> adds/removes cart-controls</li>
+  <li>✅ <code>shopping-cart</code> updates shipping</li>
+  <li>✅ <code>shipping-rates</code> only estimates shipping of cart items</li>
+  <li>✅ <code>shipping-rates</code> stores your location??</li>
+  <li>✅ <code>shopping-cart</code> listens for shipping updates??</li>
+  <li><code>check-out</code> only submits the cart data <em>somewhere</em></li>
+</ul>
 
 <link
   rel="stylesheet"
@@ -33,15 +66,37 @@ css:
 >
 
 <style webc:bucket="page">
+@property --grid-column {
+  syntax: '*';
+  inherits: false;
+  initial-value: content;
+}
+
 body {
-  max-inline-size: 60ch;
-  margin: 1lh auto;
+  --content-grid-columns:
+    [full-start] 1fr
+    [content-start] minmax(min-content, 60ch) [content-end]
+    1fr [full-end];
+  display: grid;
+  grid-template-columns: var(--content-grid-columns);
+  margin: 1lh 0;
+
+  & > * {
+    grid-column: var(--grid-column, content);
+  }
+}
+
+[shopping-cart] {
+  --grid-column: full;
 }
 
 #banner {
   display: flex;
   justify-content: space-between;
-  margin-block: 1lh;
+}
+
+main {
+  margin-block: var(--spacer) var(--gap);
 }
 
 sub-title {
@@ -51,4 +106,6 @@ sub-title {
     content: ' – ';
   }
 }
+
+[show-when=defined]:not(:defined) { display: none !important; }
 </style>

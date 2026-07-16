@@ -1,0 +1,30 @@
+---
+layout: is/page
+tags:
+  - product
+---
+
+<header>
+  <h1 @text="this.title"></h1>
+  <time
+    :datetime="this.page.date.toISOString()"
+    @text="dateFormat(this.page.date)"
+  ></time>
+  –
+  <em webc:if="this.sub" @text="this.sub"></em>
+</header>
+
+<div webc:nokeep @raw="this.content"></div>
+
+<div>
+  <add-to-cart
+    :data-title="this.title"
+    :data-url="this.page.url"
+    :data-weight="this.product.lb"
+    :data-size="paddedSize(this.product.size, this.padding)"
+    :data-price="this.product.price"
+    show-when="defined"
+  ></add-to-cart>
+
+  <em webc:if="this.product.price" @text="`Suggested price: $${this.product.price}`"></em>
+</div>

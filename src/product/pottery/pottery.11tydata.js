@@ -7,7 +7,7 @@ const title = (data) => {
 
 export default {
   layout: 'is/pottery',
-  padding: 4,
+  padding: 1,
   eleventyComputed: {
     title,
   },

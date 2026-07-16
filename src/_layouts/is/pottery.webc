@@ -1,19 +1,8 @@
 ---
-layout: is/page
+layout: is/product
 tags:
   - pottery
-  - product
 ---
-
-<header>
-  <h1 @text="this.title"></h1>
-  <time
-    :datetime="this.page.date.toISOString()"
-    @text="dateFormat(this.page.date)"
-  ></time>
-  –
-  <em webc:if="this.sub" @text="this.sub"></em>
-</header>
 
 <p>
   Made by hand in Denver,
@@ -24,17 +13,20 @@ tags:
     webc:if="this.summary"
     @html="mdInline(this.summary)"
   ></span>
-  <span @text="`${sizeToString(size)} inches`"></span>,
-  <span @text="`${lb || ozToLb(oz)}lb`"></span>.
+  <span @text="`${sizeToString(product.size)} inches`"></span>,
+  <span @text="`${product.lb}lb`"></span>.
 
-  <span webc:if="this.stock > 0">
-    <em @text="`${this.stock} in stock`"></em>.
+  <span webc:if="this.product.stock === 1">
+    <em>Available</em>.
   </span>
-  <span webc:elseif="this.sold">
-    <em>Sold</em>.
+  <span webc:elseif="this.product.stock > 0">
+    <em @text="`${this.product.stock} in stock`"></em>.
+  </span>
+  <span webc:elseif="this.product.restock">
+    <em>Made to order</em>.
   </span>
   <span webc:else>
-    <em>Available</em>.
+    <em>Sold</em>.
   </span>
 </p>
 
@@ -48,9 +40,3 @@ tags:
 </figure>
 
 <div @raw="this.content"></div>
-
-<check-out
-  :@weight="this.lb || ozToLb(this.oz, 2)"
-  :@box="shippingBox(this.size, this.padding, this.boxes)"
-  :@price="this.price"
-></check-out>

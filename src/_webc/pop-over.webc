@@ -1,0 +1,30 @@
+<style>
+@layer tools {
+  pop-over {
+    &:has(:popover-open) {
+      --popover-is-open: ;
+    }
+  }
+
+  button[popovertarget] {
+    background: transparent;
+    border: thin solid currentColor;
+    color: inherit;
+    padding-inline: 1ch;
+  }
+
+  [popover] {
+    border: thin solid;
+    box-sizing: border-box;
+    box-shadow: 0 0 var(--gap) #0009;
+    max-inline-size: min(100%, 45ch);
+    padding: var(--gap);
+    position-area: var(--area, bottom);
+    position-try-fallbacks: flip-block, flip-inline;
+
+    &::backdrop {
+      backdrop-filter: blur(2px);
+    }
+  }
+}
+</style>

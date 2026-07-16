@@ -7,6 +7,11 @@ layout: is/page
   <sub-title webc:if="this.sub" @html="this.sub"></sub-title>
 </header>
 
+<section
+  webc:if="this.content"
+  @raw="this.content"
+></section>
+
 <figure webc:if="this.collections[this.list]?.length > 0">
   <art-gallery>
     <a
@@ -15,7 +20,7 @@ layout: is/page
       gallery-item
     >
       <img
-        webc:if="item.data.gallery.find((item) => item.image)"
+        webc:if="item.data.gallery?.find((item) => item.image)"
         :src="item.data.gallery.find((item) => item.image).image.replace('./', item.url)"
         alt="" >
       <span @text="item.data.title"></span>

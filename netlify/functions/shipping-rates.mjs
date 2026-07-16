@@ -27,30 +27,17 @@ const getAuth = async () => {
 	return auth.access_token;
 }
 
-
-const cityStateFromZip = async (zip) => {
-	const auth = await getAuth();
-	const cityStateResponse = await fetch(`https://${api}/addresses/v3/city-state?ZIPCode=${zip}`, {
-		headers: {
-			accept: 'application/json',
-			Authorization: `Bearer ${auth}`,
-		},
-	});
-
-	return await cityStateResponse.json();
-}
-
-const domesticRates = async (details = {}) => {
+const domesticRates = async (shipping, item) => {
 	const auth = await getAuth();
 	const ratesResponse = await fetch(`https://${api}/prices/v3/base-rates/search`, {
 		method: 'post',
 		body: JSON.stringify({
-			originZIPCode: details.from,
-			destinationZIPCode: details.to,
-			weight: Number(details.weight),
-			length: Number(details.length),
-			width: Number(details.width),
-			height: Number(details.height),
+			originZIPCode: shipping.from,
+			destinationZIPCode: shipping.to,
+			weight: Number(item.weight),
+			length: Number(item.length),
+			width: Number(item.width),
+			height: Number(item.height),
 			priceType: "COMMERCIAL",
 			mailClass: "USPS_GROUND_ADVANTAGE",
 			processingCategory: "MACHINABLE",
@@ -67,24 +54,22 @@ const domesticRates = async (details = {}) => {
 	return await ratesResponse.json();
 }
 
-const globalRates = async (details = {}) => {
-	const mailClass = details.weight < 4
-		? 'FIRST-CLASS_PACKAGE_INTERNATIONAL_SERVICE'
-		: 'PRIORITY_MAIL_INTERNATIONAL';
-
+const globalRates = async (shipping, item) => {
 	const auth = await getAuth();
 	const ratesResponse = await fetch(`https://${api}/international-prices/v3/base-rates/search`, {
 		method: 'post',
 		body: JSON.stringify({
-			originZIPCode: details.from,
-			foreignPostalCode: details.to,
-			destinationCountryCode: details.country,
-			weight: Number(details.weight),
-			length: Number(details.length),
-			width: Number(details.width),
-			height: Number(details.height),
+			originZIPCode: shipping.from,
+			foreignPostalCode: shipping.to,
+			destinationCountryCode: shipping.country,
+			weight: Number(item.weight),
+			length: Number(item.length),
+			width: Number(item.width),
+			height: Number(item.height),
 			priceType: "COMMERCIAL",
-			mailClass,
+			mailClass: item.weight < 4
+				? 'FIRST-CLASS_PACKAGE_INTERNATIONAL_SERVICE'
+				: 'PRIORITY_MAIL_INTERNATIONAL',
 			processingCategory: "MACHINABLE",
 			rateIndicator: "SP",
 			destinationEntryFacilityType: "NONE",
@@ -99,38 +84,61 @@ const globalRates = async (details = {}) => {
 	return await ratesResponse.json();
 }
 
+const rateForItem = async (shipping, item) => {
+	const reply = shipping.country === 'US'
+		? await domesticRates(shipping, item)
+		: await globalRates(shipping, item);
+
+	return Number(reply.totalBasePrice);
+}
+
+const getRatesForItems = async (shipping, items) => {
+	const rates = items.map(async (item) => await rateForItem(shipping, item));
+	return await Promise.all(rates);
+}
+
+const numberSort = (list) => list.toSorted((a,b) => b - a);
+
+const expandItem = (str) => {
+	const parts = str.split('@');
+	const size = numberSort(parts[0].split('x').map((n) => Number(n)));
+
+	let item = {
+		weight: Number(parts[1]),
+		length: size[0],
+		height: size[1],
+		width: size[2],
+	};
+
+	return item;
+}
+
 export default async (request, context) => {
 	try {
-		const url = new URL(request.url);
-		const query = new URLSearchParams(url.search);
+		const query = new URL(request.url).searchParams;
 
-		const details = {
+		const shipping = {
 			from: query.get('from') || '80205',
 			to: query.get('to'),
-			weight: query.get('weight'),
-			length: query.get('length'),
-			width: query.get('width'),
-			height: query.get('height'),
 			country: query.get('country') || 'us',
-		}
+		};
 
-		if (!details.to) throw 'No destination zip code provided';
+		if (!shipping.to) throw 'No destination postal code provided';
 
-		if (!Object.values(details).every((value) => value)) {
-			const reply = await cityStateFromZip(details.to);
+		let items = [];
 
-			return new Response(
-				JSON.stringify(reply),
-				{ status: 200, statusText: 'ok', }
-			);
-		}
+		query.forEach((value, key) => {
+			if (shipping[key]) return;
+			const item = expandItem(value);
+			items.push(item);
+		});
 
-		const reply = details.country === 'US'
-			? await domesticRates(details)
-			: await globalRates(details);
+		const rates = await getRatesForItems(shipping, items);
+
+		const total = rates.reduce((total, current) => total + current, 0)
 
 		return new Response(
-			JSON.stringify(reply),
+			JSON.stringify({ rates, total }),
 			{ status: 200, statusText: 'ok', }
 		);
 	} catch (e) {

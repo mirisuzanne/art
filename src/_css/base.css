@@ -12,8 +12,8 @@
     --color-light: hsl(200 12% 95.098%);
     --color-dark: hsl(200deg 12% 4.902%);
 
-    --color-light-callout: hsl(193 28% 87%);
-    --color-dark-callout: hsl(192.59 23.914% 23.567%);
+    --color-light-callout: hsl(193 28% 93%);
+    --color-dark-callout: hsl(192.59 23.914% 13.567%);
 
     --color-light-accent: hsl(337.28 98.75% 79.203%);
     --color-dark-accent: hsl(330.2deg 67.742% 42.549%);
@@ -39,6 +39,10 @@
     --action-color: var(--color-dark-action, LinkText);
     --active-color: var(--color-dark-active, ActiveText);
     --feature-color: var(--color-dark-feature, AccentColor);
+
+    /* scales */
+    --spacer: calc(var(--gap) * 2);
+    --shim: calc(var(--gap) / 2);
 
     font-size: max(1em, 20px);
     color-scheme: light;
@@ -85,10 +89,17 @@
         var(--color-light-feature, AccentColor)
       );
 
-      --feature-gradient: linear-gradient(to top right,
+      --feature-gradient: linear-gradient(to right,
         var(--accent-color),
         var(--feature-color)
       );
+
+      @supports (background: linear-gradient(in oklab, red, blue)) {
+        --feature-gradient: linear-gradient(to right in oklch,
+          var(--accent-color),
+          var(--feature-color)
+        );
+      }
     }
   }
 
@@ -107,12 +118,13 @@
   h1, h2, h3 {
     line-height: normal;
 
-    @supports (background-clip: text) {
-      background: var(--feature-gradient);
-      background-clip: text;
-      color: transparent;
-      max-inline-size: max-content;
-
+    main & {
+      @supports (background-clip: text) {
+        background: var(--feature-gradient);
+        background-clip: text;
+        color: transparent;
+        max-inline-size: max-content;
+      }
     }
   }
 
@@ -125,7 +137,7 @@
   a {
     color: inherit;
     text-decoration-color: var(--action-color);
-    text-decoration-thickness: 1px;
+    text-decoration-thickness: 2px;
     text-underline-offset: 0.1em;
   }
 
@@ -134,6 +146,19 @@
     border-image: var(--feature-gradient) 1;
     margin-inline: unset;
     padding-inline: 1ch;
+  }
+
+  form-field {
+    display: flex;
+    column-gap: 1ch;
+    align-items: baseline;
+
+    input { flex: auto; }
+  }
+
+  input {
+    min-width: 6ch;
+    max-width: 12ch;
   }
 }
 

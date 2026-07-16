@@ -1,4 +1,4 @@
-import pluginSlideDeck from "@oddbird/eleventy-plugin-slide-deck";
+import pluginSlideDeck from '@oddbird/eleventy-plugin-slide-deck';
 
 const hasOtherLayout = (slide, layouts) => {
   if (!slide.layout) return false;

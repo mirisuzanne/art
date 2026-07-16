@@ -1,0 +1,108 @@
+<style>
+  shop-keep { display: none; }
+</style>
+
+<script>
+  class ShopKeep extends HTMLElement {
+	static register(tagName) {
+		if ("customElements" in window) {
+			customElements.define(tagName || "shop-keep", ShopKeep);
+		}
+	}
+
+  static cartChange = new Event('cartChange', {bubbles: true});
+
+	get cart() {
+    const cart = localStorage.getItem('cart');
+    return cart
+      ? JSON.parse(cart)
+      : [];
+  }
+
+  set cart(data) {
+    localStorage.setItem('cart', JSON.stringify(data));
+    this.#onChange();
+  }
+
+  get count() {
+    return this.cart.reduce((all, item) => all + Number(item.count), 0);
+  }
+
+  get subTotal() {
+    return this.cart.reduce((all, item) => (
+      all + this.getItemSubTotal(item)
+    ), 0);
+  }
+
+	connectedCallback() {
+    window.addEventListener('storage', (e) => this.#storageChange());
+    this.cleanUp();
+	}
+
+	disconnectedCallback() {
+    window.removeEventListener('storage', (e) => this.#storageChange());
+	}
+
+	getItem = (url) => this.validItem(
+    this.cart.find((item) => item.url === url)
+  );
+	getItemIndex = (url) => this.cart.findIndex((item) => item.url === url);
+
+  getItemPrice = (item) => Number(item.userPrice || item.price);
+  getItemSubTotal = (item) => Number(item.count) * this.getItemPrice(item);
+
+  setItem = (to) => {
+    let item = this.validItem(to);
+    if (!item) throw new Error('Invalid item:', item);
+
+    let newCart = this.cart;
+    const cartIndex = this.getItemIndex(item.url);
+
+    if (~cartIndex) newCart[cartIndex] = item;
+    else newCart.push(item);
+
+    this.cart = newCart;
+  }
+
+  removeItem = (url) => {
+    const cartIndex = this.getItemIndex(url);
+    if (!~cartIndex) throw new Error('No item in cart for:', url);
+
+    newCart = this.cart.toSpliced(cartIndex, 1);
+    this.cart = newCart;
+  }
+
+  cleanUp = () => {
+    this.cart = this.cart
+      .map((item) => this.validItem(item))
+      .filter((item) => item.count > 0);
+  }
+
+  validItem = (item) => {
+    if (typeof item !== 'object') return;
+    const itemShaped = item.url && item.title && item.price
+    if (!itemShaped) return;
+
+    item.price = Math.max(Number(item.price), 10);
+    item.userMinimum = Number(item.userMinimum) || item.price / 2;
+    item.userPrice = item.userPrice
+      ? Math.max(item.userMinimum, Number(item.userPrice))
+      : item.price;
+    item.stock = Number(item.stock) || 1;
+    item.count = Math.min(item.stock, Number(item.count));
+    item.count = Math.max(item.count, 0);
+
+    return item;
+  }
+
+  #onChange = () => {
+    this.dispatchEvent(ShopKeep.cartChange);
+  }
+
+  #storageChange = () => {
+    this.cleanUp();
+  }
+}
+
+ShopKeep.register();
+</script>

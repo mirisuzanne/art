@@ -1,7 +1,7 @@
-class shippingRates extends HTMLElement {
+class ShippingRates extends HTMLElement {
 	static register(tagName) {
 		if ("customElements" in window) {
-			customElements.define(tagName || "shipping-rates", shippingRates);
+			customElements.define(tagName || "shipping-rates", ShippingRates);
 		}
 	}
 
@@ -9,18 +9,13 @@ class shippingRates extends HTMLElement {
     const template = document.createElement("template");
     template.innerHTML = `
 			<form action="https://usps-rates.netlify.app/api" part="form">
-				<form-field>${shippingRates.#zipInput}</form-field>
-				<form-field hidden global-field>
-					${shippingRates.#countrySelect}
-				</form-field>
+				<public-field hidden>${ShippingRates.#zipInput('from')}</public-field>
+				<public-field>${ShippingRates.#zipInput('to')}</public-field>
+				<public-field hidden>${ShippingRates.#countrySelect}</public-field>
 
-				<input type="hidden" name="from">
-				<input type="hidden" name="length">
-				<input type="hidden" name="width">
-				<input type="hidden" name="height">
-				<input type="hidden" name="weight">
+				<ship-items hidden></ship-items>
 
-				<button part="button">check rates</button>
+				<button part="button">estimate shipping</button>
 				<output part="result" hidden></output>
 			</form>
     `;
@@ -31,6 +26,8 @@ class shippingRates extends HTMLElement {
   static #adoptShadowStyles = (node) => {
     const shadowStyle = new CSSStyleSheet();
     shadowStyle.replaceSync(`
+			:host { display: block; }
+
 			:host([data-status="fetching"]) button::after {
 				content: '…';
 			}
@@ -43,7 +40,8 @@ class shippingRates extends HTMLElement {
 
 			output {
 				display: block;
-				border: solid var(--status-color, currentColor);
+				border-inline-start: thick solid var(--status-color, currentColor);
+				padding-inline-start: 1ch;
 			}
 
 			form {
@@ -51,7 +49,8 @@ class shippingRates extends HTMLElement {
 				gap: 0.25lh;
 			}
 
-			form-field {
+			public-field {
+				align-items: baseline;
 				display: flex;
 				flex-flow: wrap;
 				gap: 1ch;
@@ -73,123 +72,275 @@ class shippingRates extends HTMLElement {
     node.shadowRoot.adoptedStyleSheets = [shadowStyle];
   }
 
+  static newShippingRate = new Event('newShippingRate', {bubbles: true});
+  static staleShippingRate = new Event('staleShippingRate', {bubbles: true});
+
   constructor() {
     super();
-    shippingRates.#appendShadowTemplate(this);
-    shippingRates.#adoptShadowStyles(this);
+    ShippingRates.#appendShadowTemplate(this);
+    ShippingRates.#adoptShadowStyles(this);
   }
 
 	#form;
-	#formFields = {};
+	#publicFields = {};
+
+	#formItemList;
+	#items = [];
+
 	#uspsData;
 	#output;
-	price;
+
+	estimate;
+
+	get api() {
+		return this.#form.getAttribute('action');
+	}
+
+	set api(value) {
+		this.#form.setAttribute('action', value);
+	}
+
+	get from() {
+		return this.#publicFields.from.value;
+	}
+
+	set from(value) {
+		this.#publicFields.from.value = value || '';
+		this.#publicFieldHidden('from', value);
+	}
+
+	get items() {
+		return this.#items;
+	}
+
+	set items(value) {
+		this.#items = value;
+		this.#updateForm();
+		this.#outputMessage('');
+		this.dispatchEvent(ShippingRates.staleShippingRate);
+	}
+
+	get inputs() {
+		return Array.from(this.#formItemList.children);
+	}
+
+	get inputLookup() {
+    let obj = {};
+
+    [...this.inputs].forEach((el) => obj[el.name] = el);
+
+    return obj;
+	}
+
+	get itemLookup() {
+    let obj = {};
+
+    [...this.items].forEach((item) => obj[item.id] = item);
+
+    return obj;
+	}
 
 	connectedCallback() {
-		this.#splitDimensions();
-		this.#initFormFields();
-		this.#output = this.shadowRoot.querySelector('[part=result]');
+		this.#init();
 
 		this.#form.addEventListener("submit", this.#submitForm);
-		this.#formFields.country.addEventListener("change", this.#handleCountry);
+		this.#publicFields.country.addEventListener("change", this.#handleCountry);
 	}
 
 	disconnectedCallback() {
 		this.#form.removeEventListener("submit", this.#submitForm);
-		this.#formFields.country.removeEventListener("change", this.#handleCountry);
+		this.#publicFields.country.removeEventListener("change", this.#handleCountry);
 	}
 
-	// private methods
+	// setup
+	#init = () => {
+		this.#form = this.shadowRoot.querySelector('[part=form]');
+		this.#output = this.shadowRoot.querySelector('[part=result]');
+		this.#formItemList = this.shadowRoot.querySelector('ship-items');
+
+		this.#form.querySelectorAll('public-field :is(input, select)').forEach(
+			(input) => { this.#publicFields[input.name] = input; }
+		);
+
+		this.api = this.dataset.api;
+		this.from = this.dataset.from;
+
+		const to = localStorage.getItem('zip');
+		if (to) { this.#publicFields.to.value = to; }
+
+		this.#publicFieldHidden('country', !this.dataset.global);
+		this.#itemFromDataSet();
+	}
+
+	// handlers
 	#submitForm = (event) => {
   	event.preventDefault();
   	this.#fetchData();
 	}
 
 	#handleCountry = () => {
-		if (this.#formFields.country.value === 'US') {
-			this.#formFields.to.toggleAttribute('required', true);
-			this.#formFields.to.setAttribute(
+		if (this.#publicFields.country.value === 'US') {
+			this.#publicFields.to.toggleAttribute('required', true);
+			this.#publicFields.to.setAttribute(
 				'pattern',
-				shippingRates.usPostalPattern
+				ShippingRates.#usPostalPattern
 			);
 		} else {
-			this.#formFields.to.toggleAttribute('required', false);
-			this.#formFields.to.removeAttribute('pattern');
+			this.#publicFields.to.toggleAttribute('required', false);
+			this.#publicFields.to.removeAttribute('pattern');
 		}
 	}
 
-	#splitDimensions = () => {
-		if (!this.dataset.dimensions) return;
-
-		const axis = ['length', 'height', 'width'];
-		if (axis.every((d) => this.dataset[d])) return;
-
-		const div = [',', ' '].find((d) => this.dataset.dimensions.includes(d));
-		const size = this.dataset.dimensions.split(div).map((n) => Number(n));
-		axis.forEach((d, i) => this.dataset[d] = size[i]);
+	// public methods
+	addItem = (item) => {
+		item.id = item.id || this.#randomId();
+		this.items = [...this.items, this.#validItem(item)];
+		return item.id;
 	}
 
-	async #initFormFields() {
-		this.#form = this.shadowRoot.querySelector('[part=form]');
-		if (this.dataset.api) this.#form.setAttribute('action', this.dataset.api);
+	itemIndex = (id) => this.items.findIndex((item) => item.id === id);
+	findItem = (id) => this.items.find((item) => item.id === id);
 
-		if (this.dataset.global) {
-			const globalField = this.#form.querySelector(':scope [global-field]');
-			globalField.removeAttribute('hidden');
+	updateItem = (item) => {
+		const index = this.itemIndex(item.id);
+
+		if (~index) {
+			let all = [...this.items];
+			all[index] = this.#validItem(item);
+			this.items = all;
+		} else {
+			this.addItem(item);
 		}
 
-		const formFields = [
-			...this.#form.querySelectorAll(':scope [name]')
-		];
+		return item.id;
+	}
 
-		formFields.forEach((field) => {
-			this.#formFields[field.name] = field;
-			if (this.dataset[field.name]) field.value = this.dataset[field.name];
+	// internals
+	#updateForm = () => {
+		this.inputs.filter(
+			(input) => !this.itemLookup[input.name]
+		).forEach((input) => {
+			input.remove();
+		});
+
+		this.items.forEach((item) => {
+			const inSitu = this.#findInput(item.id);
+			const itemInput = inSitu || this.#buildInput(item.id);
+			itemInput.value = `${item.size.join('x')}@${item.weight}`;
+
+			if (!inSitu) this.#formItemList.appendChild(itemInput);
 		});
 	}
 
+	#buildInput = (name) => {
+		let el = document.createElement('input');
+		el.type = 'hidden';
+		el.name = name;
+		return el;
+	}
+
+	#findInput = (name) => this.#formItemList.querySelector(`[name=${name}]`);
+
+	#publicFieldHidden = (name, hidden) => {
+		this.#publicFields[name]
+			?.closest('public-field')
+			?.toggleAttribute('hidden', hidden);
+	}
+
+	#itemFromDataSet = () => {
+		if (!this.dataset.weight) return;
+
+		const is3D = ['length', 'height', 'width'].every((d) => this.dataset[d]);
+
+		if (!(this.dataset.size || is3D)) return;
+
+		this.updateItem({
+			id: 'dataset',
+			weight: Number(this.dataset.weight),
+			size: this.dataset.size
+				? this.#sizeFromString(this.dataset.size)
+				: this.#validSize([
+					Number(this.dataset.length),
+					Number(this.dataset.height),
+					Number(this.dataset.width)
+				]),
+		});
+	};
+
+	#sizeFromString = (sizeStr) => this.#validSize(
+		sizeStr.split(' ').map((n) => Number(n))
+	);
+
+	#randomId = (length=6) => {
+		const id = Math.random().toString(36).substring(2, length+2);
+		return `i-${id}`;
+	}
+
+	// validation
+	#validItem = (item) => {
+		if (!typeof item === 'object') {
+			throw new Error(`${item} is not an item object`);
+		}
+
+		this.#validSize(item.size);
+		this.#validWeight(item.weight);
+
+		return item;
+	}
+
+	#validWeight = (weight) => {
+		if (typeof weight !== 'number') {
+			throw new Error(`${weight} Item weight must be a number (lbs)`);
+		}
+
+		return weight;
+	}
+
+	#validSize = (size) => {
+		if (size.length !== 3) {
+			throw new Error(`${size} Item size must have 3 dimensions`);
+		}
+
+		if (size.some((n) => typeof n !== 'number')) {
+			throw new Error(`${size} Dimensions must be numbers (inches)`);
+		}
+
+		return size;
+	}
+
+	// fetching async
 	async #fetchData() {
-		this.dataset.status = "fetching";
-		console.log('fetching');
-
-		const api = this.#form.getAttribute('action');
 		const formData = new FormData(this.#form);
-		const queryString = new URLSearchParams(formData).toString()
+		const queryString = new URLSearchParams(formData).toString();
+		const url = `${this.api}?${queryString}`;
 
-		const response = await fetch(`${api}?${queryString}`);
+		this.dataset.status = "fetching";
+		console.log('fetching', url);
+
+		const response = await fetch(url);
+		const body = await response.json();
 
 		if (!response.ok) {
 			this.dataset.status = "no-data";
-			console.error(`Response status: ${response.status}`);
-			this.#outputMessage('Something went wrong', 'error');
+			console.error(body);
+			this.#outputMessage(body, 'error');
+		} else {
+			this.#uspsData = body;
+			this.#updateResults();
+			localStorage.setItem('zip', this.#publicFields.to.value);
 		}
-
-		this.#uspsData = await response.json();
-		this.#updateResults();
 	}
 
 	#updateResults = () => {
-		if (this.#uspsData?.error) {
-			this.#outputMessage(this.#uspsData.error.message, 'error');
+		if (!this.#uspsData.total) {
+			console.error(this.#uspsData);
+			this.#outputMessage('Something went wrong', 'error');
 			return;
 		}
 
-		if (this.#uspsData.city) {
-			this.#outputMessage(`
-				Shipping to: ${this.#uspsData.city}, ${this.#uspsData.state}
-			`);
-			return;
-		}
-
-		if (this.#uspsData.totalBasePrice) {
-			this.price = this.#uspsData.totalBasePrice;
-			this.#outputMessage(`
-				Estimated shipping: $${this.#uspsData.totalBasePrice}
-			`);
-			return;
-		}
-
-		this.#outputMessage('Something went wrong', 'error');
+		this.estimate = this.#uspsData.total;
+		this.#outputMessage(`Estimated shipping: $${this.estimate}`);
+		this.dispatchEvent(ShippingRates.newShippingRate);
 	}
 
 	#outputMessage = (message, state) => {
@@ -198,13 +349,19 @@ class shippingRates extends HTMLElement {
 		this.#output.toggleAttribute('hidden', !message);
 	}
 
-	// form inputs
-	static usPostalPattern = '[\\d]{5}(-[\\d]{4})?';
+	// static
+	static #usPostalPattern = '[\\d]{5}(-[\\d]{4})?';
 
-	static #zipInput = `
-	  <label for="to" part="label">Postal code</label>
-		<input id="to" name="to" type="text" inputmode="numeric" part="postal-code" autocomplete="postal-code">
-	`;
+	static #zipInput(name) {
+		const label = name === 'from'
+			? 'From'
+			: 'To';
+
+		return `
+	  	<label for="${name}" part="label">${label} postal code</label>
+			<input id="${name}" name="${name}" type="text" inputmode="numeric" pattern="${ShippingRates.#usPostalPattern}" part="postal-code" autocomplete="postal-code">
+		`;
+	};
 
 	static #countrySelect = `
 		<label for="country" part="label">Country</label>
@@ -465,4 +622,4 @@ class shippingRates extends HTMLElement {
 	`;
 }
 
-shippingRates.register();
+ShippingRates.register();

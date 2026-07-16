@@ -1,0 +1,151 @@
+<script>
+class CartControl extends HTMLElement {
+	static register(tagName) {
+		if ("customElements" in window) {
+			customElements.define(tagName || "cart-control", CartControl);
+		}
+	}
+
+  static #appendShadowTemplate = (node) => {
+    const template = document.createElement("template");
+    template.innerHTML = `
+      <label for="cart-input"><slot></slot></label>
+      <input id="cart-input" type="number"/>
+    `;
+    const shadowRoot = node.attachShadow({ mode: "open" });
+    shadowRoot.appendChild(template.content.cloneNode(true));
+  }
+
+    static #adoptShadowStyles = (node) => {
+    const shadowStyle = new CSSStyleSheet();
+    shadowStyle.replaceSync(`
+			:host { display: block; }
+    `);
+    node.shadowRoot.adoptedStyleSheets = [shadowStyle];
+  }
+
+  constructor() {
+    super();
+    CartControl.#appendShadowTemplate(this);
+    CartControl.#adoptShadowStyles(this);
+  }
+
+  #shop;
+	#input;
+  #itemGroup;
+
+  get url() {
+    return this.dataset.item || this.#itemGroup?.dataset.item;
+  }
+
+  get item() {
+    return this.#shop.getItem(this.url);
+  }
+
+  get name() {
+    return this.dataset.name || this.#input.name;
+  }
+
+  set name(to) {
+    this.dataset.name = to;
+  }
+
+  get value() {
+    return this.#input.value;
+  }
+
+  set value(to) {
+    this.#input.value = to;
+  }
+
+  get cartValue() {
+    if (!this.item) return;
+
+    return this.item[this.name];
+  }
+
+  set cartValue(to) {
+    if (!this.item) return;
+
+    let newItem = this.item;
+    newItem[this.name] = to;
+
+    this.#shop.setItem(newItem);
+  }
+
+  get isValid() {
+    return this.#input.checkValidity();
+  }
+
+  get readOnly() {
+    return this.#input.hasAttribute('readonly');
+  }
+
+  set readOnly(to) {
+    this.#input.toggleAttribute('readonly', to);
+  }
+
+	connectedCallback() {
+    this.#shop = document.querySelector('shop-keep');
+    this.#input = this.shadowRoot.querySelector('input');
+    this.#itemGroup = this.closest('[data-item]');
+
+    if (!this.#shop) throw new Error('This shopping cart needs a shop!');
+    if (!this.#input) throw new Error('Need an input for controlling the cart');
+    if (!this.url) throw new Error('Provide an item url to control');
+    if (!this.name) throw new Error('Name the value to control');
+
+    this.#waitForShop();
+	}
+
+	disconnectedCallback() {
+		this.#input.removeEventListener("change", this.#updateCart);
+    document.removeEventListener('cartChange', (e) => this.#updateFromCart());
+	}
+
+	// private methods
+  #waitForShop = async () => {
+    await customElements.whenDefined(this.#shop.localName);
+
+    this.#input.addEventListener("change", (e) => this.#updateCart());
+    document.addEventListener('cartChange', (e) => this.#updateFromCart());
+
+    this.#updateFromCart();
+  }
+
+	#updateCart = () => {
+    this.cartValue = this.value;
+    this.#updateFromCart();
+  }
+
+	#updateFromCart = () => {
+    this.#initField();
+    if (this.readOnly) return;
+    if (this.cartValue) this.value = this.cartValue;
+  }
+
+  #initField = () => {
+    this.#input.name = this.name;
+    this.readOnly = Boolean(!this.item);
+    if (this.readOnly) return;
+
+    switch (this.name) {
+      case 'count':
+        this.#input.setAttribute('min', 0);
+        this.#input.setAttribute('step', 1);
+        this.#input.setAttribute('max', this.item.stock || 0);
+        break;
+      case 'userPrice':
+        this.#input.setAttribute('step', 1);
+        if (!this.item) break;
+        this.value = this.value ? this.value : this.item.price;
+        this.#input.setAttribute('min', Number(this.item.price) / 2);
+        break;
+      default:
+        break;
+    }
+  }
+}
+
+CartControl.register();
+</script>

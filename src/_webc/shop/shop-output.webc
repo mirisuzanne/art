@@ -1,0 +1,77 @@
+<script>
+class ShopOutput extends HTMLElement {
+	static register(tagName) {
+		if ("customElements" in window) {
+			customElements.define(tagName || "shop-output", ShopOutput);
+		}
+	}
+
+  static #appendShadowTemplate = (node) => {
+    const template = document.createElement("template");
+    template.innerHTML = `<output></output>`;
+    const shadowRoot = node.attachShadow({ mode: "open" });
+    shadowRoot.appendChild(template.content.cloneNode(true));
+  }
+
+  constructor() {
+    super();
+    ShopOutput.#appendShadowTemplate(this);
+  }
+
+  #shop;
+  #output;
+  #itemGroup;
+
+  get url() {
+    return this.dataset.item || this.#itemGroup?.dataset.item;
+  }
+
+  get item() {
+    if (!this.url) return;
+    return this.#shop.getItem(this.url);
+  }
+
+  get value() { return this.#output?.value; }
+  set value(to) { this.#output.value = to; }
+
+	connectedCallback() {
+    this.#shop = document.querySelector('shop-keep');
+    this.#output = this.shadowRoot.querySelector('output');
+    this.#itemGroup = this.closest('[data-item]');
+
+    if (!this.#shop) throw new Error('This shopping cart needs a shop!');
+
+    this.#waitForShop();
+	}
+
+	disconnectedCallback() {
+    document.removeEventListener('cartChange', (e) => this.#SetOutput());
+	}
+
+  #waitForShop = async () => {
+    await customElements.whenDefined(this.#shop.localName);
+
+    document.addEventListener('cartChange', (e) => this.#SetOutput());
+
+    this.#SetOutput();
+  }
+
+  #SetOutput = () => {
+    switch (this.dataset.stat) {
+      case 'itemSubTotal':
+        this.value = this.#shop.getItemSubTotal(this.item);
+        break;
+
+      default:
+        this.value = this.#shop[this.dataset.stat];
+        break;
+    }
+
+    if (this.hasAttribute('hide-zero')) {
+      this.toggleAttribute('hidden', this.value === '0');
+    }
+  }
+}
+
+ShopOutput.register();
+</script>

@@ -1,0 +1,244 @@
+<table>
+  <thead>
+    <th>Name</th>
+    <th>Count</th>
+    <th>Rate</th>
+    <th>Cost</th>
+  </thead>
+  <tbody cart-list></tbody>
+  <tbody cart-empty>
+    <tr >
+      <td colspan="4">
+        Your cart is currently empty
+      </td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th>Total</th>
+      <td><shop-output data-stat="count"></shop-output></td>
+      <td></td>
+      <td>$<shop-output data-stat="subTotal"></shop-output></td>
+    </tr>
+    <tr cart-shipping hidden>
+      <th>Shipping</th>
+      <td></td>
+      <td></td>
+      <td><output data-for="shipping"></output></td>
+    </tr>
+  </tfoot>
+</table>
+
+<shipping-rates
+  show-when="defined"
+  data-api="/api/"
+  data-from="80205"
+  data-global="true"
+  hidden
+></shipping-rates>
+
+<template id="line-item-template">
+  <tr data-item="">
+    <th>
+      <a href="" item-title>Item title</a>
+    </th>
+    <td>
+      <cart-control data-name="count">
+        <visually-hidden>In your cart</visually-hidden>
+      </cart-control>
+    </td>
+    <td>
+      <cart-control data-name="userPrice">
+        <visually-hidden>Name your price</visually-hidden>
+      </cart-control>
+    </td>
+    <td>
+      $<shop-output data-stat="itemSubTotal"></shop-output>
+    </td>
+  </tr>
+</template>
+
+<style>
+  @layer tools {
+    shopping-cart {
+      --grid-column: full;
+      border-block-start: medium solid var(--accent-color);
+      border-image: var(--feature-gradient) 1;
+      display: grid;
+      margin-block-start: var(--gap);
+      padding: var(--gap);
+
+      thead, tfoot {
+        font-size: smaller;
+      }
+
+      tfoot {
+        background: var(--callout-color);
+        font-weight: bold;
+      }
+    }
+  }
+</style>
+
+<script>
+class ShoppingCart extends HTMLElement {
+	static register(tagName) {
+		if ("customElements" in window) {
+			customElements.define(tagName || "shopping-cart", ShoppingCart);
+		}
+	}
+
+  #shop;
+  #cartList;
+  #cartEmpty;
+  #lineItemTemplate;
+
+  #shipping;
+  #shippingRow;
+  #shippingOutput;
+
+  get items() {
+    return Array.from(this.#cartList.children)
+      .filter((el) => el.dataset.item);
+  }
+
+  get itemLookup() {
+    let obj = {};
+
+    [...this.items].forEach((el) => obj[el.dataset.item] = el);
+
+    return obj;
+  }
+
+  get cartLookup() {
+    let obj = {};
+
+    [...this.#shop.cart].forEach((item) => obj[item.url] = item);
+
+    return obj;
+  }
+
+  get cartDiff() {
+    const add = this.#shop.cart.filter((item) => !this.itemLookup[item.url]);
+    const remove = this.items.filter((el) => !this.cartLookup[el.dataset.item]);
+
+    return { add, remove, };
+  }
+
+  connectedCallback() {
+    this.#shop = document.querySelector('shop-keep');
+    this.#cartList = this.querySelector('[cart-list]');
+    this.#cartEmpty = this.querySelector('[cart-empty]');
+    this.#lineItemTemplate = this.querySelector('template#line-item-template');
+
+    this.#shipping = this.querySelector('shipping-rates');
+    this.#shippingRow = this.querySelector('tr[cart-shipping]');
+    this.#shippingOutput = this.querySelector('output[data-for=shipping]');
+
+    if (!this.#shop) throw new Error('This shopping cart needs a shop!');
+    if (!this.#cartList) throw new Error('Need an output location for cart items');
+    if (!this.#lineItemTemplate) throw new Error('Need an item template');
+
+    this.#waitForShop();
+	}
+
+	disconnectedCallback() {
+    document.removeEventListener('cartChange', (e) => this.#updateFromCart());
+    this.removeEventListener('newShippingRate', (e) => this.#newShippingRate());
+    this.removeEventListener('staleShippingRate', (e) => this.#staleShippingRate());
+	}
+
+	// private methods
+  #waitForShop = async () => {
+    await customElements.whenDefined(this.#shop.localName);
+
+    this.#updateFromCart();
+    document.getElementById('cart-link')?.removeAttribute('hidden');
+
+    document.addEventListener('cartChange', (e) => this.#updateFromCart());
+    this.addEventListener('newShippingRate', (e) => this.#newShippingRate());
+    this.addEventListener('staleShippingRate', (e) => this.#staleShippingRate());
+  }
+
+  #updateFromCart = () => {
+    const diff = this.cartDiff;
+
+    diff.add.forEach((item) => this.#addLineItem(item));
+    diff.remove.forEach((el) => this.#removeLineItem(el));
+
+    this.#ifEmpty();
+    this.#updateShipping();
+  }
+
+  #addLineItem = (itemData) => {
+    const fragment = document.importNode(this.#lineItemTemplate.content, true);
+
+    const newRow = fragment.querySelector('[data-item]');
+    const rowTitle = newRow.querySelector('[item-title]');
+
+    newRow.dataset.item = itemData.url;
+    rowTitle.href = itemData.url;
+    rowTitle.textContent = itemData.title;
+
+    this.#cartList.appendChild(fragment);
+  }
+
+  #removeLineItem = (itemElement) => {
+    itemElement.remove();
+  }
+
+  // can't get this to work with ifEmpty
+  #tryTransition = (callBack) => {
+    // Fallback for browsers that don't support this API:
+    if (!document.startViewTransition) {
+      callBack();
+      return;
+    }
+
+    // With a View Transition:
+    document.startViewTransition(() => callBack());
+  }
+
+  #ifEmpty = () => {
+    this.#cartEmpty.toggleAttribute(
+      'hidden',
+      this.#cartList.children.length > 0
+    );
+  }
+
+  // shipping
+  #updateShipping = () => {
+    if (!this.#shipping) return;
+
+    const isEmpty = this.#shop.count === 0;
+    this.#shipping.toggleAttribute('hidden', isEmpty);
+    if (isEmpty) return;
+
+    const all = this.#shop.cart.filter((item) => (
+      Number(item.count) > 0 && item.weight && item.size
+    )).map((item) => ({
+      id: item.url.slice(1,-1).replaceAll('/', '_'),
+      size: item.size.split(',').map((d) => Number(d)),
+      weight: Number(item.weight),
+    }));
+
+    this.#shipping.items = all;
+  }
+
+  #newShippingRate = () => {
+    if (!this.#shippingRow) return;
+
+    this.#shippingOutput.value = this.#shipping.estimate;
+    this.#shippingRow.removeAttribute('hidden');
+  }
+
+  #staleShippingRate = () => {
+    if (!this.#shippingRow) return;
+
+    this.#shippingOutput.value = '';
+    this.#shippingRow.setAttribute('hidden', '');
+  }
+}
+
+ShoppingCart.register();
+</script>
