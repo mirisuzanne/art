@@ -1,14 +1,19 @@
 <img
-  webc:if="item.image"
-  :src="item.image"
-  :alt="item.alt || ''"
-  sizes="auto"
+  webc:if="this.item.image"
+  :src="this.item.image"
+  :alt="this.item.alt || ''"
+  :style="`--name: ${slugify(this.item.image)}`"
+  @attributes="({
+    loading: this.first ? 'eager' : 'lazy',
+    decoding: this.first ? 'auto' : 'async',
+    sizes: this.first ? '100w' : 'auto',
+  })"
 >
 <lite-youtube
-  webc:elseif="item.youtube"
-  :videoid="item.youtube"
-  :style="`background-image: url('https://v1.opengraph.11ty.dev/https%3A%2F%2Fyoutube.com%2Fwatch%3Fv%3D${item.youtube}/auto/jpeg/');`"
-  @text="item.alt || ''"
+  webc:elseif="this.item.youtube"
+  :videoid="this.item.youtube"
+  :style="`background-image: url('https://v1.opengraph.11ty.dev/https%3A%2F%2Fyoutube.com%2Fwatch%3Fv%3D${this.item.youtube}/auto/jpeg/');`"
+  @text="this.item.alt || ''"
 ></lite-youtube>
 
 <style>

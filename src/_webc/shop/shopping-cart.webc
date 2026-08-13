@@ -2,7 +2,7 @@
   <thead>
     <th>Name</th>
     <th>Count</th>
-    <th>Rate</th>
+    <th>Pay what you want</th>
     <th>Cost</th>
   </thead>
   <tbody cart-list></tbody>
@@ -24,18 +24,10 @@
       <th>Shipping</th>
       <td></td>
       <td></td>
-      <td><output data-for="shipping"></output></td>
+      <td>$<output data-for="shipping"></output></td>
     </tr>
   </tfoot>
 </table>
-
-<shipping-rates
-  show-when="defined"
-  data-api="/api/"
-  data-from="80205"
-  data-global="true"
-  hidden
-></shipping-rates>
 
 <template id="line-item-template">
   <tr data-item="">
@@ -61,7 +53,6 @@
 <style>
   @layer tools {
     shopping-cart {
-      --grid-column: full;
       border-block-start: medium solid var(--accent-color);
       border-image: var(--feature-gradient) 1;
       display: grid;
@@ -131,7 +122,7 @@ class ShoppingCart extends HTMLElement {
     this.#cartEmpty = this.querySelector('[cart-empty]');
     this.#lineItemTemplate = this.querySelector('template#line-item-template');
 
-    this.#shipping = this.querySelector('shipping-rates');
+    this.#shipping = document.querySelector('shipping-rates');
     this.#shippingRow = this.querySelector('tr[cart-shipping]');
     this.#shippingOutput = this.querySelector('output[data-for=shipping]');
 
@@ -144,8 +135,8 @@ class ShoppingCart extends HTMLElement {
 
 	disconnectedCallback() {
     document.removeEventListener('cartChange', (e) => this.#updateFromCart());
-    this.removeEventListener('newShippingRate', (e) => this.#newShippingRate());
-    this.removeEventListener('staleShippingRate', (e) => this.#staleShippingRate());
+    document.removeEventListener('newShippingRate', (e) => this.#newShippingRate());
+    document.removeEventListener('staleShippingRate', (e) => this.#staleShippingRate());
 	}
 
 	// private methods
@@ -156,8 +147,8 @@ class ShoppingCart extends HTMLElement {
     document.getElementById('cart-link')?.removeAttribute('hidden');
 
     document.addEventListener('cartChange', (e) => this.#updateFromCart());
-    this.addEventListener('newShippingRate', (e) => this.#newShippingRate());
-    this.addEventListener('staleShippingRate', (e) => this.#staleShippingRate());
+    document.addEventListener('newShippingRate', (e) => this.#newShippingRate());
+    document.addEventListener('staleShippingRate', (e) => this.#staleShippingRate());
   }
 
   #updateFromCart = () => {

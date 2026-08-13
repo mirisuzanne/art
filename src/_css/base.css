@@ -1,6 +1,27 @@
-@layer starter.reset, starter.base;
+@layer starter, patterns;
+@layer starter.reset, starter.base, starter.theme;
+
+@layer patterns {
+  [data-card] {
+    position: relative;
+  }
+
+  [card-link]::before {
+    content: '';
+    display: block;
+    inset: 0;
+    position: absolute;
+    z-index: 1;
+  }
+}
 
 @layer starter.theme {
+  @view-transition {
+    navigation: auto;
+  }
+
+  * { view-transition-name: var(--name); }
+
   html {
     /* brand colors */
     --brand-blue: hsl(195 52% 31%);
@@ -118,7 +139,7 @@
   h1, h2, h3 {
     line-height: normal;
 
-    main & {
+    [data-prose] & {
       @supports (background-clip: text) {
         background: var(--feature-gradient);
         background-clip: text;
@@ -139,6 +160,10 @@
     text-decoration-color: var(--action-color);
     text-decoration-thickness: 2px;
     text-underline-offset: 0.1em;
+
+    &:focus, &:hover, &:active {
+      text-decoration-style: wavy;
+    }
   }
 
   blockquote {
@@ -198,6 +223,7 @@
     border: 0 dotted;
     border-block-end-width: thin;
     margin-block: 1.5lh;
+    margin-inline: unset;
   }
 
   /* controls */

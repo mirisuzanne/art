@@ -7,7 +7,7 @@ css:
 #   pottery: '/pottery/'
 ---
 
-<shop-keep></shop-keep>
+<!-- <shop-keep></shop-keep> -->
 
 <header id="banner">
   <a href="/" rel="home">m</a>
@@ -30,14 +30,24 @@ css:
   </pop-over>
 </header>
 
-<main id="main" @raw="this.content"></main>
+<main id="main" data-prose @raw="this.content"></main>
+
+<!-- <aside webc:if="this.tags">
+  <ul>
+    <li webc:for="tag of this.tags" @text="tag"></li>
+  </ul>
+</aside>
 
 <a href="#cart" id="cart-link" hidden>
   Cart <shop-output data-stat="count" hide-zero></shop-output>
 </a>
 
 <aside shopping-cart>
-  <shopping-cart id="cart" show-when="defined"></shopping-cart>
+  <shopping-cart
+    show-when="defined"
+    id="cart"
+  ></shopping-cart>
+
   <noscript>
     <p>
       The shopping cart requires Javascript,
@@ -47,17 +57,25 @@ css:
   </noscript>
 </aside>
 
-<ul>
-  <li>separate forms, localStorage cart as source of truth…</li>
-  <li>✅ <code>add-to-cart</code> only adds a product to cart</li>
-  <li>✅ <code>cart-control</code> only edits price/count of items in the cart</li>
-  <li>✅ <code>shopping-cart</code> adds/removes cart-controls</li>
-  <li>✅ <code>shopping-cart</code> updates shipping</li>
-  <li>✅ <code>shipping-rates</code> only estimates shipping of cart items</li>
-  <li>✅ <code>shipping-rates</code> stores your location??</li>
-  <li>✅ <code>shopping-cart</code> listens for shipping updates??</li>
-  <li><code>check-out</code> only submits the cart data <em>somewhere</em></li>
-</ul>
+<shipping-rates
+  show-when="defined"
+  data-from="80205"
+  data-global="true"
+  hidden
+></shipping-rates> -->
+
+<hr>
+
+<check-out>
+  <h2>See something you like?</h2>
+  <p>
+    I'm still working on
+    a checkout system,
+    but if you send me a message,
+    I'll get back to you
+    about payment & shipping options.
+  </p>
+</check-out>
 
 <link
   rel="stylesheet"
@@ -96,7 +114,14 @@ body {
 }
 
 main {
+  --grid-column: full;
+  display: grid;
+  grid-template-columns: var(--content-grid-columns);
   margin-block: var(--spacer) var(--gap);
+
+  & > * {
+    grid-column: var(--grid-column, content);
+  }
 }
 
 sub-title {

@@ -4,39 +4,24 @@ tags:
   - pottery
 ---
 
-<p>
-  Made by hand in Denver,
-  using <em @text="this.clay"></em>
-  with <span @text="this.glaze"></span>.
-
-  <span
-    webc:if="this.summary"
-    @html="mdInline(this.summary)"
-  ></span>
-  <span @text="`${sizeToString(product.size)} inches`"></span>,
-  <span @text="`${product.lb}lb`"></span>.
-
-  <span webc:if="this.product.stock === 1">
-    <em>Available</em>.
-  </span>
-  <span webc:elseif="this.product.stock > 0">
-    <em @text="`${this.product.stock} in stock`"></em>.
-  </span>
-  <span webc:elseif="this.product.restock">
-    <em>Made to order</em>.
-  </span>
-  <span webc:else>
-    <em>Sold</em>.
-  </span>
-</p>
-
 <figure webc:if="this.gallery?.length > 0">
   <art-gallery>
     <gallery-item
-      webc:for="item of this.gallery"
+      webc:for="(item, index) of this.gallery"
       :@item="item"
+      :@first="index === 0"
     ></gallery-item>
   </art-gallery>
 </figure>
 
 <div @raw="this.content"></div>
+
+<p>
+  Made by hand in Denver,
+  using <em @text="this.clay"></em>
+  from <em @text="this.from"></em>.
+  <span webc:if="this.safe === 'yes'">
+    Food safe, microwave safe, and dishwasher safe.
+  </span>
+  <span webc:elseif="this.safe" @text="this.safe"></span>
+</p>

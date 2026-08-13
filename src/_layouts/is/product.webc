@@ -6,25 +6,81 @@ tags:
 
 <header>
   <h1 @text="this.title"></h1>
-  <time
-    :datetime="this.page.date.toISOString()"
-    @text="dateFormat(this.page.date)"
-  ></time>
-  –
-  <em webc:if="this.sub" @text="this.sub"></em>
+  <div><em webc:if="this.sub" @text="this.sub"></em></div>
+
+  <div>
+    <time
+      :datetime="this.page.date.toISOString()"
+      @text="dateFormat(this.page.date)"
+    ></time>
+    –
+    <em webc:if="this.stock === 1">Available</em>
+    <em
+      webc:elseif="this.stock > 0"
+      @text="`${this.stock} in stock`"
+    ></em>
+    <em webc:elseif="this.restock">Made to order</em>
+    <em webc:else>Sold</em>
+  </div>
 </header>
 
+<div webc:if="this.summary" @html="mdBlock(this.summary)"></div>
 <div webc:nokeep @raw="this.content"></div>
 
-<div>
-  <add-to-cart
+<product-details webc:if="this.restock || (this.stock > 0)">
+  <strong webc:if="this.set">As a set…</strong>
+  <strong webc:if="this.stock === 1">Product details…</strong>
+  <strong webc:else>Individually…</strong>
+  <dl webc:if="this.size || this.lb || this.price">
+    <div webc:if="this.size">
+      <dt>size</dt>
+      <dd @text="`${sizeToString(this.size)} inches`"></dd>
+    </div>
+    <div webc:if="this.lb">
+      <dt>weight</dt>
+      <dd @text="`${this.lb}lb`"></dd>
+    </div>
+    <div webc:if="this.price">
+      <dt>suggested price</dt>
+      <dd @text="`$${this.price}`"></dd>
+    </div>
+  </dl>
+
+  <!-- <add-to-cart
     :data-title="this.title"
     :data-url="this.page.url"
-    :data-weight="this.product.lb"
-    :data-size="paddedSize(this.product.size, this.padding)"
-    :data-price="this.product.price"
+    :data-weight="this.lb"
+    :data-size="paddedSize(this.size, this.padding)"
+    :data-price="this.price"
     show-when="defined"
-  ></add-to-cart>
+  ></add-to-cart> -->
+</product-details>
 
-  <em webc:if="this.product.price" @text="`Suggested price: $${this.product.price}`"></em>
-</div>
+
+<style>
+@layer layout {
+  product-details {
+    background: var(--callout-color);
+    display: grid;
+
+    strong {
+      padding: calc(var(--shim) / 2) var(--shim);
+    }
+
+    dl {
+      margin-block: unset;
+      padding: var(--shim);
+    }
+
+    dt, dd { display: inline; }
+
+    dt {
+      font-weight: bold;
+
+      &::after { content: ': '; }
+    }
+
+    dd { margin: unset; }
+  }
+}
+</style>

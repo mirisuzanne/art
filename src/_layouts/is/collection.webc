@@ -7,23 +7,25 @@ layout: is/page
   <sub-title webc:if="this.sub" @html="this.sub"></sub-title>
 </header>
 
+<nav>
+  <art-gallery webc:if="this.collections[this.list]?.length > 0">
+    <gallery-item data-card webc:for="(item, index) of this.collections[this.list].toReversed()">
+      <a
+        card-link
+        :href="item.url"
+        @text="item.data.title"
+      ></a>
+      <em webc:if="item.data.stock === 0">&ndash; SOLD</em>
+      <nav-img
+        :@item="item.data.gallery?.find((item) => item.image)"
+        :@url="item.url"
+        :@first="this.index === 0"
+      ></nav-img>
+    </gallery-item>
+  </art-gallery>
+</nav>
+
 <section
   webc:if="this.content"
   @raw="this.content"
 ></section>
-
-<figure webc:if="this.collections[this.list]?.length > 0">
-  <art-gallery>
-    <a
-      webc:for="item of this.collections[this.list]"
-      :href="item.url"
-      gallery-item
-    >
-      <img
-        webc:if="item.data.gallery?.find((item) => item.image)"
-        :src="item.data.gallery.find((item) => item.image).image.replace('./', item.url)"
-        alt="" >
-      <span @text="item.data.title"></span>
-    </a>
-  </art-gallery>
-</figure>

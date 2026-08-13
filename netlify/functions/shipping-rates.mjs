@@ -27,6 +27,18 @@ const getAuth = async () => {
 	return auth.access_token;
 }
 
+const cityStateFromZip = async (zip) => {
+	const auth = await getAuth();
+	const cityStateResponse = await fetch(`https://${api}/addresses/v3/city-state?ZIPCode=${zip}`, {
+		headers: {
+			accept: 'application/json',
+			Authorization: `Bearer ${auth}`,
+		},
+	});
+
+	return await cityStateResponse.json();
+}
+
 const domesticRates = async (shipping, item) => {
 	const auth = await getAuth();
 	const ratesResponse = await fetch(`https://${api}/prices/v3/base-rates/search`, {
@@ -120,10 +132,8 @@ export default async (request, context) => {
 		const shipping = {
 			from: query.get('from') || '80205',
 			to: query.get('to'),
-			country: query.get('country') || 'us',
+			country: query.get('country') || 'US',
 		};
-
-		if (!shipping.to) throw 'No destination postal code provided';
 
 		let items = [];
 
@@ -134,11 +144,25 @@ export default async (request, context) => {
 		});
 
 		const rates = await getRatesForItems(shipping, items);
+		const total = rates.reduce((total, current) => total + (current || 0), 0);
 
-		const total = rates.reduce((total, current) => total + current, 0)
+		const cityState = shipping.country === 'US'
+			? await cityStateFromZip(shipping.to)
+			: null
+		;
+
+		const address = cityState?.city
+			? {
+				locality: cityState.city,
+				region: cityState.state,
+				postalCode: cityState.ZIPCode,
+				country: shipping.country,
+			}
+			: null
+		;
 
 		return new Response(
-			JSON.stringify({ rates, total }),
+			JSON.stringify({ rates, total, address }),
 			{ status: 200, statusText: 'ok', }
 		);
 	} catch (e) {
@@ -152,7 +176,7 @@ export default async (request, context) => {
 }
 
 export const config = {
-  path: "/api",
+  path: "/api/shipping",
 	rateLimit: {
     windowLimit: 100,
     windowSize: 60,

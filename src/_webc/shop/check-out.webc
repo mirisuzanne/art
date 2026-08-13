@@ -1,0 +1,123 @@
+<form
+  name="checkout"
+  method="POST"
+  data-netlify="true"
+  data-prose
+>
+  <slot></slot>
+  <input type="hidden" name="url" :value="$data.page.url">
+  <!-- <input type="hidden" name="cart"> -->
+  <!-- <input type="hidden" name="address"> -->
+  <!-- <input type="hidden" name="estimate"> -->
+
+  <form-field>
+    <label for="checkout-name">Name</label>
+    <input type="text" name="name" id="checkout-name" autocomplete="name">
+  </form-field>
+  <form-field>
+    <label for="checkout-name">Email</label>
+    <input type="text" name="email" id="checkout-email" autocomplete="email">
+  </form-field>
+  <form-field>
+    <label for="checkout-message">Message</label>
+    <textarea name="message" id="checkout-message"></textarea>
+  </form-field>
+  <button type="submit">Send</button>
+</form>
+
+<!-- <script>
+class CheckOut extends HTMLElement {
+	static register(tagName) {
+		if ("customElements" in window) {
+			customElements.define(tagName || "check-out", CheckOut);
+		}
+	}
+
+  #shop;
+  #cartField;
+
+  #shipping;
+  #addressField;
+  #estimateField;
+
+  get cart() {
+    return this.#shop?.cart;
+  }
+
+  get value() {
+    return this.#cartField.value;
+  }
+
+  set value(to) {
+    this.#cartField.value = to;
+  }
+
+  get shipping() {
+    return {
+      address: this.#shipping?.address,
+      estimate: this.#shipping?.estimate,
+    };
+  }
+
+  get address() {
+    return this.#addressField.value;
+  }
+
+  set address(value) {
+    this.#addressField.value = value;
+  }
+
+  get estimate() {
+    return this.#estimateField.value;
+  }
+
+  set estimate(value) {
+    this.#estimateField.value = value;
+  }
+
+	connectedCallback() {
+    this.#shop = document.querySelector('shop-keep');
+    this.#shipping = document.querySelector('shipping-rates');
+
+    this.#cartField = this.querySelector('[name=cart]');
+    this.#addressField = this.querySelector('[name=address]');
+    this.#estimateField = this.querySelector('[name=estimate]');
+
+    if (!this.#shop) throw new Error('This shopping cart needs a shop!');
+
+    this.#waitForShop();
+    this.#waitForShipping();
+	}
+
+	disconnectedCallback() {
+    document.removeEventListener('cartChange', (e) => this.#updateFromCart());
+    document.removeEventListener('addressChange', (e) => this.#updateFromShipping());
+	}
+
+	// private methods
+  #waitForShop = async () => {
+    await customElements.whenDefined(this.#shop.localName);
+    document.addEventListener('cartChange', (e) => this.#updateFromCart());
+    this.#updateFromCart();
+  }
+
+  #waitForShipping = async () => {
+    await customElements.whenDefined(this.#shipping.localName);
+    document.addEventListener('addressChange', (e) => this.#updateFromShipping());
+    document.addEventListener('newShippingRate', (e) => this.#updateFromShipping());
+    document.addEventListener('staleShippingRate', (e) => this.#updateFromShipping());
+    this.#updateFromShipping();
+  }
+
+	#updateFromCart = () => {
+    this.value = JSON.stringify(this.cart, null, 2);
+  }
+
+  #updateFromShipping = () => {
+    this.address = JSON.stringify(this.shipping.address, null, 2);
+    this.estimate = this.shipping.estimate;
+  }
+}
+
+CheckOut.register();
+</script> -->

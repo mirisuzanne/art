@@ -1,12 +1,13 @@
 <style>
-figure:has(art-gallery) {
+:is(figure, nav):has(art-gallery) {
+  --grid-column: full;
   container: gallery / inline-size;
+  margin: var(--gap);
 }
 
 art-gallery {
   display: grid;
-  display: grid-lanes;
-  gap: 0.5lh;
+  gap: var(--gap);
 
   @container gallery (inline-size > 40ch) {
     grid-template-columns: repeat(2, 1fr);
@@ -15,6 +16,10 @@ art-gallery {
     & > :last-child:nth-child(even) {
       --span: span 2;
     }
+  }
+
+  img {
+    border: thin solid var(--feature-color);
   }
 }
 

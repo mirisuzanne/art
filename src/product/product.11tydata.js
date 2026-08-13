@@ -1,18 +1,13 @@
 const ozToLb = (oz, digits) => (oz / 16).toFixed(digits || 0);
 
-const product = (data) => {
-  if (!data.product) return;
-
-  if (data.product.oz && !data.product.lb) {
-    data.product.lb = ozToLb(data.product.oz);
-  }
-
-  return data.product;
+const lb = (data) => {
+  if (data.lb) return data.lb;
+  if (data.oz) return ozToLb(data.oz);
 };
 
 export default {
   layout: 'is/product',
   eleventyComputed: {
-    product,
+    lb,
   },
 };

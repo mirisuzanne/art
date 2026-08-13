@@ -1,0 +1,11 @@
+<img
+  webc:if="this.item?.image"
+  :src="this.item.image.replace('./', this.url)"
+  :alt="this.item.alt || ''"
+  :style="`--name: ${slugify(this.item.image)}`"
+  @attributes="({
+    loading: this.first ? 'eager' : 'lazy',
+    decoding: this.first ? 'auto' : 'async',
+    sizes: this.first ? '100w' : 'auto',
+  })"
+>
