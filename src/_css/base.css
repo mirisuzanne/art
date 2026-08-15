@@ -1,19 +1,4 @@
-@layer starter, patterns;
 @layer starter.reset, starter.base, starter.theme;
-
-@layer patterns {
-  [data-card] {
-    position: relative;
-  }
-
-  [card-link]::before {
-    content: '';
-    display: block;
-    inset: 0;
-    position: absolute;
-    z-index: 1;
-  }
-}
 
 @layer starter.theme {
   @view-transition {
@@ -174,16 +159,30 @@
   }
 
   form-field {
-    display: flex;
-    column-gap: 1ch;
-    align-items: baseline;
-
-    input { flex: auto; }
+    display: grid;
+    margin-block: 0.5lh;
   }
 
   input {
     min-width: 6ch;
-    max-width: 12ch;
+    max-width: unset;
+    width: stretch;
+  }
+
+  button {
+    background: var(--accent-color);
+    border: medium double;
+    border-radius: 3px;
+    color: var(--background-color);
+    padding-inline: 1ch;
+
+    &:focus, &:hover, &:active {
+      border-image: var(--feature-gradient) 1;
+    }
+
+    &[aria-pressed=true] {
+      background: var(--text-color);
+    }
   }
 }
 
@@ -212,6 +211,10 @@
   /* prose */
   h1, h2, h3 {
     margin-block: 0.75rlh 0.25rlh;
+
+    &:where(:first-child) {
+      margin-block-start: unset;
+    }
   }
 
   figure { margin-inline: unset; }
@@ -232,7 +235,7 @@
   label { display: block; }
   textarea {
     field-sizing: content;
-    inline-size: 100%;
+    inline-size: stretch;
     min-block-size: 4lh;
   }
 

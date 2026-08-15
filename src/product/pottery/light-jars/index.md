@@ -2,7 +2,7 @@
 layout: is/collection
 title: Porcelain light jars
 sub: For all your light storage needs
-list: light jars
+list: light jar
 override:tags: [list]
 ---
 

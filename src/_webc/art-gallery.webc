@@ -1,6 +1,6 @@
 <style>
 :is(figure, nav):has(art-gallery) {
-  --grid-column: full;
+  --grid-column: pull;
   container: gallery / inline-size;
   margin: var(--gap);
 }
@@ -20,6 +20,7 @@ art-gallery {
 
   img {
     border: thin solid var(--feature-color);
+    border-image: var(--feature-gradient) 1;
   }
 }
 

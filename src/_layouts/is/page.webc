@@ -3,15 +3,16 @@ layout: base
 css:
   - fonts
   - page
-# nav:
-#   pottery: '/pottery/'
+nav:
+  custom: '/commission/'
+  about: '/about/'
 ---
 
 <!-- <shop-keep></shop-keep> -->
 
 <header id="banner">
   <a href="/" rel="home">m</a>
-  <nav webc:if="this.nav">
+  <nav id="main-nav" webc:if="this.nav">
     <a
       webc:for="(name, url) in this.nav"
       :href="url"
@@ -20,7 +21,6 @@ css:
   </nav>
   <pop-over
     data-for="color-control"
-    style="--area: top span-left"
     show-when="js"
   >
     <button popovertarget="color-controls">colors</button>
@@ -32,13 +32,7 @@ css:
 
 <main id="main" data-prose @raw="this.content"></main>
 
-<!-- <aside webc:if="this.tags">
-  <ul>
-    <li webc:for="tag of this.tags" @text="tag"></li>
-  </ul>
-</aside>
-
-<a href="#cart" id="cart-link" hidden>
+<!---- <a href="#cart" id="cart-link" hidden>
   Cart <shop-output data-stat="count" hide-zero></shop-output>
 </a>
 
@@ -62,18 +56,15 @@ css:
   data-from="80205"
   data-global="true"
   hidden
-></shipping-rates> -->
-
-<hr>
+></shipping-rates> ---->
 
 <check-out>
   <h2>See something you like?</h2>
   <p>
-    I'm still working on
-    a checkout system,
-    but if you send me a message,
+    If you send me a message,
     I'll get back to you
-    about payment & shipping options.
+    about payment & shipping options --
+    or any other questions you have.
   </p>
 </check-out>
 
@@ -93,7 +84,9 @@ css:
 body {
   --content-grid-columns:
     [full-start] 1fr
+    [pull-start] minmax(0, 1fr)
     [content-start] minmax(min-content, 60ch) [content-end]
+    minmax(0, 1fr) [pull-end]
     1fr [full-end];
   display: grid;
   grid-template-columns: var(--content-grid-columns);
@@ -110,7 +103,14 @@ body {
 
 #banner {
   display: flex;
-  justify-content: space-between;
+  gap: var(--shim);
+}
+
+#main-nav {
+  display: flex;
+  flex: 1;
+  gap: var(--shim);
+  justify-content: end;
 }
 
 main {

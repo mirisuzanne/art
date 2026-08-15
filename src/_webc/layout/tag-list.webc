@@ -1,0 +1,11 @@
+<script webc:setup>
+  export const tagLink = (tag, all) =>
+    all.find((page) => page.data.list === tag)?.page.url ||
+    `/tags/${slugify(tag)}`;
+</script>
+
+<ul webc:if="$data.tags">
+  <li webc:for="tag of $data.tags">
+    <a :href="tagLink(tag, $data.collections.all)" @text="tag"></a>
+  </li>
+</ul>

@@ -16,14 +16,22 @@
   [popover] {
     border: thin solid;
     box-sizing: border-box;
-    box-shadow: 0 0 var(--gap) #0009;
+    filter: drop-shadow(0 0 var(--shim) var(--shadow-color));
+    margin-block: var(--shim);
     max-inline-size: min(100%, 45ch);
+    overflow: visible;
     padding: var(--gap);
-    position-area: var(--area, bottom);
+    position-area: var(--area, bottom span-left);
     position-try-fallbacks: flip-block, flip-inline;
 
-    &::backdrop {
-      backdrop-filter: blur(2px);
+    &::after {
+      aspect-ratio: 16/9;
+      background: currentColor;
+      content: '';
+      clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+      inset: auto 1ch 100% auto;
+      inline-size: 2ch;
+      position: absolute;
     }
   }
 }

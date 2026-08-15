@@ -8,16 +8,19 @@ oz: 38.15
 stock: 0
 
 gallery:
+- image: ./7972DD81.jpg
+  alt: >
+    White porcelain jar glowing warm amber,
+    with the lid off and light pouring out the top.
+    The base angles out wide,
+    then in towards a narrow vertical rim --
+    almost like a squat lava lamp,
+    with blue splatters from the base.
 - image: ./P1020593.jpg
   alt: >
-    Angular lidded jar that says 'light'
+    The jar says 'light'
     in hand-carved and painted lettering,
     and has a lamp cord attached.
-    The base angles out wide,
-    then in towards a narrow top --
-    like a squat lava lamp,
-    but white with blue splatters
-    from the bottom.
 - image: ./P1020594.jpg
   alt: >
     The lid is off,

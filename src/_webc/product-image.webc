@@ -1,5 +1,6 @@
 <img
   webc:if="this.item?.image"
+  product-image
   :src="this.item.image.replace('./', this.url)"
   :alt="this.item.alt || ''"
   :style="`--name: ${slugify(this.item.image)}`"

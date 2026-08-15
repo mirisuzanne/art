@@ -7,25 +7,71 @@ layout: is/page
   <sub-title webc:if="this.sub" @html="this.sub"></sub-title>
 </header>
 
-<nav>
-  <art-gallery webc:if="this.collections[this.list]?.length > 0">
-    <gallery-item data-card webc:for="(item, index) of this.collections[this.list].toReversed()">
-      <a
-        card-link
-        :href="item.url"
-        @text="item.data.title"
-      ></a>
-      <em webc:if="item.data.stock === 0">&ndash; SOLD</em>
-      <nav-img
-        :@item="item.data.gallery?.find((item) => item.image)"
-        :@url="item.url"
-        :@first="this.index === 0"
-      ></nav-img>
-    </gallery-item>
-  </art-gallery>
-</nav>
-
 <section
   webc:if="this.content"
   @raw="this.content"
 ></section>
+
+<nav>
+  <art-gallery webc:if="this.collections[this.list]?.length > 0">
+    <gallery-item
+      webc:for="(item, index) of this.collections[this.list].toReversed()"
+      product-card
+    >
+      <a
+        product-title
+        :href="item.url"
+      ><span @text="item.data.title"></span></a>
+      <product-flag
+        webc:if="item.data.stock === 0"
+      >SOLD</product-flag>
+      <product-image
+        :@item="item.data.gallery?.find((item) => item.image)"
+        :@url="item.url"
+        :@first="this.index === 0"
+      ></product-image>
+    </gallery-item>
+  </art-gallery>
+</nav>
+
+<style>
+  @layer layout {
+    [product-card] {
+      display: grid;
+      grid-template:
+        'image flag' auto
+        'title title' auto
+        / 1fr auto
+      ;
+    }
+
+    [product-image] {
+      grid-area: image;
+      grid-column-end: -1;
+    }
+
+    [product-title] {
+      display: grid;
+      grid-area: 1 / 1 / -1 / -1;
+      grid-template-columns: subgrid;
+      grid-template-rows: subgrid;
+      z-index: 1;
+
+      span {
+        grid-area: title;
+      }
+    }
+
+    product-flag {
+      align-self: start;
+      background: var(--feature-gradient);
+      border: medium solid;
+      color: var(--background-color);
+      font-weight: bold;
+      grid-area: flag;
+      margin: var(--shim);
+      padding: 0 var(--shim);
+      z-index: 1;
+    }
+  }
+</style>

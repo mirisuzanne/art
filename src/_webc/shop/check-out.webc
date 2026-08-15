@@ -6,9 +6,9 @@
 >
   <slot></slot>
   <input type="hidden" name="url" :value="$data.page.url">
-  <!-- <input type="hidden" name="cart"> -->
-  <!-- <input type="hidden" name="address"> -->
-  <!-- <input type="hidden" name="estimate"> -->
+  <!---- <input type="hidden" name="cart"> ---->
+  <!---- <input type="hidden" name="address"> ---->
+  <!---- <input type="hidden" name="estimate"> ---->
 
   <form-field>
     <label for="checkout-name">Name</label>
@@ -25,7 +25,17 @@
   <button type="submit">Send</button>
 </form>
 
-<!-- <script>
+<style>
+  @layer layout {
+    form[name=checkout] {
+      border-block-start: thin solid var(--border-color);
+      border-image: var(--feature-gradient) 1;
+      padding-block: var(--gap);
+    }
+  }
+</style>
+
+<!---- <script>
 class CheckOut extends HTMLElement {
 	static register(tagName) {
 		if ("customElements" in window) {
@@ -120,4 +130,4 @@ class CheckOut extends HTMLElement {
 }
 
 CheckOut.register();
-</script> -->
+</script> ---->

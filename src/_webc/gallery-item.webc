@@ -17,5 +17,7 @@
 ></lite-youtube>
 
 <style>
-  gallery-item { display: block; }
+  @layer starter {
+    gallery-item { display: block; }
+  }
 </style>
