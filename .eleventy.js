@@ -5,7 +5,6 @@ import yaml from "js-yaml";
 import collect from "./11ty/collect.js";
 import markdown from "./11ty/markdown.js";
 import shipping from "./11ty/shipping.js";
-import slides from "./11ty/slides.js";
 import time from "./11ty/time.js";
 
 export default async function(eleventyConfig) {
@@ -14,7 +13,6 @@ export default async function(eleventyConfig) {
   eleventyConfig.addPlugin(collect);
   eleventyConfig.addPlugin(markdown);
   eleventyConfig.addPlugin(shipping);
-  eleventyConfig.addPlugin(slides);
   eleventyConfig.addPlugin(time);
 
   eleventyConfig.addPlugin(pluginWebc, {
@@ -23,8 +21,6 @@ export default async function(eleventyConfig) {
       'npm:@11ty/eleventy-img/*.webc',
       'npm:@11ty/is-land/*.webc',
       'npm:@terriblemia/ground-control/*.webc',
-      'npm:@oddbird/slide-deck/**/*.webc',
-      'npm:@oddbird/eleventy-plugin-slide-deck/components/**/*.webc',
     ],
   });
 
