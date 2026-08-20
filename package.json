@@ -4,6 +4,7 @@
   "description": "Maybe a place to sell my art, with more control",
   "main": "_site/index.html",
   "scripts": {
+    "build": "eleventy",
     "serve": "eleventy --serve"
   },
   "keywords": [],
