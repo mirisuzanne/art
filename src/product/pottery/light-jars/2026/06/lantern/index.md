@@ -1,10 +1,11 @@
 ---
-title: Short Lantern Jar
+title: Sloped Lantern Jar
 date: 2026-06-12
 clay: Kota porcelain
 from: Kentucky Mudworks
 
 stock: 1
+size: [6.5,5,5]
 
 gallery:
 - image: ./P1020529.jpg

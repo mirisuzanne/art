@@ -3,6 +3,7 @@ title: Tall Lantern Jar
 date: 2026-08-11
 
 stock: 1
+size: [7,4.5,4.5]
 
 gallery:
 - image: ./P1020645.jpg
