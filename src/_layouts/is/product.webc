@@ -65,6 +65,8 @@ tags:
     display: grid;
 
     strong {
+      background: var(--feature-gradient);
+      color: var(--background-color);
       padding: calc(var(--shim) / 2) var(--shim);
     }
 
