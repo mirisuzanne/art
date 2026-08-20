@@ -5,8 +5,8 @@ tags:
 ---
 
 <header>
-  <h1 @text="this.title"></h1>
-  <div><em webc:if="this.sub" @text="this.sub"></em></div>
+  <h1 @text="mdInline(this.title)"></h1>
+  <sub-title webc:if="this.sub" @text="mdInline(this.sub)"></sub-title>
 
   <div>
     <time

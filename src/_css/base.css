@@ -134,12 +134,6 @@
     }
   }
 
-  strong {
-    background: var(--feature-gradient);
-    color: var(--background-color);
-    filter: drop-shadow(1px 0 0 var(--feature-color));
-  }
-
   a {
     color: inherit;
     text-decoration-color: var(--action-color);

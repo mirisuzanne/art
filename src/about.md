@@ -1,6 +1,6 @@
 ---
 title: (Terrible) Mia
-sub: a portrait of Miriam Suzanne around middle-age
+sub: a portrait of **Miriam Suzanne** around middle-age
 ---
 
 Some people swap careers along the way

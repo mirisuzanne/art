@@ -121,6 +121,8 @@ body {
 }
 
 [rel=home] {
+  font-family: var(--fonts-serif);
+  font-style: italic;
   grid-area: home;
 }
 
