@@ -27,3 +27,12 @@
   data-reset="filter-contrast filter-brightness color-scheme"
   type="button"
 >reset</button>
+
+<style>
+  @layer page {
+    color-control {
+      display: grid;
+      gap: var(--shim);
+    }
+  }
+</style>

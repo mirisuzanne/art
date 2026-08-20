@@ -4,7 +4,8 @@ css:
   - fonts
   - page
 nav:
-  custom: '/commission/'
+  pricing: '/pricing/'
+  commission: '/commission/'
   about: '/about/'
 ---
 
@@ -83,11 +84,11 @@ nav:
 
 body {
   --content-grid-columns:
-    [full-start] 1fr
+    [full-start] minmax(var(--gap), 1fr)
     [pull-start] minmax(0, 1fr)
     [content-start] minmax(min-content, 60ch) [content-end]
     minmax(0, 1fr) [pull-end]
-    1fr [full-end];
+    minmax(var(--gap), 1fr) [full-end];
   display: grid;
   grid-template-columns: var(--content-grid-columns);
   margin: 1lh 0;
@@ -102,15 +103,32 @@ body {
 }
 
 #banner {
-  display: flex;
+  display: grid;
   gap: var(--shim);
+  grid-template:
+    'home colors' auto
+    'nav nav' auto
+    / 1fr auto
+  ;
+
+  @media (width > 45em) {
+    --justify-nav: end;
+    grid-template:
+      'home nav colors' auto
+      / auto 1fr auto
+    ;
+  }
+}
+
+[rel=home] {
+  grid-area: home;
 }
 
 #main-nav {
   display: flex;
-  flex: 1;
   gap: var(--shim);
-  justify-content: end;
+  grid-area: nav;
+  justify-content: var(--justify-nav);
 }
 
 main {

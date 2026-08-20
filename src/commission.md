@@ -1,20 +1,24 @@
 ---
 title: Commission a custom piece
-sub: in clay or pixels
+sub: in clay (or pixels)
 ---
 
-Is there something you need?
-Let me know!
-If you've seen me do it before,
-I'm probably willing to do it again.
-I'm also happy to try new things,
-as long as there's enough freedom
-for me to bring my style to the piece.
+There are several types of commission
+that I enjoy and encourage:
 
-I get excited about trying new pottery forms,
-or carving your child's hand-writing into a piece --
-but it's surprisingly difficult to do
-something in a specific color,
-unless I already have a glaze you like.
+- You see some pottery out-of-stock,
+  and would like me to make another.
+- You want custom text or a logo on pottery,
+  especially carving your child's handwriting into clay.
+- You want a form you haven't seen me make,
+  like a tea pot.
+  Why haven't I made a tea pot yet?
+- I've developed book cover art
+  for several friends who are authors.
 
-Here are some previous commissions that I've done…
+I can adapt pottery to some extent
+based on your preferences --
+different dimensions,
+concepts like angular/curvy, raw, or colorful.
+But it's hard to get specific colors on-demand,
+and I may not be interested in copying more specific designs.

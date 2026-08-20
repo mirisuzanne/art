@@ -1,13 +1,13 @@
 <style>
-:is(figure, nav):has(art-gallery) {
+:is(figure, nav):has(> art-gallery) {
   --grid-column: pull;
   container: gallery / inline-size;
-  margin: var(--gap);
 }
 
 art-gallery {
   display: grid;
   gap: var(--gap);
+  margin-block: var(--gap);
 
   @container gallery (inline-size > 40ch) {
     grid-template-columns: repeat(2, 1fr);
