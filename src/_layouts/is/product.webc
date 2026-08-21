@@ -28,9 +28,7 @@ tags:
 <div webc:nokeep @raw="this.content"></div>
 
 <product-details webc:if="this.restock || (this.stock > 0)">
-  <strong webc:if="this.set">As a set…</strong>
-  <strong webc:if="this.stock === 1">Product details…</strong>
-  <strong webc:else>Individually…</strong>
+  <strong>Details…</strong>
   <dl webc:if="this.size || this.lb || this.price">
     <div webc:if="this.size">
       <dt>size</dt>
@@ -42,7 +40,11 @@ tags:
     </div>
     <div webc:if="this.price">
       <dt>suggested price</dt>
-      <dd @text="`$${this.price}`"></dd>
+      <dd>
+        <span @text="`$${this.price}`"></span>
+        <span webc:if="this.set">for the set…</span>
+        <span webc:elseif="this.stock > 1">each…</span>
+      </dd>
     </div>
   </dl>
 
@@ -63,16 +65,20 @@ tags:
   product-details {
     background: var(--callout-color);
     display: grid;
+    gap: var(--shim);
+    grid-template-columns: var(--shim) 1fr var(--shim);
+    padding-block-end: var(--shim);
+
+    & > * {
+      margin-block: unset;
+      grid-column: 2;
+    }
 
     strong {
       background: var(--feature-gradient);
       color: var(--background-color);
+      grid-column: 1 / -1;
       padding: calc(var(--shim) / 2) var(--shim);
-    }
-
-    dl {
-      margin-block: unset;
-      padding: var(--shim);
     }
 
     dt, dd { display: inline; }

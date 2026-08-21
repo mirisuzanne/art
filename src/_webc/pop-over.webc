@@ -8,9 +8,7 @@
 
   button[popovertarget] {
     background: transparent;
-    border: thin solid currentColor;
     color: inherit;
-    padding-inline: 1ch;
   }
 
   [popover] {

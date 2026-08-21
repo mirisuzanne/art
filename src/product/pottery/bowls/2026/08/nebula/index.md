@@ -1,5 +1,5 @@
 ---
-title: Nebula Dinner Bowls
+title: Nebula dinner bowls
 date: 2026-08-11T22:29:48-06:00
 clay: Speckled Brown Trout
 from: Rocky Mountain Clay

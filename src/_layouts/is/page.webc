@@ -103,6 +103,7 @@ body {
 }
 
 #banner {
+  --name: banner;
   display: grid;
   gap: var(--shim);
   grid-template:

@@ -1,5 +1,5 @@
 ---
-title: Sloped Lantern Jar
+title: Wide lantern jar
 date: 2026-06-12
 clay: Kota porcelain
 from: Kentucky Mudworks

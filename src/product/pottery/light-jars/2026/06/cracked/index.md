@@ -1,5 +1,5 @@
 ---
-title: Cracked Light Jar
+title: Cracked light jar
 date: 2026-06-11
 
 price: 150

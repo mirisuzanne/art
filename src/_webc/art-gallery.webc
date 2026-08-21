@@ -7,7 +7,6 @@
 art-gallery {
   display: grid;
   gap: var(--gap);
-  margin-block: var(--gap);
 
   @container gallery (inline-size > 40ch) {
     grid-template-columns: repeat(2, 1fr);
