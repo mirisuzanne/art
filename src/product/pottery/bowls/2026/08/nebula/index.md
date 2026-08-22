@@ -9,6 +9,7 @@ price: 40
 size: [7,7,4]
 lb: 1.21
 stock: 0
+restock: true
 
 gallery:
 - image: ./P1020631.jpg

@@ -23,8 +23,11 @@ layout: is/page
         :href="item.url"
       ><span @text="item.data.title"></span></a>
       <product-flag
-        webc:if="item.data.stock === 0"
-      >SOLD</product-flag>
+        webc:if="item.data.restock"
+      >made to order</product-flag>
+      <product-flag
+        webc:elseif="item.data.stock === 0"
+      >sold</product-flag>
       <product-image
         :@item="item.data.gallery?.find((item) => item.image)"
         :@url="item.url"
@@ -68,9 +71,12 @@ layout: is/page
       border: medium solid;
       color: var(--background-color);
       font-weight: bold;
+      font-variant-caps: all-small-caps;
       grid-area: flag;
+      line-height: 1;
       margin: var(--shim);
-      padding: 0 var(--shim);
+      padding: 0.25lh var(--shim);
+      text-transform: lowercase;
       z-index: 1;
     }
   }
