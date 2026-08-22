@@ -4,15 +4,8 @@
 <style>
   @layer tools {
     spoil-it {
-      --spoiler-background: var(--feature-gradient);
-
-      &::part(text) {
-        @supports (background-clip: text) {
-          background: var(--feature-gradient);
-          background-clip: text;
-          color: transparent;
-        }
-      }
+      --spoiler-closed-background: transparent;
+      --spoiler-closed-visibility: visible;
     }
   }
 </style>
@@ -47,14 +40,12 @@ class SpoilIt extends HTMLElement {
       }
 
       button[aria-expanded="false"] {
-        background: var(--spoiler-background, currentColor);
-      }
-      button[aria-expanded="true"] {
-        color: var(--spoiler-text, inherit);
-      }
+        background: var(--spoiler-closed-background, currentColor);
 
-      button[aria-expanded="false"] span {
-        visibility: hidden;
+        [part=text] {
+          visibility: var(--spoiler-closed-visibility, hidden);
+          filter: var(--spoiler-closed-filter, blur(3px));
+        }
       }
     `);
     node.shadowRoot.adoptedStyleSheets = [shadowStyle];

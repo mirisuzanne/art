@@ -12,10 +12,10 @@ stock: 1
 price: 100
 
 gallery:
+- image: ./P1020625.jpg
 - image: ./P1020585.jpg
 - image: ./P1020586.jpg
 - image: ./P1020588.jpg
 - image: ./P1020590.jpg
-- image: ./P1020625.jpg
 - image: ./P1020626.jpg
 ---

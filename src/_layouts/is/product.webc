@@ -6,7 +6,7 @@ tags:
 
 <header>
   <h1 @text="mdInline(this.title)"></h1>
-  <sub-title webc:if="this.sub" @text="mdInline(this.sub)"></sub-title>
+  <sub-title webc:if="this.sub" @html="mdInline(this.sub)"></sub-title>
 
   <div>
     <time
@@ -39,11 +39,12 @@ tags:
       <dd @text="`${this.lb}lb`"></dd>
     </div>
     <div webc:if="this.price">
-      <dt>suggested price</dt>
+      <dt><a href="/pricing/">name your price</a>, or</dt>
       <dd>
-        <span @text="`$${this.price}`"></span>
-        <span webc:if="this.set">for the set…</span>
-        <span webc:elseif="this.stock > 1">each…</span>
+        $<spoil-it :@content="this.price"></spoil-it>
+        <span webc:if="this.set">for the set</span>
+        <span webc:elseif="this.stock > 1">each</span>
+        (click to reveal)
       </dd>
     </div>
   </dl>

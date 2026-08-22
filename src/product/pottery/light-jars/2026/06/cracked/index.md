@@ -1,4 +1,5 @@
 ---
+eleventyExcludeFromCollections: true
 title: Cracked light jar
 date: 2026-06-11
 

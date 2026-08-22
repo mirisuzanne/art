@@ -15,7 +15,7 @@ layout: is/page
 <nav>
   <art-gallery webc:if="this.collections[this.list]?.length > 0">
     <gallery-item
-      webc:for="(item, index) of this.collections[this.list].toReversed()"
+      webc:for="(item, index) of this.collections[this.list].toReversed().sort((a,b) => b.data.stock === 0 && a.data.stock > 0 ? -1 : 0)"
       product-card
     >
       <a
