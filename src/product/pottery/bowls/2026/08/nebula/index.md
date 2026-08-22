@@ -8,7 +8,7 @@ safe: yes
 price: 40
 size: [7,7,4]
 lb: 1.21
-stock: 4
+stock: 0
 
 gallery:
 - image: ./P1020631.jpg

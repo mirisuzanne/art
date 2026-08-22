@@ -17,18 +17,19 @@ to price handmade artwork.
    even if you aren't flush with cash.
    If you like what I make,
    I want it to be affordable to you.
-   Not _cheap_, but _within reach_.
+   Not always _cheap_, but _within reach_.
 3. I need to pay for clay and glaze,
    food, tools, housing, and so on.
 
 I post prices for each piece,
-estimating the range where I think they belong.
+estimating where I think they
+fit in the market.
 But all prices are suggested,
 and you should pay what feels viable to you
-(and also cover shipping).
+(plus shipping).
 
 No need to negotiate,
-just _pay what you can_.
+just _pay what you want_.
 
 If you're able to pay
 more than the suggestion,
