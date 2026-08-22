@@ -16,6 +16,13 @@
     webc:is="template-styles"
     :@css="styleSheet"
   >
+
+  <meta webc:is="color-scheme" webc:nokeep>
+  <meta webc:nokeep webc:is="fav-icons" :@theme="this.theme">
+  <meta webc:nokeep webc:is="open-graph" :@desc="this.description">
+
+  <meta name="generator" :content="eleventy.generator">
+
   <noscript>
     <style>[show-when=js] { display: none !important; }</style>
   </noscript>
