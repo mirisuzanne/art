@@ -1,0 +1,53 @@
+<script webc:setup>
+  export const getDesc = (data) => data.sub ||
+    'Art by Miriam Suzanne, made by hand in Denver, CO.';
+
+  export const getImage = (gallery, url) => {
+    const data = gallery?.find((item) => item.image);
+    if (!data) return;
+
+    const image = {
+      image: `./src${data.image.replace('./', url)}`,
+      alt: data.alt,
+    }
+
+    return image;
+  };
+
+  export const ogImgData = (data) => {
+    let imageData = getImage(data.gallery, data.page.url);
+
+    if (!imageData) {
+      const from = data.list || 'stock';
+      const latest = data.collections[from].find((page) => page.data.gallery);
+      imageData = getImage(latest.data.gallery, latest.page.url);
+    }
+
+    return imageData;
+  };
+
+  export const ogImgSrc = async (data) => {
+    const imgData = ogImgData(data);
+    if (!imgData) return;
+
+    const img = await imgSrc(imgData.image);
+    return `${data.baseURL}${img}`;
+  };
+
+  export const ogImgAlt = (data) => {
+    const imgData = ogImgData(data);
+
+    return imgData?.alt;
+  };
+</script>
+
+<meta property="og:type" content="website" />
+<meta property="og:title" :content="$data.title">
+<meta property="og:author" content="Miriam Suzanne">
+<meta property="og:image" :content="ogImgSrc($data)">
+<meta property="og:image:alt" webc:if="ogImgAlt($data)" :content="ogImgAlt($data)">
+<meta property="og:url" :content="`${$data.baseURL}${$data.page.url}`">
+<meta property="og:site_name" content="Mia's Culpa">
+<meta property="og:description" :content="getDesc($data)">
+<meta name="description" :content="getDesc($data)">
+<meta name="fediverse:creator" content="@mia@front-end.social" />
