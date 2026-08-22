@@ -11,8 +11,8 @@ art-gallery {
   @container gallery (inline-size > 40ch) {
     grid-template-columns: repeat(2, 1fr);
 
-    & > :first-child,
-    & > :last-child:nth-child(even) {
+    & > :first-child:nth-last-child(n+3),
+    & > :last-child:nth-child(2n+4) {
       --span: span 2;
     }
   }
