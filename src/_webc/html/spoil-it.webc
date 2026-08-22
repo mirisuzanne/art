@@ -44,7 +44,7 @@ class SpoilIt extends HTMLElement {
 
         [part=text] {
           visibility: var(--spoiler-closed-visibility, hidden);
-          filter: var(--spoiler-closed-filter, blur(3px));
+          filter: var(--spoiler-closed-filter, blur(4px));
         }
       }
     `);
