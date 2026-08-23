@@ -1,6 +1,7 @@
 <script webc:setup>
-  export const getDesc = (data) => data.sub ||
-    'Art by Miriam Suzanne, made by hand in Denver, CO.';
+  export const getDesc = (data) =>
+    `${data.sub ? data.sub + ' // ' : ''}
+    Art by Miriam Suzanne, made by hand in Denver, CO.`;
 
   export const getImage = (gallery, url) => {
     const data = gallery?.find((item) => item.image);
@@ -19,7 +20,8 @@
 
     if (!imageData) {
       const from = data.list || 'stock';
-      const latest = data.collections[from].find((page) => page.data.gallery);
+      const collection = data.collections[from].toReversed();
+      const latest = collection.find((page) => page.data.gallery);
       imageData = getImage(latest.data.gallery, latest.page.url);
     }
 
