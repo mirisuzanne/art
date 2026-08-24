@@ -5,9 +5,6 @@ layout: is/collection
 title: Commission a custom piece
 sub: in clay (or pixels)
 list: commission
-
-gallery:
-- image: /product/pottery/bottles/2026/02/isabel/P1020377.jpg
 ---
 
 There are several types of commission

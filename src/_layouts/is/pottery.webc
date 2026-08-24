@@ -17,11 +17,17 @@ tags:
 <div @raw="this.content"></div>
 
 <p>
-  Made by hand in Denver,
-  using <em @text="this.clay"></em>
-  from <em @text="this.from"></em>.
+  Made by hand in Denver, CO.
+  <span webc:if="this.clay">
+    Made from <em @text="this.clay"></em>
+    from <em @text="this.from"></em>.
+  </span>
   <span webc:if="this.safe === 'yes'">
     Food safe, microwave safe, and dishwasher safe.
   </span>
   <span webc:elseif="this.safe" @text="this.safe"></span>
+  <span webc:if="this.restock">
+    Requires roughly one month production time
+    before shipping.
+  </span>
 </p>

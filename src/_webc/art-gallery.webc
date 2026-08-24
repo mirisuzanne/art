@@ -8,12 +8,18 @@ art-gallery {
   display: grid;
   gap: var(--gap);
 
+  & > :only-child,
+  & > :first-child:nth-last-child(n+3),
+  & > :last-child:nth-child(2n+4) {
+    --span: span 2;
+  }
+
   @container gallery (inline-size > 40ch) {
     grid-template-columns: repeat(2, 1fr);
 
-    & > :first-child:nth-last-child(n+3),
-    & > :last-child:nth-child(2n+4) {
-      --span: span 2;
+    gallery-item,
+    [gallery-item] {
+      grid-column: var(--span, initial);
     }
   }
 
@@ -23,8 +29,4 @@ art-gallery {
   }
 }
 
-gallery-item,
-[gallery-item] {
-  grid-column: var(--span, initial);
-}
 </style>
