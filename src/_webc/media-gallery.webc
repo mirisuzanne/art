@@ -1,0 +1,29 @@
+<style webc:bucket="page">
+@layer page {
+  media-gallery {
+    display: grid;
+    gap: var(--gap);
+
+    & > :only-child,
+    & > :first-child:nth-last-child(n+3),
+    & > :last-child:nth-child(2n+4) {
+      --span: span 2;
+    }
+
+    @container (inline-size > 40ch) {
+      grid-template-columns: repeat(2, 1fr);
+
+      gallery-item,
+      [gallery-item] {
+        grid-column: var(--span, initial);
+      }
+    }
+
+    img {
+      border: thin solid var(--feature-color);
+      border-image: var(--feature-gradient) 1;
+      inline-size: stretch;
+    }
+  }
+}
+</style>

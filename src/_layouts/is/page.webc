@@ -98,13 +98,17 @@ nav:
   body {
     --content-grid-columns:
       [full-start] minmax(var(--gap), 1fr)
-      [pull-start] minmax(0, 1fr)
+      [pull-start] minmax(0, var(--pull, 1fr))
       [content-start] minmax(min-content, 60ch) [content-end]
-      minmax(0, 1fr) [pull-end]
+      minmax(0, var(--pull, 1fr)) [pull-end]
       minmax(var(--gap), 1fr) [full-end];
     display: grid;
     grid-template-columns: var(--content-grid-columns);
     margin: 1lh 0;
+
+    @media (width > 50em) {
+      --pull: 8ch;
+    }
 
     & > * {
       grid-column: var(--grid-column, content);
@@ -163,6 +167,15 @@ nav:
   }
 
   [show-when=defined]:not(:defined) { display: none !important; }
+
+  [grid-container] {
+    container: layout / inline-size;
+  }
+
+  [grid-container~=pull] {
+    --grid-column: pull;
+  }
+
 
   [shopping-cart] {
     --grid-column: full;

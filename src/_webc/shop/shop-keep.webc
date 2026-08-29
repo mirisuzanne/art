@@ -1,5 +1,7 @@
-<style>
-  shop-keep { display: none; }
+<style webc:bucket="page">
+  @layer starter.reset {
+    shop-keep { display: none !important; }
+  }
 </style>
 
 <script>

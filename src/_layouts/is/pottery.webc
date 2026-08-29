@@ -4,14 +4,14 @@ tags:
   - pottery
 ---
 
-<figure webc:if="this.gallery?.length > 0">
-  <art-gallery>
+<figure grid-container="pull" webc:if="this.gallery?.length > 0">
+  <media-gallery>
     <gallery-item
       webc:for="(item, index) of this.gallery"
       :@item="item"
       :@first="index === 0"
     ></gallery-item>
-  </art-gallery>
+  </media-gallery>
 </figure>
 
 <div @raw="this.content"></div>

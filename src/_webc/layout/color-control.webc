@@ -28,7 +28,7 @@
   type="button"
 >reset</button>
 
-<style>
+<style webc:bucket="page">
   @layer page {
     color-control {
       display: grid;

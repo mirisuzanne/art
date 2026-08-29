@@ -16,8 +16,8 @@
   @text="this.item.alt || ''"
 ></lite-youtube>
 
-<style>
-  @layer starter {
+<style webc:bucket="page">
+  @layer starter.reset {
     gallery-item { display: block; }
   }
 </style>

@@ -50,7 +50,7 @@
   </tr>
 </template>
 
-<style>
+<style webc:bucket="page">
   @layer tools {
     shopping-cart {
       border-block-start: medium solid var(--accent-color);

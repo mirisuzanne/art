@@ -61,7 +61,7 @@ tags:
 
 <tag-list></tag-list>
 
-<style>
+<style webc:bucket="page">
 @layer layout {
   product-details {
     background: var(--callout-color);

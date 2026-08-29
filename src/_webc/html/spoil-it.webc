@@ -1,7 +1,7 @@
 <span webc:if="this.content" webc:nokeep @text="this.content"></span>
 <slot></slot>
 
-<style>
+<style webc:bucket="page">
   @layer tools {
     spoil-it {
       --spoiler-closed-background: transparent;

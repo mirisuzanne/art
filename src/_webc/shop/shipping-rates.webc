@@ -8,7 +8,7 @@ and weighs
 
 <script src="./shipping-rates.js"></script>
 
-<style>
+<style webc:bucket="page">
 @layer tools {
   shipping-rates {
     background: var(--callout-color);

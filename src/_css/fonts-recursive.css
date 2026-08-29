@@ -67,7 +67,7 @@ quotes (“ ” ‘ ’) & bullet (•) */
   unicode-range: U+20-7F, U+A9, U+2190-2193, U+2018, U+2019, U+201C, U+201D, U+2022;
 }
 
-@layer reset {
+@layer starter.reset {
   *,
   *::before,
   *::after {

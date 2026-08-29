@@ -12,8 +12,8 @@ layout: is/page
   @raw="this.content"
 ></section>
 
-<nav>
-  <art-gallery webc:if="this.collections[this.list]?.length > 0">
+<nav grid-container="pull" webc:if="this.collections[this.list]?.length > 0">
+  <media-gallery>
     <gallery-item
       webc:for="(item, index) of sortByStock(this.collections[this.list])"
       product-card
@@ -34,10 +34,10 @@ layout: is/page
         :@first="this.index === 0"
       ></product-image>
     </gallery-item>
-  </art-gallery>
+  </media-gallery>
 </nav>
 
-<style>
+<style webc:bucket="page">
   @layer layout {
     [product-card] {
       display: grid;

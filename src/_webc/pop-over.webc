@@ -1,4 +1,4 @@
-<style>
+<style webc:bucket="page">
 @layer tools {
   pop-over {
     &:has(:popover-open) {
