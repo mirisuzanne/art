@@ -1,6 +1,12 @@
 ---
-title: (Terrible) Mia
-sub: a portrait of **Miriam Suzanne** around middle-age
+title: Miriam Suzanne
+sub: aka (Terrible) Mia
+image:
+  src: ./lightning.jpg
+  alt: >
+    Miriam in black coveralls with asymmetrical hair
+    that includes orange streaks,
+    and large neon lighting bolt earrings.
 ---
 
 Some people swap careers along the way
@@ -10,9 +16,12 @@ pursuing simultaneous careers instead:
 theater with [Grapefruit Lab](https://grapefruitlab.com),
 music with [Teacup Gorilla](https://teacupgorilla.com),
 web design with [OddBird](https://oddbird.net),
-and several other arts on my own --
+and several other arts
+[on my own](https://miriamsuzanne.com) --
 including the pottery, prints,
 and novel on this site.
+
+![{{ image.alt }}]({{ image.src }})
 
 I enjoy bringing my perspective
 to a creative process --
@@ -23,6 +32,7 @@ then repeating the process.
 I'm interested in the ways
 a process and a material push back,
 forcing me to adjust and reconsider.
+
 I have no interest in a world where
 I can conjure up exactly what's in my head.
 Why bother?

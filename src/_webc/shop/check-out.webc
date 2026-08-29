@@ -27,7 +27,7 @@
 
 <style>
   @layer layout {
-    form[name=checkout] {
+    check-out {
       border-block-start: thin solid var(--border-color);
       border-image: var(--feature-gradient) 1;
       padding-block: var(--gap);

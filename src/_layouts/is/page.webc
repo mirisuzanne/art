@@ -68,6 +68,19 @@ nav:
   </p>
 </check-out>
 
+<footer id="contentinfo">
+  <p>
+    Copyright (c) <strong>Miriam Suzanne</strong>,
+    <time @text="new Date().getFullYear()"></time>
+  </p>
+  <ul>
+    <li webc:for="link of this.social">
+      <a :href="link.url" rel="me" @text="link.name"></a>
+      on <span @text="link.on"></span>
+    </li>
+  </ul>
+</footer>
+
 <link
   rel="stylesheet"
   href="../../_css/fonts.css"
@@ -81,76 +94,86 @@ nav:
   initial-value: content;
 }
 
-body {
-  --content-grid-columns:
-    [full-start] minmax(var(--gap), 1fr)
-    [pull-start] minmax(0, 1fr)
-    [content-start] minmax(min-content, 60ch) [content-end]
-    minmax(0, 1fr) [pull-end]
-    minmax(var(--gap), 1fr) [full-end];
-  display: grid;
-  grid-template-columns: var(--content-grid-columns);
-  margin: 1lh 0;
+@layer layout {
+  body {
+    --content-grid-columns:
+      [full-start] minmax(var(--gap), 1fr)
+      [pull-start] minmax(0, 1fr)
+      [content-start] minmax(min-content, 60ch) [content-end]
+      minmax(0, 1fr) [pull-end]
+      minmax(var(--gap), 1fr) [full-end];
+    display: grid;
+    grid-template-columns: var(--content-grid-columns);
+    margin: 1lh 0;
 
-  & > * {
-    grid-column: var(--grid-column, content);
+    & > * {
+      grid-column: var(--grid-column, content);
+    }
   }
-}
 
-[shopping-cart] {
-  --grid-column: full;
-}
-
-#banner {
-  --name: banner;
-  display: grid;
-  gap: var(--shim);
-  grid-template:
-    'home colors' auto
-    'nav nav' auto
-    / 1fr auto
-  ;
-
-  @media (width > 45em) {
-    --justify-nav: end;
+  #banner {
+    --name: banner;
+    display: grid;
+    gap: var(--shim);
     grid-template:
-      'home nav colors' auto
-      / auto 1fr auto
+      'home colors' auto
+      'nav nav' auto
+      / 1fr auto
     ;
+
+    @media (width > 45em) {
+      --justify-nav: end;
+      grid-template:
+        'home nav colors' auto
+        / auto 1fr auto
+      ;
+    }
+  }
+
+  [rel=home] {
+    font-family: var(--fonts-serif);
+    font-style: italic;
+    grid-area: home;
+  }
+
+  #main-nav {
+    display: flex;
+    gap: var(--shim);
+    grid-area: nav;
+    justify-content: var(--justify-nav);
+  }
+
+  main {
+    --grid-column: full;
+    display: grid;
+    grid-template-columns: var(--content-grid-columns);
+    margin-block: var(--spacer) var(--gap);
+
+    & > * {
+      grid-column: var(--grid-column, content);
+    }
+  }
+
+  sub-title {
+    font-style: italic;
+
+    time + &::before {
+      content: ' – ';
+    }
+  }
+
+  [show-when=defined]:not(:defined) { display: none !important; }
+
+  [shopping-cart] {
+    --grid-column: full;
+  }
+
+  #contentinfo {
+    --grid-column: full;
+    border-block-start: thin solid var(--border-color);
+    border-image: var(--feature-gradient) 1;
+    padding: var(--gap);
   }
 }
 
-[rel=home] {
-  font-family: var(--fonts-serif);
-  font-style: italic;
-  grid-area: home;
-}
-
-#main-nav {
-  display: flex;
-  gap: var(--shim);
-  grid-area: nav;
-  justify-content: var(--justify-nav);
-}
-
-main {
-  --grid-column: full;
-  display: grid;
-  grid-template-columns: var(--content-grid-columns);
-  margin-block: var(--spacer) var(--gap);
-
-  & > * {
-    grid-column: var(--grid-column, content);
-  }
-}
-
-sub-title {
-  font-style: italic;
-
-  time + &::before {
-    content: ' – ';
-  }
-}
-
-[show-when=defined]:not(:defined) { display: none !important; }
 </style>
