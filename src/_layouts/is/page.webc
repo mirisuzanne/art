@@ -76,7 +76,13 @@ nav:
   <ul>
     <li webc:for="link of this.social">
       <a :href="link.url" rel="me" @text="link.name"></a>
-      on <span @text="link.on"></span>
+      on <strong @text="link.on"></strong>
+    </li>
+    <li>
+      <a href="https://buttondown.com/MiaCulpa">
+        Mia Culpa
+      </a>
+      in <strong>Your Inbox</strong>
     </li>
   </ul>
 </footer>
