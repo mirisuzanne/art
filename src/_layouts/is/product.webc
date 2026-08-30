@@ -27,6 +27,17 @@ tags:
 </header>
 
 <div webc:if="this.summary" @html="mdBlock(this.summary)"></div>
+
+<figure grid-container="pull" webc:if="this.gallery?.length > 0">
+  <media-gallery>
+    <gallery-item
+      webc:for="(item, index) of this.gallery"
+      :@item="item"
+      :@first="index === 0"
+    ></gallery-item>
+  </media-gallery>
+</figure>
+
 <div webc:nokeep @raw="this.content"></div>
 
 <product-details webc:if="this.restock || (this.stock > 0)">
