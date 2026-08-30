@@ -1,8 +1,7 @@
 ---
 title: Wide lantern jar
 date: 2026-06-12
-clay: Kota porcelain
-from: Kentucky Mudworks
+clay: kota
 
 stock: 1
 size: [6.5,5,5]

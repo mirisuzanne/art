@@ -1,8 +1,7 @@
 ---
 title: Handwriting shower bottles
 date: 2026-02-25
-clay: BMX
-from: Rocky Mountain Clay
+clay: bmx
 summary: >
   Designed with help from a young friend of mine,
   I can make these bottles in a variety of shapes and sizes --

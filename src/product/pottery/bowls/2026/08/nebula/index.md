@@ -1,9 +1,7 @@
 ---
 title: Nebula dinner bowls
 date: 2026-08-11T22:29:48-06:00
-clay: Speckled Brown Trout
-from: Rocky Mountain Clay
-safe: yes
+clay: trout
 
 price: 40
 size: [7,7,4]

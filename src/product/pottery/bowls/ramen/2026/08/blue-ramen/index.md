@@ -1,8 +1,7 @@
 ---
 title: Blue speckled ramen bowls
-clay: Speckled Brown Trout
-from: Rocky Mountain Clay
 date: 2026-08-13
+clay: trout
 
 stock: 2
 price: 50

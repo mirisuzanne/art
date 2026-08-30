@@ -4,6 +4,29 @@ tags:
   - pottery
 ---
 
+<script webc:setup>
+  const getClay = (clay, data) => {
+    const dbClay = data.clays[clay];
+
+    const clayData = {
+      name: dbClay?.name || clay[0].toUpperCase() + clay.substring(1),
+      from: dbClay?.from || data.from,
+      type: dbClay?.type || data.type,
+    };
+
+    let string = clayData.name;
+    if (clayData.type) string = `${string} (${clayData.type})`;
+    if (clayData.from) string = `${string} from ${clayData.from}`;
+
+    return string;
+  }
+
+  export const clayList = (data) => {
+    if (typeof data.clay === 'string') return getClay(data.clay, data);
+    return data.clay.map((clay, i, all) => getClay(clay, data)).join(', and ');
+  }
+</script>
+
 <figure grid-container="pull" webc:if="this.gallery?.length > 0">
   <media-gallery>
     <gallery-item
@@ -17,15 +40,15 @@ tags:
 <div @raw="this.content"></div>
 
 <p>
-  Made by hand in Denver, CO.
-  <span webc:if="this.clay">
-    Made from <em @text="this.clay"></em>
-    from <em @text="this.from"></em>.
+  Made by hand in Denver, CO
+  <span webc:if="this.clay" @text="`with ${clayList($data)}.`"></span>
+  <span webc:else>with a reclaimed mix of clays.</span>
+
+  <span webc:if="this.safety" @html="mdInline(this.safety)"></span>
+  <span webc:else>
+    Food, microwave, and dishwasher safe.
   </span>
-  <span webc:if="this.safe === 'yes'">
-    Food safe, microwave safe, and dishwasher safe.
-  </span>
-  <span webc:elseif="this.safe" @text="this.safe"></span>
+
   <span webc:if="this.restock">
     Requires roughly one month production time
     before shipping.

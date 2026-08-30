@@ -8,30 +8,25 @@
   * { view-transition-name: var(--name); }
 
   html {
-    /* brand colors */
-    --brand-blue: hsl(195 52% 31%);
-    --brand-orange: hsl(24 100% 62%);
-    --brand-pink: hsl(330 100% 45%);
-    --neutral: hsl(195deg 10% 50%);
-
     /* generic */
     --color-light: hsl(200 12% 95.098%);
     --color-dark: hsl(200deg 12% 4.902%);
+    --neutral: hsl(195deg 10% 50%);
 
-    --color-light-callout: hsl(193 28% 93%);
-    --color-dark-callout: hsl(192.59 23.914% 13.567%);
+    --color-light-callout: hsl(193deg 28% 93%);
+    --color-dark-callout: hsl(193deg 23.914% 13.567%);
 
-    --color-light-accent: hsl(337.28 98.75% 79.203%);
-    --color-dark-accent: hsl(330.2deg 67.742% 42.549%);
+    --color-light-accent: hsl(337deg 98.75% 79.203%);
+    --color-dark-accent: hsl(337deg 67.742% 42.549%);
 
-    --color-light-action: hsl(196.57 76.878% 80.38%);
-    --color-dark-action: hsl(195deg 53% 27%);
+    --color-light-action: hsl(196deg 76.878% 80.38%);
+    --color-dark-action: hsl(196deg 53% 27%);
 
-    --color-light-active: hsl(330 52.857% 87%);
+    --color-light-active: hsl(330deg 52.857% 87%);
     --color-dark-active: hsl(330deg 52.857% 27.451%);
 
-    --color-light-feature: hsl(194.07 82.555% 45.938%);
-    --color-dark-feature: hsl(193.69 99.455% 22.7%);
+    --color-light-feature: hsl(194deg 82.555% 45.938%);
+    --color-dark-feature: hsl(194deg 99.455% 22.7%);
 
     /* background colors */
     --background-color: var(--color-light, Canvas);
@@ -64,36 +59,36 @@
 
     @supports (color: light-dark(pink, teal)) {
       /* background colors */
-      --background-color: light-dark(
+      --background-color: oklch(from light-dark(
         var(--color-light, Canvas),
         var(--color-dark, Canvas)
-      );
-      --callout-color: light-dark(
+      ) l c calc(h + var(--filter-hue, 0)));
+      --callout-color: oklch(from light-dark(
         var(--color-light-callout),
         var(--color-dark-callout)
-      );
+      ) l c calc(h + var(--filter-hue, 0)));
 
       /* content colors */
-      --text-color: light-dark(
+      --text-color: oklch(from light-dark(
         var(--color-dark, CanvasText),
         var(--color-light, CanvasText)
-      );
-      --accent-color: light-dark(
+      ) l c calc(h + var(--filter-hue, 0)));
+      --accent-color: oklch(from light-dark(
         var(--color-dark-accent, AccentColor),
         var(--color-light-accent, AccentColor)
-      );
-      --action-color: light-dark(
+      ) l c calc(h + var(--filter-hue, 0)));
+      --action-color: oklch(from light-dark(
         var(--color-dark-action, LinkText),
         var(--color-light-action, LinkText)
-      );
-      --active-color: light-dark(
+      ) l c calc(h + var(--filter-hue, 0)));
+      --active-color: oklch(from light-dark(
         var(--color-dark-active, ActiveText),
         var(--color-light-active, ActiveText)
-      );
-      --feature-color: light-dark(
+      ) l c calc(h + var(--filter-hue, 0)));
+      --feature-color: oklch(from light-dark(
         var(--color-dark-feature, AccentColor),
         var(--color-light-feature, AccentColor)
-      );
+      ) l c calc(h + var(--filter-hue, 0)));
 
       --feature-gradient: linear-gradient(to right,
         var(--accent-color),

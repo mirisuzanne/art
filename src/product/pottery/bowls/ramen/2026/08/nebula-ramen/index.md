@@ -1,7 +1,6 @@
 ---
 title: Nebula ramen bowls
-clay: Speckled Brown Trout
-from: Rocky Mountain Clay
+clay: trout
 date: 2026-08-09
 
 stock: 2

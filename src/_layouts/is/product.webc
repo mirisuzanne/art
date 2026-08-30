@@ -5,15 +5,17 @@ tags:
 ---
 
 <header>
-  <h1 @text="mdInline(this.title)"></h1>
+  <h1 @html="mdInline(this.title)"></h1>
   <sub-title webc:if="this.sub" @html="mdInline(this.sub)"></sub-title>
 
   <div>
-    <time
-      :datetime="this.page.date.toISOString()"
-      @text="dateFormat(this.page.date)"
-    ></time>
-    –
+    <span webc:if="this.stock > 0">
+      <time
+        :datetime="this.page.date.toISOString()"
+        @text="dateFormat(this.page.date)"
+      ></time>
+      –
+    </span>
     <em webc:if="this.stock === 1">Available</em>
     <em
       webc:elseif="this.stock > 0"
