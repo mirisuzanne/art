@@ -4,7 +4,7 @@ css:
   - fonts
   - page
 nav:
-  commission: '/commission/'
+  request: '/commission/'
   about: '/about/'
 ---
 
@@ -103,11 +103,13 @@ nav:
 @layer layout {
   body {
     --content-grid-columns:
-      [full-start] minmax(var(--gap), 1fr)
+      [full-start] var(--gap)
+      [wide-start] minmax(0, 1fr)
       [pull-start] minmax(0, var(--pull, 1fr))
       [content-start] minmax(min-content, 60ch) [content-end]
       minmax(0, var(--pull, 1fr)) [pull-end]
-      minmax(var(--gap), 1fr) [full-end];
+      minmax(0, 1fr) [wide-end]
+      var(--gap) [full-end];
     display: grid;
     grid-template-columns: var(--content-grid-columns);
     margin: 1lh 0;
@@ -182,6 +184,13 @@ nav:
     --grid-column: pull;
   }
 
+  [grid-container~=wide] {
+    --grid-column: wide;
+  }
+
+  [grid-container~=full] {
+    --grid-column: full;
+  }
 
   [shopping-cart] {
     --grid-column: full;

@@ -1,18 +1,38 @@
-const inStock = (page) => page.data.restock || page.data.stock;
+const inStock = (data) => data.stock && data.stock !== 0;
+const reStock = (data) => data.restock && !inStock(data);
+const showStock = (data) => inStock(data) || reStock(data) || data.feature;
+const isSecond = (data) => data.flag?.includes('second');
 
 const sortByStock = (collection) => collection
 	.toReversed()
-	.sort((a,b) => !inStock(b) && inStock(a) ? -1 : 0);
+	.sort((a,b) => {
+		if (isSecond(b.data) && !isSecond(a.data)) return -1;
+		if (inStock(a.data) && !inStock(b.data)) return -1;
+		return 0;
+	});
 
 export default function (eleventyConfig) {
+  eleventyConfig.addFilter('inStock', inStock);
+  eleventyConfig.addFilter('reStock', reStock);
+  eleventyConfig.addFilter('showStock', showStock);
+  eleventyConfig.addFilter('isSecond', isSecond);
   eleventyConfig.addFilter('sortByStock', sortByStock);
 
 	eleventyConfig.addCollection(
 		'stock',
 		function (collectionsApi) {
-			return collectionsApi.getFilteredByTags('product').filter((page) => {
-        return page.data.restock || page.data.stock > 0;
-      });
+			return collectionsApi.getFilteredByTags('product').filter((page) =>
+				showStock(page.data)
+      );
+		}
+	);
+
+	eleventyConfig.addCollection(
+		'request',
+		function (collectionsApi) {
+			return collectionsApi.getFilteredByTags('product').filter((page) =>
+				reStock(page.data)
+      );
 		}
 	);
 };

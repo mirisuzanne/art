@@ -9,6 +9,19 @@
     sizes: this.first ? '100w' : 'auto',
   })"
 >
+<video
+  webc:elseif="this.item.video"
+  :src="this.item.video"
+  :alt="this.item.alt || ''"
+  :type="this.item.type || 'video/mp4'"
+  :width="this.item.width || 1920 "
+  :height="this.item.height || 1080"
+  controls
+  muted
+  @attributes="({
+    loop: this.item.loop,
+  })"
+></video>
 <lite-youtube
   webc:elseif="this.item.youtube"
   :videoid="this.item.youtube"

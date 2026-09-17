@@ -8,8 +8,9 @@ summary: >
   and only fits a small bulb
   with a standard socket base.
 
+flag: second
 stock: 1
-price: 100
+price: 75
 
 gallery:
 - image: ./P1020625.jpg

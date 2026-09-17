@@ -9,19 +9,18 @@ tags:
   <sub-title webc:if="this.sub" @html="mdInline(this.sub)"></sub-title>
 
   <div>
-    <span webc:if="this.stock > 0">
+    <span webc:if="inStock($data)">
       <time
         :datetime="this.page.date.toISOString()"
         @text="dateFormat(this.page.date)"
       ></time>
       –
     </span>
-    <em webc:if="this.stock === 1">Available</em>
+    <em webc:if="reStock($data)">Made to order</em>
     <em
-      webc:elseif="this.stock > 0"
+      webc:elseif="inStock($data)"
       @text="`${this.stock} in stock`"
     ></em>
-    <em webc:elseif="this.restock">Made to order</em>
     <em webc:else>Sold</em>
   </div>
 </header>
@@ -40,7 +39,7 @@ tags:
 
 <div webc:nokeep @raw="this.content"></div>
 
-<product-details webc:if="this.restock || (this.stock > 0)">
+<product-details webc:if="showStock($data)">
   <strong>Details…</strong>
   <dl webc:if="this.size || this.lb || this.price">
     <div webc:if="this.size">

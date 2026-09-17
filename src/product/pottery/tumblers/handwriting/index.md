@@ -1,9 +1,9 @@
 ---
-title: Handwriting Tumblers
+title: Custom handwriting tumblers
 date: 2026-02-17
 tags:
   - handwriting
-  - commission
+  - customize
 summary: >
   Get tumblers with your own handwriting --
   or a hand-written message from someone you love.
@@ -11,7 +11,6 @@ summary: >
   but hand-traced reproductions
   carved into the surface!
 
-stock: 0
 restock: true
 price: 60
 

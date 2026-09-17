@@ -27,6 +27,7 @@ export default async function(eleventyConfig) {
     ],
   });
 
+  eleventyConfig.addPassthroughCopy('**/*.mov');
   eleventyConfig.addPassthroughCopy({
     './src/_css': 'css',
     './src/_fonts': 'fonts',

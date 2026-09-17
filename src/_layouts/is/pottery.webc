@@ -39,7 +39,7 @@ tags:
     Food, microwave, and dishwasher safe.
   </span>
 
-  <span webc:if="this.restock">
+  <span webc:if="reStock($data)">
     Requires roughly one month production time
     before shipping.
   </span>

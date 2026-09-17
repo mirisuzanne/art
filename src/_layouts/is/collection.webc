@@ -7,12 +7,17 @@ layout: is/page
   <sub-title webc:if="this.sub" @html="mdInline(this.sub)"></sub-title>
 </header>
 
+<div webc:if="this.summary" @html="mdBlock(this.summary)"></div>
+
 <section
   webc:if="this.content"
   @raw="this.content"
 ></section>
 
-<nav grid-container="pull" webc:if="this.collections[this.list]?.length > 0">
+<nav
+  webc:if="this.collections[this.list]?.length > 0"
+  :grid-container="sortByStock(this.collections[this.list]).length > 5 ? 'wide' : 'pull'"
+>
   <media-gallery>
     <gallery-item
       webc:for="(item, index) of sortByStock(this.collections[this.list])"
@@ -23,11 +28,15 @@ layout: is/page
         :href="item.url"
       ><span @text="item.data.title"></span></a>
       <product-flag
-        webc:if="item.data.restock"
+        webc:if="reStock(item.data)"
       >made to order</product-flag>
       <product-flag
-        webc:elseif="item.data.stock === 0"
+        webc:elseif="!inStock(item.data)"
       >sold</product-flag>
+      <product-flag
+        webc:elseif="item.data.flag"
+        @text="item.data.flag"
+      ></product-flag>
       <product-image
         :@item="item.data.gallery?.find((item) => item.image)"
         :@url="item.url"

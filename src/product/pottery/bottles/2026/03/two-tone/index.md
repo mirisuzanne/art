@@ -1,5 +1,5 @@
 ---
-title: Two-Tone Bottles & Pumps
+title: Two-tone bottles & pumps
 date: 2026-03-31
 clay: [ironstone, bmx]
 

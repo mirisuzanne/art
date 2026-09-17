@@ -10,6 +10,7 @@ summary: >
   I don't use digital transfers,
   but hand-trace and carve your handwriting into the piece.
 
+flag: customize
 restock: true
 price: 75
 
@@ -32,7 +33,7 @@ gallery:
     and a black rubber no-slip pad
     hidden inside the foot ring.
 tags:
-- commission
+- customize
 - bottles
 - handwriting
 ---

@@ -1,28 +1,37 @@
 <style webc:bucket="page">
 @layer page {
   media-gallery {
+    --column: 400px;
     display: grid;
     gap: var(--gap);
+    margin-block: 1lh;
 
     & > :only-child,
     & > :first-child:nth-last-child(n+3),
     & > :last-child:nth-child(2n+4) {
-      --span: span 2;
+      --span: var(--auto-span);
     }
 
-    @container (inline-size > 40ch) {
-      grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(min(100%, 400px), 1fr)
+    );
 
-      gallery-item,
-      [gallery-item] {
-        grid-column: var(--span, initial);
-      }
+    gallery-item,
+    [gallery-item] {
+      grid-column: var(--span, initial);
+    }
+
+    @container (850px < inline-size < 1200px) {
+      --auto-span: span 2;
     }
 
     img {
+      aspect-ratio: 3/2;
       border: thin solid var(--feature-color);
       border-image: var(--feature-gradient) 1;
       inline-size: stretch;
+      object-fit: cover;
     }
   }
 }

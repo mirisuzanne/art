@@ -18,3 +18,8 @@ frost:
 kota:
   type: porcelain
   from: Kentucky Mudworks
+
+mix:
+  type: reclaim
+  name: mix of clays
+  from: various sources
