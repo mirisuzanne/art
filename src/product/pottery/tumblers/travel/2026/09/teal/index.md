@@ -3,7 +3,8 @@ title: Travel tumbler
 date: 2026-08-31
 clay: bmx
 
-stock: 1
+stock: 0
+size: [6.25,3.5,3.5]
 
 gallery:
 - image: ./P1020748.jpg

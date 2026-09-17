@@ -5,6 +5,7 @@ clay: trout
 
 stock: 2
 price: 50
+size: [8,8,4.5]
 
 gallery:
 - image: ./P1020649.jpg

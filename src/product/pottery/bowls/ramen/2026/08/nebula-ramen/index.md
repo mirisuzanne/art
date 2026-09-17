@@ -5,6 +5,7 @@ date: 2026-08-09
 
 stock: 2
 price: 50
+size: [8,8,4]
 
 gallery:
 - image: ./P1020657.jpg

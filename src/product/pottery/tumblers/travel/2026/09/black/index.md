@@ -4,6 +4,7 @@ date: 2026-08-31
 clay: bmx
 
 stock: 1
+size: [5.75,3.5,3.5]
 
 gallery:
 - image: ./P1020753.jpg
