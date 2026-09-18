@@ -7,7 +7,6 @@ const sortByStock = (collection) => collection
 	.toReversed()
 	.sort((a,b) => {
 		if (isSecond(b.data) && !isSecond(a.data)) return -1;
-		if (inStock(a.data) && !inStock(b.data)) return -1;
 		return 0;
 	});
 

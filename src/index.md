@@ -1,13 +1,12 @@
 ---
 layout: is/collection
 title: Mia's Culpa
-sub: Everything here is my fault, and I'm sorry
-list: stock
+sub: Everyone should have **too much art**
+list: product
 ---
 
-Everyone should have too much art in their life,
-and too much [pottery](/product/pottery/) in the cupboard.
-I'm slowly adding more pieces,
-but I spend a lot of my time
-on a backlog of [requests & commissions](/commission/),
-so let me know if there's something you'd like to see!
+If you're into thoughtfully hand-made gifts,
+it's a good time to
+[reach out with holiday requests](/commission/).
+I always enjoy tracing your child's handwriting or drawings
+onto a custom piece!

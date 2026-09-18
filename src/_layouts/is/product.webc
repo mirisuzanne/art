@@ -51,12 +51,11 @@ tags:
       <dd @text="`${this.lb}lb`"></dd>
     </div>
     <div webc:if="this.price">
-      <dt><a href="/pricing/">name your price</a>, or</dt>
+      <dt><a href="/pricing/">suggested price</a></dt>
       <dd>
-        $<spoil-it :@content="this.price"></spoil-it>
+        $<span :@content="this.price"></span>
         <span webc:if="this.set">for the set</span>
         <span webc:elseif="this.stock > 1">each</span>
-        (click to reveal)
       </dd>
     </div>
   </dl>

@@ -1,8 +1,4 @@
-<toggle-control id="color-scheme" data-attr="color-scheme" data-local="color-scheme">
-  <button type="button">light</button>
-  <button type="button">dark</button>
-  <button type="button" aria-pressed="true">auto</button>
-</toggle-control>
+<solar-eclipse></solar-eclipse>
 
 <input-control
   data-prop="--filter-brightness"

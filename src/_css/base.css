@@ -54,7 +54,7 @@
   }
 
   html,
-  [color-scheme] {
+  [data-theme] {
     color-scheme: light dark;
 
     @supports (color: light-dark(pink, teal)) {
@@ -104,8 +104,8 @@
     }
   }
 
-  [color-scheme=light] { color-scheme: light; }
-  [color-scheme=dark] { color-scheme: dark; }
+  [data-theme=light] { color-scheme: light; }
+  [data-theme=dark] { color-scheme: dark; }
 
   ::selection {
     background-color: var(--accent-color);

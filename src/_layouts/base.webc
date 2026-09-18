@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title @text="title || 'Art by Miriam'"></title>
   <style webc:keep>
-    @layer starter, tools, layout, page;
+    @layer starter, solar-eclipse-toggle, tools, layout, page;
   </style>
   <link rel="stylesheet" href="../_css/base.css">
   <style @raw="getBundle('css')" webc:keep></style>

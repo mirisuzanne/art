@@ -16,9 +16,12 @@
     "@11ty/eleventy-plugin-webc": "^0.12.0-beta.7",
     "@11ty/is-land": "^5.0.1",
     "@terriblemia/ground-control": "^0.3.0",
+    "@zachleat/solar-eclipse-toggle": "^2.2.1",
+    "install": "^0.13.0",
     "js-yaml": "^4.1.1",
     "lite-youtube-embed": "^0.3.4",
-    "node-fetch": "^3.3.2"
+    "node-fetch": "^3.3.2",
+    "npm": "^11.19.1"
   },
   "type": "module",
   "devDependencies": {
