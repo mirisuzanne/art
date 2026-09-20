@@ -4,7 +4,7 @@ date: 2026-07-22
 tags:
   - Erin's dots
 
-stock: 3
+stock: 1
 price: 20
 
 gallery:
