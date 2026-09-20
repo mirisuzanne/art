@@ -53,7 +53,7 @@ tags:
     <div webc:if="this.price">
       <dt><a href="/pricing/">suggested price</a></dt>
       <dd>
-        $<span :@content="this.price"></span>
+        $<span :@text="this.price"></span>
         <span webc:if="this.set">for the set</span>
         <span webc:elseif="this.stock > 1">each</span>
       </dd>
