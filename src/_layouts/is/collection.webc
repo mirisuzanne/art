@@ -14,14 +14,24 @@ layout: is/page
   @raw="this.content"
 ></section>
 
+<toggle-control data-for="#product-list" data-attr="data-show">
+  <button data-value="all" aria-pressed="true">show all</button>
+  <button data-value="stock">in stock</button>
+  <button data-value="demand">on demand</button>
+</toggle-control>
+
 <nav
   webc:if="this.collections[this.list]?.length > 0"
   :grid-container="sortByStock(this.collections[this.list]).length > 5 ? 'wide' : 'pull'"
+  id="product-list"
 >
   <media-gallery>
     <gallery-item
       webc:for="(item, index) of sortByStock(this.collections[this.list])"
       product-card
+      :data-stock="inStock(item.data)
+        ? 'true'
+        : (reStock(item.data) ? 'demand' : 'false')"
     >
       <a
         product-title
@@ -87,6 +97,14 @@ layout: is/page
       padding: 0.25lh var(--shim);
       text-transform: lowercase;
       z-index: 1;
+    }
+
+    [data-show=stock] {
+      gallery-item:not([data-stock=true]) { display: none; }
+    }
+
+    [data-show=demand] {
+      gallery-item:not([data-stock=demand]) { display: none; }
     }
   }
 </style>

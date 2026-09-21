@@ -17,6 +17,14 @@ gallery:
     with a grooved texture,
     and inlaid white text that says
     pink & lavender & blue.
+- image: ./P1020774.jpg
+  alt: >
+    The text roughly follows the texture,
+    but does not completely stay within the lines.
+- image: ./P1020775.jpg
+  alt: >
+    Draft marks are still visible
+    where other text arrangements were considered.
 - image: ./P1020684.jpg
   alt: >
     The inside and rim are glazed white,

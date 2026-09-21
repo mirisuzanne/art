@@ -17,6 +17,14 @@ gallery:
     with a grooved texture,
     and inlaid white text that says
     orange & coral & white & violet & rose.
+- image: ./P1020771.jpg
+  alt: >
+    The text roughly follows the texture,
+    but without staying contained within the lines.
+- image: ./P1020773.jpg
+  alt: >
+    There are scratches still visible
+    from previous draft arrangements of the text.
 - image: ./P1020692.jpg
   alt: >
     The inside and rim are glazed white,
