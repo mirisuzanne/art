@@ -1,5 +1,5 @@
 ---
-title: Wide lantern jar
+title: Lantern jar
 date: 2026-06-12
 clay: kota
 

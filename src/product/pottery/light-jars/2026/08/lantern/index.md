@@ -1,5 +1,5 @@
 ---
-title: Narrow lantern jar
+title: Lantern jar
 date: 2026-08-11
 
 stock: 1
