@@ -19,7 +19,9 @@
     let imageData = getImage(data.gallery, data.page.url);
 
     if (!imageData) {
-      const from = data.list || 'stock';
+      const from = (typeof data.list === 'string' && data.collections[data.list])
+        ? data.list
+        : 'stock';
       const collection = data.collections[from].toReversed();
       const latest = collection.find((page) => page.data.gallery);
       imageData = getImage(latest.data.gallery, latest.page.url);

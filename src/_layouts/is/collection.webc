@@ -2,6 +2,21 @@
 layout: is/page
 ---
 
+<script webc:setup>
+  export const getCollection = (data) => {
+    if (!data.list) return;
+
+    if (typeof data.list === 'string') {
+      if (!data.collections[data.list]) return;
+      return sortByStock(data.collections[data.list]);
+    }
+
+    return data.collections.product.filter(
+      (item) => data.list.includes(item.page.url)
+    );
+  }
+</script>
+
 <header>
   <h1 @html="mdInline(this.title)"></h1>
   <sub-title webc:if="this.sub" @html="mdInline(this.sub)"></sub-title>
@@ -14,20 +29,24 @@ layout: is/page
   @raw="this.content"
 ></section>
 
-<toggle-control data-for="#product-list" data-attr="data-show">
+<toggle-control
+  webc:if="typeof this.list === string"
+  data-for="#product-list"
+  data-attr="data-show"
+>
   <button data-value="all" aria-pressed="true">show all</button>
   <button data-value="stock">in stock</button>
   <button data-value="demand">on demand</button>
 </toggle-control>
 
 <nav
-  webc:if="this.collections[this.list]?.length > 0"
-  :grid-container="sortByStock(this.collections[this.list]).length > 5 ? 'wide' : 'pull'"
+  webc:if="getCollection($data)"
+  :grid-container="getCollection($data).length > 5 ? 'wide' : 'pull'"
   id="product-list"
 >
   <media-gallery>
     <gallery-item
-      webc:for="(item, index) of sortByStock(this.collections[this.list])"
+      webc:for="(item, index) of getCollection($data)"
       product-card
       :data-stock="inStock(item.data)
         ? 'true'
