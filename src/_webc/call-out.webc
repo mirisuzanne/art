@@ -1,0 +1,9 @@
+<style webc:bucket="page">
+  call-out {
+    border: solid var(--feature-color);
+    border-image: var(--feature-gradient) 1;
+    display: block;
+    margin-block: 1lh;
+    padding: 0.25lh var(--gap);
+  }
+</style>
