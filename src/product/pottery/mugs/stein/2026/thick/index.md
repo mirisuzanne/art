@@ -1,5 +1,5 @@
 ---
-date: 2026-09-21
+date: 2026-09-20
 clay: chocolate
 
 stock: 1
