@@ -39,9 +39,9 @@ tags:
 
 <div webc:nokeep @raw="this.content"></div>
 
-<product-details webc:if="showStock($data)">
+<product-details webc:if="showStock($data) && (this.size || this.lb || this.price)">
   <strong>Details…</strong>
-  <dl webc:if="this.size || this.lb || this.price">
+  <dl>
     <div webc:if="this.size">
       <dt>size</dt>
       <dd @text="`${sizeToString(this.size)} inches`"></dd>
@@ -53,7 +53,7 @@ tags:
     <div webc:if="this.price">
       <dt><a href="/pricing/">suggested price</a></dt>
       <dd>
-        $<span :@text="this.price"></span>
+        $<span @text="this.price"></span>
         <span webc:if="this.set">for the set</span>
         <span webc:elseif="this.stock > 1">each</span>
       </dd>

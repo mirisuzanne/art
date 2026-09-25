@@ -1,8 +1,10 @@
 ---
 title: Secret stash jar
-stock: 1
 date: 2026-03-15
 clay: mix
+
+price: 60
+stock: 1
 
 gallery:
 - image: ./P1020678.jpg

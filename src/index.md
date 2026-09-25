@@ -10,9 +10,8 @@ templateEngineOverride: webc
 
   **Find me in person!**
 
-  - Sunday, September 27
-  - 9am–2pm
-  - [GoodKid](https://goodkidcollective.com/) [Secret market](https://www.westword.com/arts-culture/psst-theres-a-secret-market-hidden-behind-goodkid-denver-40909557/) (shhh)
+  - **Sunday, September 27** from **9am–2pm**
+  - [GoodKid](https://goodkidcollective.com/) [secret market](https://www.westword.com/arts-culture/psst-theres-a-secret-market-hidden-behind-goodkid-denver-40909557/) (shhh)
 
   I'll be sharing
   a booth with my wonderful friend

@@ -9,7 +9,7 @@ summary: >
   with a standard socket base.
 
 stock: 1
-price: 75
+price: 150
 
 gallery:
 - image: ./P1020625.jpg

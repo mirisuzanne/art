@@ -2,6 +2,7 @@
 title: Secret stash jar
 date: 2026-09-22
 
+price: 60
 stock: 1
 
 gallery:
