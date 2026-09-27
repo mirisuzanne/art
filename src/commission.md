@@ -4,17 +4,15 @@ layout: is/collection
 
 title: Commission a custom piece
 sub: in clay (or pixels)
-list: request
+list: customize
 ---
 
-I enjoy making things that people will use and enjoy.
-Let me know if you see something
-that's out of stock,
-or need something I haven't done before --
-like a tea pot.
-I may not accept every gig,
-but I'm excited to have the conversation!
+Many of my existing designs are available on request,
+but I'm also happy to customize
+a number of them for your specific needs.
+I've especially enjoyed hand-carving
+designs from children and loved ones --
+_a great personalized gift for the holidays_!
 
-Here are some things
-I'm always happy to
-make on demand:
+My contact information is below.
+Most pieces take about a month to complete.
