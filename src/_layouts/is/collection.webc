@@ -29,16 +29,6 @@ layout: is/page
   @raw="this.content"
 ></section>
 
-<toggle-control
-  webc:if="typeof this.list === string"
-  data-for="#product-list"
-  data-attr="data-show"
->
-  <button data-value="all" aria-pressed="true">show all</button>
-  <button data-value="stock">in stock</button>
-  <button data-value="demand">on demand</button>
-</toggle-control>
-
 <nav
   webc:if="getCollection($data)"
   :grid-container="getCollection($data).length > 5 ? 'wide' : 'pull'"
@@ -116,14 +106,6 @@ layout: is/page
       padding: 0.25lh var(--shim);
       text-transform: lowercase;
       z-index: 1;
-    }
-
-    [data-show=stock] {
-      gallery-item:not([data-stock=true]) { display: none; }
-    }
-
-    [data-show=demand] {
-      gallery-item:not([data-stock=demand]) { display: none; }
     }
   }
 </style>
