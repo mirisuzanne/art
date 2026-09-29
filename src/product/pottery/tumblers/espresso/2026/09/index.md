@@ -4,7 +4,7 @@ date: 2026-09-03
 clay: bmx
 
 size: [2,2,2]
-stock: 9
+stock: 0
 price: 20
 
 gallery:
