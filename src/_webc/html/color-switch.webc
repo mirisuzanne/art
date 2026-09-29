@@ -1,0 +1,79 @@
+<button><slot>Invert colors</slot></button>
+
+<script>
+class ColorSwitch extends HTMLElement {
+	static register(tagName) {
+		if ('customElements' in window) {
+			customElements.define(tagName || 'color-switch', ColorSwitch);
+		}
+	};
+
+	toggle;
+
+	get storage() {
+		return localStorage.getItem('color-scheme');
+	}
+
+	get preference() {
+		return window?.matchMedia?.('(prefers-color-scheme:dark)')?.matches
+			? 'dark'
+			: 'light';
+	}
+
+	get scheme() {
+		const rootStyle = window.getComputedStyle(document.documentElement);
+		const value = rootStyle.getPropertyValue('color-scheme');
+
+		return value.includes(' ')
+			? this.preference
+			: value;
+	}
+
+	set scheme(mode) {
+		localStorage.setItem('color-scheme', mode);
+		document.documentElement.style.setProperty('color-scheme', mode);
+		this.setState();
+	};
+
+	connectedCallback() {
+    this.#findToggle();
+		this.#addToggleListener();
+
+		if (this.storage) {
+			this.scheme = this.storage;
+		} else {
+			this.scheme = this.preference;
+		}
+  };
+
+  disconnectedCallback() {
+    this.#removeToggleListener();
+  };
+
+	doToggle = () => {
+		this.scheme = this.scheme === 'light'
+			? 'dark'
+			: 'light';
+	}
+
+	setState = () => {
+		const pressed = this.scheme != this.preference;
+		this.toggle?.setAttribute('aria-pressed', pressed);
+	}
+
+	#findToggle = () => {
+		this.toggle = this.querySelector('button');
+		this.toggle?.setAttribute('type', 'button');
+	}
+
+	#addToggleListener = () => {
+		this.toggle?.addEventListener('click', (e) => this.doToggle());
+	}
+
+	#removeToggleListener = () => {
+		this.toggle?.removeEventListener('click', (e) => this.doToggle());
+	}
+}
+
+ColorSwitch.register();
+</script>

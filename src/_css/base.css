@@ -159,47 +159,79 @@
   }
 
   button {
-    background: var(--accent-color);
-    border: medium double;
+    background: var(--button-background);
+    color: var(--button-text);
+    border-color: var(--border-color);
     border-radius: 3px;
-    color: var(--background-color);
     padding-inline: 1ch;
 
-    &:focus, &:hover, &:active {
-      border-image: var(--feature-gradient) 1;
+    &[aria-pressed=true] {
+      background: var(--accent-color);
+      color: var(--background-color);
+      box-shadow: 0px 0px 3px var(--shadow-color) inset;
     }
 
-    &[aria-pressed=true] {
-      background: var(--text-color);
+    &:focus, &:hover, &:active {
+      background: var(--feature-gradient);
+      color: var(--background-color);
+    }
+  }
+
+  toggle-control {
+    display: flex;
+    align-items: baseline;
+
+    em:first-child {
+      padding-inline-end: 1ch;
+    }
+
+    button:not(:first-of-type) {
+      border-inline-start: unset;
+      border-start-start-radius: unset;
+      border-end-start-radius: unset;
+    }
+
+    button:not(:last-of-type) {
+      border-start-end-radius: unset;
+      border-end-end-radius: unset;
     }
   }
 }
 
+@layer starter.reset, starter.base;
 @layer starter.base {
   html {
     --base-font-size: 20px;
-    --gap: round(up, 3vmin, 0.25lh);
+    --gap: clamp(8px, 3vmin, 24px);
     --tab-size: 2;
     --tab: calc(var(--tab-size, 2) * 1ch);
+
+    /* issues like to pop up without this */
+    -moz-text-size-adjust: none;
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+
     /* not fluid, just clamped by user preferences */
     font-size: clamp(1em, var(--base-font-size), 1.25em);
+    font-size-adjust: from-font;
     interpolate-size: allow-keywords;
     line-height: 1.5;
     tab-size: var(--tab-size);
   }
 
   body {
+    font-size: clamp(1rem, 0.9rem + 0.5vi, 1.5rem);
     margin: var(--gap);
-    font-size: clamp(1rem, 0.8rem + 0.5vi, 1.5rem);
   }
 
-  body > :is(header, main, footer) {
+  body > :is(header, nav, main, footer) {
     container: layout / inline-size;
   }
 
   /* prose */
   h1, h2, h3 {
-    margin-block: 0.75rlh 0.25rlh;
+    line-height: 1.25;
+    margin-block-start: var(--gap);
 
     &:where(:first-child) {
       margin-block-start: unset;
@@ -224,6 +256,7 @@
   label { display: block; }
   textarea {
     field-sizing: content;
+    inline-size: 100%;
     inline-size: stretch;
     min-block-size: 4lh;
   }

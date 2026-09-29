@@ -28,6 +28,7 @@
   </noscript>
 </head>
 <body>
+  <a href="#main" visually-hidden=skip-links>skip to content</a>
   <template
     webc:nokeep
     @raw="this.content"

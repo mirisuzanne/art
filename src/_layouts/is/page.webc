@@ -4,14 +4,14 @@ css:
   - fonts
   - page
 nav:
-  request: '/commission/'
+  custom: '/commission/'
   about: '/about/'
 ---
 
 <!-- <shop-keep></shop-keep> -->
 
 <header id="banner">
-  <a href="/" rel="home">m</a>
+  <a href="/" rel="home">shop</a>
   <nav id="main-nav" webc:if="this.nav">
     <a
       webc:for="(name, url) in this.nav"
@@ -140,12 +140,12 @@ nav:
         / auto 1fr auto
       ;
     }
-  }
 
-  [rel=home] {
-    font-family: var(--fonts-serif);
-    font-style: italic;
-    grid-area: home;
+    [rel=home] {
+      font-family: var(--fonts-serif);
+      font-style: italic;
+      grid-area: home;
+    }
   }
 
   #main-nav {

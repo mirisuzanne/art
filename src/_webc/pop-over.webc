@@ -6,11 +6,6 @@
     }
   }
 
-  button[popovertarget] {
-    background: transparent;
-    color: inherit;
-  }
-
   [popover] {
     border: thin solid;
     box-sizing: border-box;

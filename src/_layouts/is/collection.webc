@@ -29,11 +29,26 @@ layout: is/page
   @raw="this.content"
 ></section>
 
-<nav
+<section
   webc:if="getCollection($data)"
   :grid-container="getCollection($data).length > 5 ? 'wide' : 'pull'"
   id="product-list"
 >
+  <toggle-control data-for="#product-list" data-attr="data-show" id="list-filter">
+    <em>Filter:</em>
+    <button
+      data-value="stock"
+      aria-pressed="true"
+    >in stock</button>
+    <button
+      webc:if="getCollection($data).find((item) => reStock(item.data))"
+      data-value="demand"
+    >made to order</button>
+    <button
+      data-value="all"
+    >all</button>
+  </toggle-control>
+
   <media-gallery>
     <gallery-item
       webc:for="(item, index) of getCollection($data)"
@@ -63,7 +78,7 @@ layout: is/page
       ></product-image>
     </gallery-item>
   </media-gallery>
-</nav>
+</section>
 
 <style webc:bucket="page">
   @layer layout {
@@ -106,6 +121,18 @@ layout: is/page
       padding: 0.25lh var(--shim);
       text-transform: lowercase;
       z-index: 1;
+    }
+
+    #list-filter {
+      font-size: smaller;
+      margin-block-start: var(--gap);
+    }
+
+    [data-show=stock] [data-stock]:not([data-stock=true]) {
+      display: none;
+    }
+    [data-show=demand] [data-stock]:not([data-stock=demand]) {
+      display: none;
     }
   }
 </style>
