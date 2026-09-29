@@ -2,7 +2,7 @@
 date: 2026-09-21
 clay: chocolate
 
-stock: 1
+stock: 0
 price: 45
 
 gallery:
