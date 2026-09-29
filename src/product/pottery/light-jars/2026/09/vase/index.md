@@ -1,7 +1,7 @@
 ---
 date: 2026-09-27
 
-stock: 1
+stock: 0
 size: [8,6,6]
 
 gallery:
