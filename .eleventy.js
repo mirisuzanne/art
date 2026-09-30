@@ -34,6 +34,8 @@ export default async function(eleventyConfig) {
     './src/_favicons/*.*': './',
   });
 
+  eleventyConfig.setQuietMode(true);
+
   return {
     dir: {
       input: 'src',

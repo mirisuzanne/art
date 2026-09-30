@@ -1,0 +1,50 @@
+<script webc:setup>
+  export const showFilters = (stockData) => {
+    if (stockData.stock === stockData.all) return false;
+    if (stockData.restock === stockData.all) return false;
+    if (stockData.stock + stockData.restock === 0) return false;
+    return true;
+  }
+</script>
+
+<switch-group
+  webc:if="showFilters(this.stockData)"
+>
+  <em>Show…</em>
+
+  <switch-control
+    webc:if="this.stockData.restock > 0"
+    data-for="#product-list"
+    data-attr="show-restock"
+    data-on="true"
+  >
+    <button aria-pressed="true">made to order</button>
+  </switch-control>
+
+  <switch-control
+    data-for="#product-list"
+    data-attr="show-sold"
+    data-on="true"
+  >
+    <button>sold</button>
+  </switch-control>
+</switch-group>
+
+<style webc:bucket="page">
+  @layer layout {
+    product-filters {
+      display: block;
+      font-size: smaller;
+      justify-self: end;
+      margin-block-start: var(--spacer);
+    }
+
+    [data-stock=demand]:not([show-restock=true] *) {
+      display: none;
+    }
+
+    [data-stock=false]:not([show-sold=true] *) {
+      display: none;
+    }
+  }
+</style>

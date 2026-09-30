@@ -3,8 +3,8 @@ templateEngineOverride: webc
 layout: is/collection
 
 title: Commission a custom piece
-sub: in clay (or pixels)
-list: customize
+sub: Or request something that's out of stock
+list: request
 ---
 
 Many of my existing designs are available on request,

@@ -4,19 +4,28 @@ css:
   - fonts
   - page
 nav:
-  custom: '/commission/'
+  requests: '/commission/'
   about: '/about/'
 ---
 
 <!-- <shop-keep></shop-keep> -->
 
 <header id="banner">
-  <a href="/" rel="home">shop</a>
+  <a
+    href="/"
+    rel="home"
+    @attributes="({
+      'aria-current': this.page.url === '/' ? 'page' : null,
+    })"
+  >shop</a>
   <nav id="main-nav" webc:if="this.nav">
     <a
       webc:for="(name, url) in this.nav"
       :href="url"
       @text="name"
+      @attributes="({
+        'aria-current': url === this.page.url ? 'page' : null,
+      })"
     ></a>
   </nav>
   <pop-over

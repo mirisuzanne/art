@@ -1,0 +1,101 @@
+<script webc:setup>
+  export const filterData = (products) => ({
+    all: products.length,
+    stock: products.filter((item) => inStock(item.data)).length,
+    restock: products.filter((item) => reStock(item.data)).length,
+  });
+</script>
+
+
+<section
+  webc:if="this.products"
+  id="product-list"
+  show-restock="true"
+  :grid-container="this.products.length > 3 ? 'wide' : 'pull'"
+>
+  <product-filters
+    webc:if="this.products"
+    :@stock-data="filterData(this.products)"
+  ></product-filters>
+
+  <media-gallery :@products="this.products">
+    <gallery-item
+      webc:for="(item, index) of this.products"
+
+      product-card
+      :data-stock="inStock(item.data)
+        ? 'true'
+        : (reStock(item.data) ? 'demand' : 'false')"
+    >
+      <a
+        product-title
+        :href="item.url"
+      ><span @text="item.data.title"></span></a>
+      <product-flag
+        webc:if="reStock(item.data)"
+        @text="item.data.flag || 'made to order'"
+      ></product-flag>
+      <product-flag
+        webc:elseif="!inStock(item.data)"
+        >sold</product-flag>
+      <product-flag
+        webc:elseif="item.data.flag"
+        @text="item.data.flag"
+      ></product-flag>
+      <product-image
+        :@item="item.data.gallery?.find((item) => item.image)"
+        :@url="item.url"
+        :@first="this.index === 0"
+      ></product-image>
+    </gallery-item>
+  </media-gallery>
+</section>
+
+<style webc:bucket="page">
+  @layer layout {
+    #product-list {
+      display: grid;
+    }
+
+    [product-card] {
+      display: grid;
+      grid-template:
+        'image flag' auto
+        'title title' auto
+        / 1fr auto
+      ;
+    }
+
+    [product-image] {
+      grid-area: image;
+      grid-column-end: -1;
+    }
+
+    [product-title] {
+      display: grid;
+      grid-area: 1 / 1 / -1 / -1;
+      grid-template-columns: subgrid;
+      grid-template-rows: subgrid;
+      z-index: 1;
+
+      span {
+        grid-area: title;
+      }
+    }
+
+    product-flag {
+      align-self: start;
+      background: var(--feature-gradient);
+      border: medium solid;
+      color: var(--background-color);
+      font-weight: bold;
+      font-variant-caps: all-small-caps;
+      grid-area: flag;
+      line-height: 1;
+      margin: var(--shim);
+      padding: 0.25lh var(--shim);
+      text-transform: lowercase;
+      z-index: 1;
+    }
+  }
+</style>

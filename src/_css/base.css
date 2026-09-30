@@ -138,6 +138,10 @@
     &:focus, &:hover, &:active {
       text-decoration-style: wavy;
     }
+
+    &[aria-current] {
+      text-decoration-style: wavy;
+    }
   }
 
   blockquote {
@@ -161,19 +165,19 @@
   button {
     background: var(--button-background);
     color: var(--button-text);
-    border-color: var(--border-color);
+    border: 1px solid var(--border-color);
     border-radius: 3px;
     padding-inline: 1ch;
 
     &[aria-pressed=true] {
-      background: var(--accent-color);
+      background: var(--feature-gradient);
       color: var(--background-color);
       box-shadow: 0px 0px 3px var(--shadow-color) inset;
     }
 
     &:focus, &:hover, &:active {
-      background: var(--feature-gradient);
-      color: var(--background-color);
+      border-color: var(--action-color);
+      z-index: 1;
     }
   }
 
@@ -186,7 +190,7 @@
     }
 
     button:not(:first-of-type) {
-      border-inline-start: unset;
+      margin-inline-start: -1px;
       border-start-start-radius: unset;
       border-end-start-radius: unset;
     }

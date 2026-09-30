@@ -3,8 +3,16 @@
   media-gallery {
     --column: 400px;
     display: grid;
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(min(100%, 400px), 1fr)
+    );
     gap: var(--gap);
     margin-block: 1lh;
+
+    figure & {
+      --auto-span: span 2;
+    }
 
     & > :only-child,
     & > :first-child:nth-last-child(n+3),
@@ -12,18 +20,9 @@
       --span: var(--auto-span);
     }
 
-    grid-template-columns: repeat(
-      auto-fit,
-      minmax(min(100%, 400px), 1fr)
-    );
-
     gallery-item,
     [gallery-item] {
       grid-column: var(--span, initial);
-    }
-
-    @container (850px < inline-size < 1200px) {
-      --auto-span: span 2;
     }
 
     img {

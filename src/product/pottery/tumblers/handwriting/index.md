@@ -11,6 +11,7 @@ summary: >
   but hand-traced reproductions
   carved into the surface!
 
+flag: customize
 restock: true
 price: 60
 

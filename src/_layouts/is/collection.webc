@@ -4,10 +4,10 @@ layout: is/page
 
 <script webc:setup>
   export const getCollection = (data) => {
-    if (!data.list) return;
+    if (!data.list) return [];
 
     if (typeof data.list === 'string') {
-      if (!data.collections[data.list]) return;
+      if (!data.collections[data.list]) return [];
       return sortByStock(data.collections[data.list]);
     }
 
@@ -29,110 +29,7 @@ layout: is/page
   @raw="this.content"
 ></section>
 
-<section
-  webc:if="getCollection($data)"
-  :grid-container="getCollection($data).length > 5 ? 'wide' : 'pull'"
-  id="product-list"
->
-  <toggle-control data-for="#product-list" data-attr="data-show" id="list-filter">
-    <em>Filter:</em>
-    <button
-      data-value="stock"
-      aria-pressed="true"
-    >in stock</button>
-    <button
-      webc:if="getCollection($data).find((item) => reStock(item.data))"
-      data-value="demand"
-    >made to order</button>
-    <button
-      data-value="all"
-    >all</button>
-  </toggle-control>
-
-  <media-gallery>
-    <gallery-item
-      webc:for="(item, index) of getCollection($data)"
-      product-card
-      :data-stock="inStock(item.data)
-        ? 'true'
-        : (reStock(item.data) ? 'demand' : 'false')"
-    >
-      <a
-        product-title
-        :href="item.url"
-      ><span @text="item.data.title"></span></a>
-      <product-flag
-        webc:if="reStock(item.data)"
-      >made to order</product-flag>
-      <product-flag
-        webc:elseif="!inStock(item.data)"
-      >sold</product-flag>
-      <product-flag
-        webc:elseif="item.data.flag"
-        @text="item.data.flag"
-      ></product-flag>
-      <product-image
-        :@item="item.data.gallery?.find((item) => item.image)"
-        :@url="item.url"
-        :@first="this.index === 0"
-      ></product-image>
-    </gallery-item>
-  </media-gallery>
-</section>
-
-<style webc:bucket="page">
-  @layer layout {
-    [product-card] {
-      display: grid;
-      grid-template:
-        'image flag' auto
-        'title title' auto
-        / 1fr auto
-      ;
-    }
-
-    [product-image] {
-      grid-area: image;
-      grid-column-end: -1;
-    }
-
-    [product-title] {
-      display: grid;
-      grid-area: 1 / 1 / -1 / -1;
-      grid-template-columns: subgrid;
-      grid-template-rows: subgrid;
-      z-index: 1;
-
-      span {
-        grid-area: title;
-      }
-    }
-
-    product-flag {
-      align-self: start;
-      background: var(--feature-gradient);
-      border: medium solid;
-      color: var(--background-color);
-      font-weight: bold;
-      font-variant-caps: all-small-caps;
-      grid-area: flag;
-      line-height: 1;
-      margin: var(--shim);
-      padding: 0.25lh var(--shim);
-      text-transform: lowercase;
-      z-index: 1;
-    }
-
-    #list-filter {
-      font-size: smaller;
-      margin-block-start: var(--gap);
-    }
-
-    [data-show=stock] [data-stock]:not([data-stock=true]) {
-      display: none;
-    }
-    [data-show=demand] [data-stock]:not([data-stock=demand]) {
-      display: none;
-    }
-  }
-</style>
+<product-list
+  webc:nokeep
+  :@products="getCollection($data)"
+></product-list>
