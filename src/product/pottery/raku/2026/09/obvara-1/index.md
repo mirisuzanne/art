@@ -24,4 +24,7 @@ gallery:
 - image: ./P1020899.jpg
 ---
 
-Process photos by Patrick Griffith.
+Raku process photos by Patrick Griffith.
+The plaster-like texturing
+is inspired by a workshop with
+[Akira Satake](https://akirasatake.com/home/).
