@@ -1,7 +1,10 @@
 title: Light Jar
 clay: frost
+safety: false
 
 price: 200
+size: [7.25,6.25,6.25]
+oz: 50.1
 tags:
   - light jar
 

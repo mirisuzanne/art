@@ -35,9 +35,6 @@ tags:
   <span webc:else>with a reclaimed mix of clays.</span>
 
   <span webc:if="this.safety" @html="mdInline(this.safety)"></span>
-  <span webc:else>
-    Food, microwave, and dishwasher safe.
-  </span>
 
   <span webc:if="reStock($data)">
     Requires roughly one month production time
