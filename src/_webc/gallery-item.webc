@@ -1,8 +1,21 @@
+<script webc:setup>
+  export const imgStyle = (item) => {
+    const declare = {
+      '--name': slugify(item.image),
+      '--aspect': item.aspect,
+    };
+
+    return Object.keys(declare)
+      .map((prop) => declare[prop] ? `${prop}: ${declare[prop]};`: '')
+      .join('');
+  }
+</script>
+
 <img
   webc:if="this.item.image"
   :src="this.item.image"
   :alt="this.item.alt || ''"
-  :style="`--name: ${slugify(this.item.image)}`"
+  :style="imgStyle(this.item)"
   @attributes="({
     loading: this.first ? 'eager' : 'lazy',
     decoding: this.first ? 'auto' : 'async',

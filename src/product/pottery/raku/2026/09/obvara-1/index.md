@@ -15,7 +15,13 @@ gallery:
 - image: ./P1020897.jpg
 - image: ./P1020896.jpg
 - image: ./P1020898.jpg
-- image: ./P1020899.jpg
 - image: ./P1020900.jpg
 - image: ./P1020901.jpg
+- image: ./IMG_3371.jpg
+  aspect: 2/3
+- image: ./IMG_3372.jpg
+  aspect: 2/3
+- image: ./P1020899.jpg
 ---
+
+Process photos by Patrick Griffith.
