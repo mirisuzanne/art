@@ -3,6 +3,7 @@ title: Obvara raku vase
 date: 2026-09-26
 
 stock: 1
+size: [6.6,5,5]
 
 summary: |
   The obvara raku process

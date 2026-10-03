@@ -11,6 +11,8 @@ summary: |
   similar to a sourdough starter --
   to create these organic sepia-toned variations.
 
+size: [7,4.25,4.25]
+
 gallery:
 - image: ./P1020891.jpg
   alt: >

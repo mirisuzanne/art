@@ -4,6 +4,7 @@ date: 2026-09-26
 
 stock: 1
 price: 150
+size: [6.5,4.5,4.5]
 
 gallery:
 - image: ./P1020886.jpg
