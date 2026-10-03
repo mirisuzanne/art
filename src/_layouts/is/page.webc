@@ -28,15 +28,7 @@ nav:
       })"
     ></a>
   </nav>
-  <pop-over
-    data-for="color-control"
-    show-when="js"
-  >
-    <button popovertarget="color-controls">colors</button>
-    <dialog id="color-controls" popover>
-      <color-control></color-control>
-    </dialog>
-  </pop-over>
+  <color-switch show-when="js">light/dark</color-switch>
 </header>
 
 <main id="main" data-prose @raw="this.content"></main>
