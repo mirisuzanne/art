@@ -1,9 +1,9 @@
 ---
 title: Honey-pot light jar
-# sub: Commission for **Michelle**
+sub: Commission for **Michelle**
 date: 2026-10-02
 
-stock: 1
+stock: 0
 
 gallery:
 - image: ./P1020903.jpg
