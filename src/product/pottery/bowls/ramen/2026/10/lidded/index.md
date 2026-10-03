@@ -10,7 +10,7 @@ summary: >
   with a lid to keep things warm,
   or overturn on the table and use for toppings.
 
-stock: 1
+stock: 0
 price: 75
 size: [9,9,5.5]
 
