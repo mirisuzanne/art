@@ -1,7 +1,7 @@
 ---
 layout: is/collection
-title: Mia's Culpa
-sub: Everyone should have **too much art**
+title: Hand Made by Miriam Suzanne
+sub: everything here is [my fault](/about/)
 list: product
 templateEngineOverride: webc
 ---

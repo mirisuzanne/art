@@ -4,7 +4,7 @@ date: 2026-08-11T22:29:48-06:00
 clay: trout
 
 price: 40
-size: [7,7,4]
+size: [6.5,6.5,3.25]
 lb: 1.21
 stock: 0
 restock: true

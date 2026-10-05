@@ -8,7 +8,7 @@ summary: >
   and only fits a small bulb
   with a standard socket base.
 
-stock: 1
+stock: 0
 price: 100
 
 gallery:

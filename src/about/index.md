@@ -1,6 +1,6 @@
 ---
-title: Miriam Suzanne
-sub: aka (Terrible) Mia
+title: Mia's Culpa
+sub: I would love for you to have more art
 image:
   src: ./lightning.jpg
   alt: >
@@ -9,17 +9,16 @@ image:
     and large neon lighting bolt earrings.
 ---
 
-I'm interested in the ways
-a process and a material push back,
-forcing me to adjust
-and reconsider my perspective.
-I'm not trying to be original --
-I only want to be attentive to that negotiation.
-
-I have no interest in a world where
-I can conjure up exactly what's in my head.
-Why bother?
-I'm constantly imagining the wrong things.
+I'm an artist and teacher
+living and making in Denver, CO.
+After studying pottery in college
+(along with theater & writing)
+I spent 20 years without access to a studio.
+After covid lock-down,
+I decided to find my way back --
+first weekly,
+then bi-weekly.
+Now I spend most afternoons at Kinship Studio.
 
 ![{{ image.alt }}]({{ image.src }})
 
@@ -33,3 +32,17 @@ web design with [OddBird](https://oddbird.net),
 and several other arts
 [unaffiliated](https://miriamsuzanne.com)
 (but never alone).
+
+This site has bits and parts of my other arts,
+but is mostly dedicated to pottery.
+I'm interested in the ways
+a process and a material push back,
+forcing me to adjust
+and reconsider my perspective.
+I'm not trying to be original --
+I only want to be attentive to that negotiation.
+
+I have no interest in a world where
+I can conjure up exactly what's in my head.
+Why bother?
+I'm constantly imagining the wrong things.
