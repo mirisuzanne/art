@@ -1,6 +1,6 @@
 ---
 title: Lidded ramen bowl
-sub: commission for **Jen**
+request: Jen
 clay: trout
 date: 2026-10-03
 
@@ -16,13 +16,56 @@ size: [9,9,5.5]
 
 gallery:
 - image: ./P1020910.jpg
-- image: ./P1020911.jpg
-- image: ./P1020913.jpg
-- image: ./P1020914.jpg
-- image: ./P1020915.jpg
-- image: ./P1020916.jpg
-- image: ./P1020917.jpg
+  alt: >
+    Large round-bottom ramen bowl
+    with a wide rim
+    and textured walls
+    of glassy blues on browns.
+    There's a deep foot ring at the base
+    and a wide shallow lid
+    that sits into the lip -
+    also textured,
+    and with a ring at the top for a handle.
 - image: ./P1020912.jpg
+  alt: >
+    The inside of the bowl
+    has a ledge about an inch from the rim
+    where the lid is able to sit.
+    From the outside,
+    that lip is the end of the smooth rim,
+    and the start of a deep texturing.
+- image: ./P1020913.jpg
+  alt: >
+    The foot ring angles out and back in,
+    making it easy to hold.
+    There's glaze on the inside
+    of the foot as well.
+    The shallow lid is a wide shallow bowl
+    when inverted.
+- image: ./P1020914.jpg
+  alt: >
+    The outer texture comes from overlapping carved rings
+    around the piece,
+    where the glaze pools in blues
+    and breaks over the edges to coffee browns
+    and lighter highlights.
+- image: ./P1020915.jpg
+  alt: >
+    The lid has a similar texture and glaze,
+    also ending an inch or so from the rim -
+    and a similar foot ring that is glazed on the inside.
+- image: ./P1020916.jpg
+  alt: >
+    Inside the bowl,
+    the glaze pools in light blues along the ledge,
+    highlighting the very edge with golden browns,
+    and going blue again in the basin.
+    There's a spray of lighter whites and blues from one side.
+- image: ./P1020917.jpg
+  alt: >
+    The inside of the lid is glazed to match the bowl,
+    in organic blues that seem to float
+    like crema on a coffee background.
 ---
 
 The bowl itself is 4 inches tall,

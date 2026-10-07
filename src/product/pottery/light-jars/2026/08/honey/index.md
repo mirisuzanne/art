@@ -1,6 +1,6 @@
 ---
 title: Honey-pot light jar
-sub: Commission for **Joanna**
+request: Joanna
 date: 2026-08-13
 
 stock: 0
