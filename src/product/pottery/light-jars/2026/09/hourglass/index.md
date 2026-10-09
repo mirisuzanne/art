@@ -2,7 +2,7 @@
 title: Hourglass light jar
 date: 2026-09-16
 
-stock: 1
+stock: 0
 
 gallery:
 - image: ./P1020787.jpg

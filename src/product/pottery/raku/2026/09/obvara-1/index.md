@@ -14,6 +14,17 @@ summary: |
 
 gallery:
 - image: ./P1020897.jpg
+  alt: >
+    Bottle vase in organic sepia-like matte finish.
+    It has a wide base that rounds back into the foot,
+    holding it gently off the table.
+    The walls are like a smeared-plaster,
+    highlighted by the raku-burned toasty brown splatters.
+    At the shoulder a darker ring,
+    then white with subtle splashes
+    as the form angles in
+    to a narrow neck
+    with a slightly flared bowl-like lip.
 - image: ./P1020896.jpg
 - image: ./P1020898.jpg
 - image: ./P1020900.jpg
