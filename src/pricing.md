@@ -11,7 +11,12 @@ and you should pay what feels viable to you
 (plus shipping).
 
 No need to negotiate,
-just _pay what you want_.
+just _pay what you want_
+(plus shipping).
+
+Here's my
+[Venmo account](https://account.venmo.com/u/miriamsuzanne),
+but there are other options too.
 
 If you're able to pay
 more than the suggestion,
