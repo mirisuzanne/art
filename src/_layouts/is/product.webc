@@ -58,25 +58,25 @@ tags:
       <dd>
         $<span @text="this.price"></span>
         <span
-          webc:if="typeof this.set === 'number'"
+          webc:if="this.set"
           @text="`for a set of ${this.set}`"
         ></span>
-        <span webc:elseif="this.set">
-          for the set
-        </span>
         <span webc:elseif="this.stock > 1 || this.restock">each</span>
       </dd>
     </div>
   </dl>
 
-  <!-- <add-to-cart
+  <add-to-cart
+    webc:if="showStock($data)"
     :data-title="this.title"
     :data-url="this.page.url"
     :data-weight="this.lb"
     :data-size="paddedSize(this.size, this.padding)"
-    :data-price="this.price"
+    :data-price="this.set ? this.price / this.set : this.price"
+    :data-stock="this.stock || 50"
+    :data-count="this.set || 1"
     show-when="defined"
-  ></add-to-cart> -->
+  ></add-to-cart>
 </product-details>
 
 <tag-list></tag-list>

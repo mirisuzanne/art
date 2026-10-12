@@ -55,7 +55,7 @@
 
   setItem = (to) => {
     let item = this.validItem(to);
-    if (!item) throw new Error('Invalid item:', item);
+    if (!item) throw new Error('Invalid item', item);
 
     let newCart = this.cart;
     const cartIndex = this.getItemIndex(item.url);
@@ -82,7 +82,7 @@
 
   validItem = (item) => {
     if (typeof item !== 'object') return;
-    const itemShaped = item.url && item.title && item.price
+    const itemShaped = item.url && item.title
     if (!itemShaped) return;
 
     item.price = Math.max(Number(item.price), 10);

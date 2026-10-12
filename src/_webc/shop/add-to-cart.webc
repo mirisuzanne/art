@@ -24,6 +24,8 @@ class AddToCart extends HTMLElement {
       weight: this.dataset.weight,
       size: this.dataset.size,
       price: this.dataset.price,
+      stock: this.dataset.stock || 1,
+      count: this.dataset.count || 1,
     };
   }
 
@@ -59,10 +61,7 @@ class AddToCart extends HTMLElement {
 	#AddToCart = () => {
     if (this.inCart > 0) return;
 
-    const item = this.item;
-    item.count = 1;
-
-    this.#shop.setItem(item);
+    this.#shop.setItem(this.item);
 	}
 
   #SetButtonState = () => {

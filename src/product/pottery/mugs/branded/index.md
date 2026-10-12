@@ -15,6 +15,8 @@ summary: >
 flag: customize
 restock: true
 size: [3.75,4.5,4.5]
+price: 500
+set: 10
 
 gallery:
 - image: ./oddbird.jpg

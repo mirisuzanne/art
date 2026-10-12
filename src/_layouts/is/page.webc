@@ -8,7 +8,7 @@ nav:
   about: '/about/'
 ---
 
-<!-- <shop-keep></shop-keep> -->
+<shop-keep></shop-keep>
 
 <header id="banner">
   <a
@@ -33,8 +33,12 @@ nav:
 
 <main id="main" data-prose @raw="this.content"></main>
 
-<!---- <a href="#cart" id="cart-link" hidden>
-  Cart <shop-output data-stat="count" hide-zero></shop-output>
+<a href="#cart" id="cart-link" hidden>
+  Cart
+  <shop-output
+    data-stat="count"
+    hide-zero
+  ></shop-output>
 </a>
 
 <aside shopping-cart>
@@ -46,13 +50,13 @@ nav:
   <noscript>
     <p>
       The shopping cart requires Javascript,
-      but you can always email me instead:
+      but you can email me instead:
       <a href="mailto:miriam@miriamsuzanne.com">miriam@miriamsuzanne.com</a>
     </p>
   </noscript>
 </aside>
 
-<shipping-rates
+<!---- <shipping-rates
   show-when="defined"
   data-from="80205"
   data-global="true"
@@ -60,12 +64,16 @@ nav:
 ></shipping-rates> ---->
 
 <check-out>
-  <h2>See something you like?</h2>
   <p>
-    If you send me a message,
-    I'll get back to you
-    about payment & shipping options --
-    or any other questions you have.
+    Drop me a note.
+    I'll be in touch
+    to confirm the order,
+    or answer any questions you have.
+    You can
+    <a href="https://account.venmo.com/u/miriamsuzanne">
+      pay me on Venmo
+    </a>
+    once the order is confirmed.
   </p>
 </check-out>
 
@@ -112,6 +120,7 @@ nav:
       minmax(0, 1fr) [wide-end]
       var(--gap) [full-end];
     display: grid;
+    row-gap: var(--spacer);
     grid-template-columns: var(--content-grid-columns);
     margin: 1lh 0;
 
@@ -160,7 +169,6 @@ nav:
     --grid-column: full;
     display: grid;
     grid-template-columns: var(--content-grid-columns);
-    margin-block: var(--spacer) var(--gap);
 
     & > * {
       grid-column: var(--grid-column, content);
@@ -195,6 +203,17 @@ nav:
 
   [shopping-cart] {
     --grid-column: full;
+  }
+
+  #cart-link {
+    background: var(--feature-gradient);
+    bottom: var(--gap);
+    color: var(--background-color);
+    grid-column: wide;
+    text-decoration-color: currentColor;
+    padding: 0 1ch;
+    place-self: end;
+    position: sticky;
   }
 
   #contentinfo {
