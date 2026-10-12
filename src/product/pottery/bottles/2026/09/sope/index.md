@@ -3,6 +3,8 @@ date: 2026-09-01
 title: Sope bottle with bubbles
 request: Danyka & Sam
 
+size: [7,3.25,3.25]
+
 gallery:
 - image: ./P1020708.jpg
   alt: >

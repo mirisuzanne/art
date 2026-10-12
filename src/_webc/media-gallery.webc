@@ -1,11 +1,12 @@
 <style webc:bucket="page">
 @layer page {
   media-gallery {
-    --column: 400px;
+    --column: minmax(min(100%, 400px), 1fr);
     display: grid;
+    grid-auto-columns: var(--column);
     grid-template-columns: repeat(
       auto-fit,
-      minmax(min(100%, 400px), 1fr)
+      var(--column)
     );
     gap: var(--gap);
     margin-block: 1lh;
@@ -20,9 +21,11 @@
       --span: var(--auto-span);
     }
 
-    gallery-item,
-    [gallery-item] {
-      grid-column: var(--span, initial);
+    @container (inline-size > 800px) {
+      gallery-item,
+      [gallery-item] {
+        grid-column: var(--span, initial);
+      }
     }
 
     img {

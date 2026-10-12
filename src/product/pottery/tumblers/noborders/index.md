@@ -6,6 +6,8 @@ clay: mix
 
 stock: 1
 restock: true
+size: [3.75,4.5,4.5]
+price: 45
 
 gallery:
 - image: ./P1020700.jpg

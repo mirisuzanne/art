@@ -1,6 +1,7 @@
 ---
 title: Planter & tray
 date: 2026-09-22
+clay: chocolate
 
 price: 60
 stock: 1

@@ -29,7 +29,7 @@ const shippingBox = (size, padding, boxes) =>
 
 const sizeToString = (size) => validSize(size)
     ? size.join('×')
-    : 'no size available';
+    : '';
 
 export default function (eleventyConfig) {
   eleventyConfig.addFilter('sizeToString', sizeToString);

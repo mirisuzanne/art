@@ -1,8 +1,10 @@
 ---
 title: Butter bell
 date: 2026-09-22
+clay: chocolate
 
 stock: 1
+size: [4,5,5]
 
 gallery:
 - image: ./P1020857.jpg

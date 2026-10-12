@@ -1,8 +1,10 @@
 ---
 title: Trans fats butter bell
 date: 2026-09-22
+clay: chocolate
 
 stock: 1
+size: [3.5,4.5,4.5]
 
 gallery:
 - image: ./P1020840.jpg

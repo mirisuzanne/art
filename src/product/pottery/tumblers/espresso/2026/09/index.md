@@ -6,6 +6,7 @@ clay: bmx
 size: [2,2,2]
 stock: 0
 price: 20
+restock: true
 
 gallery:
 - image: ./P1020735.jpg

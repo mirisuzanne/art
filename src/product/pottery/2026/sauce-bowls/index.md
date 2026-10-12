@@ -1,10 +1,12 @@
 ---
 title: Dotted sauce bowls
 date: 2026-07-22
+clay: bmx
 tags:
   - Erin's dots
 
 stock: 1
+size: [2,3.5,3.5]
 price: 20
 
 gallery:

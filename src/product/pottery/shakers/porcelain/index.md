@@ -1,8 +1,12 @@
 ---
 title: Salt 'n pepper
 date: 2026-01-06
+clay: frost
 
 stock: 0
+size: [3.5,2,2]
+price: 54
+set: 2
 restock: true
 
 gallery:

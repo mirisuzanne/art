@@ -1,8 +1,10 @@
 ---
 title: Secret stash jar
 date: 2026-09-22
+clay: chocolate
 
 price: 60
+size: [4,4.5,4.5]
 stock: 1
 
 gallery:

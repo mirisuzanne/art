@@ -4,6 +4,7 @@ date: 2025-08-23
 clay: ironstone
 
 stock: 0
+size: [4,8,8]
 restock: true
 
 gallery:

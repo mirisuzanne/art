@@ -42,8 +42,9 @@
         webc:elseif="item.data.flag"
         @text="item.data.flag"
       ></product-flag>
+
       <product-image
-        :@item="item.data.gallery?.find((item) => item.image)"
+        :@item="item.data.gallery?.find((item) => item.image) || $data.site"
         :@url="item.url"
         :@first="this.index === 0"
       ></product-image>

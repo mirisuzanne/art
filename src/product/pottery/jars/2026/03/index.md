@@ -4,6 +4,7 @@ date: 2026-03-15
 clay: mix
 
 price: 60
+size: [4.5,3.5,3.5]
 stock: 1
 
 gallery:

@@ -6,6 +6,7 @@ clay: [ironstone, bmx]
 stock: 2
 restock: true
 price: 60
+size: [7,3.25,3.25]
 
 gallery:
 - image: ./P1020511.jpg
@@ -24,27 +25,33 @@ gallery:
     either pulled in like an hourglass
     or pushed out like a diamond.
 
+- image: ./P1020854.jpg
+  option: 1
+  alt: >
+    Bottle one has a cinched waist
+    with clean angles.
+    The black clay comes nearly to the waist,
+    just below center.
+
+- image: ./P1020925.jpg
+  option: 2
+  alt: >
+    Bottle two is cylindrical,
+    slightly wider at the shoulder than the base.
+    The black clay comes about
+    a third of the main body.
+
 - image: ./P1020852.jpg
-  item: 1
   alt: >
     Bottle one from above,
     with a slightly tapered neck
     to hold a cark and pump.
 
 - image: ./P1020855.jpg
-  item: 1
   alt: >
     The bottom of bottle one,
     with a shallow clay foot ring
     that hides a non-slip rubber sticker.
-
-- image: ./P1020854.jpg
-  item: 1
-  alt: >
-    Bottle one has a cinched waist
-    with clean angles.
-    The black clay comes nearly to the waist,
-    just below center.
 
 summary: >
   Great as a bud vase, bottle,
@@ -58,6 +65,6 @@ summary: >
 Many of these have sold,
 but two are still available:
 
-- back row right, with an angular inset waist
-  (with additional pictures)
-- back row center-right, cylindrical
+1. back row right, with an angular inset waist
+   (with additional pictures)
+2. back row center-right, cylindrical

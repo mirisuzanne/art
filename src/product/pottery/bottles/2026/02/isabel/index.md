@@ -12,7 +12,9 @@ summary: >
 
 flag: customize
 restock: true
+
 price: 75
+size: [7,3.25,3.25]
 
 gallery:
 - image: ./P1020377.jpg

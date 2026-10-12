@@ -32,7 +32,6 @@ tags:
 <p>
   Made by hand in Denver, CO
   <span webc:if="this.clay" @text="`with ${clayList($data)}.`"></span>
-  <span webc:else>with a reclaimed mix of clays.</span>
 
   <span webc:if="this.safety" @html="mdInline(this.safety)"></span>
 

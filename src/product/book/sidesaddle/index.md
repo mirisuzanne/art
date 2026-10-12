@@ -4,6 +4,7 @@ date: 2015-05-01
 tags: [riding sidesaddle]
 
 stock: 15
+size: [5.25,3.25,3.25]
 price: 25
 
 gallery:

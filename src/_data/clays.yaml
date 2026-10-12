@@ -12,7 +12,12 @@ trout:
 ironstone:
   from: New Mexico Clay
 
+chocolate:
+  name: ChoCoLate
+  from: New Mexico Clay
+
 frost:
+  type: porcelain
   from: Laguna Clay Company
 
 kota:
@@ -20,6 +25,4 @@ kota:
   from: Kentucky Mudworks
 
 mix:
-  type: reclaim
-  name: mix of clays
-  from: various sources
+  name: a reclaimed mix of clays

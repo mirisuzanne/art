@@ -3,6 +3,7 @@ date: 2026-09-21
 clay: chocolate
 
 stock: 1
+size: [6.25,4,5.5]
 price: 45
 
 gallery:
