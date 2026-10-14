@@ -10,7 +10,7 @@ class CartControl extends HTMLElement {
     const template = document.createElement("template");
     template.innerHTML = `
       <label for="cart-input"><slot></slot></label>
-      <input id="cart-input" type="number"/>
+      <input id="cart-input" type="number" part="input"/>
     `;
     const shadowRoot = node.attachShadow({ mode: "open" });
     shadowRoot.appendChild(template.content.cloneNode(true));

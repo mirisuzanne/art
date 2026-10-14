@@ -21,6 +21,7 @@ export default async function(eleventyConfig) {
   eleventyConfig.addPlugin(pluginWebc, {
     components: [
       'src/_webc/**/*.webc',
+      'src/_webc/icons/**/*.svg',
       'npm:@11ty/eleventy-img/*.webc',
       'npm:@11ty/is-land/*.webc',
       'npm:@terriblemia/ground-control/*.webc',

@@ -70,7 +70,7 @@
     const cartIndex = this.getItemIndex(url);
     if (!~cartIndex) throw new Error('No item in cart for:', url);
 
-    newCart = this.cart.toSpliced(cartIndex, 1);
+    const newCart = this.cart.toSpliced(cartIndex, 1);
     this.cart = newCart;
   }
 

@@ -28,6 +28,9 @@
     --color-light-feature: hsl(194deg 82.555% 45.938%);
     --color-dark-feature: hsl(194deg 99.455% 22.7%);
 
+    --color-light-danger: red;
+    --color-dark-danger: maroon;
+
     /* background colors */
     --background-color: var(--color-light, Canvas);
     --callout-color: var(--color-light-callout);
@@ -40,6 +43,7 @@
     --action-color: var(--color-dark-action, LinkText);
     --active-color: var(--color-dark-active, ActiveText);
     --feature-color: var(--color-dark-feature, AccentColor);
+    --danger-color: var(--color-dark-danger);
 
     /* scales */
     --spacer: calc(var(--gap) * 2);
@@ -89,6 +93,10 @@
         var(--color-dark-feature, AccentColor),
         var(--color-light-feature, AccentColor)
       ) l c calc(h + var(--filter-hue, 0)));
+      --danger-color: light-dark(
+        var(--color-dark-danger),
+        var(--color-light-danger)
+      );
 
       --feature-gradient: linear-gradient(to right,
         var(--accent-color),
@@ -149,6 +157,12 @@
     border-image: var(--feature-gradient) 1;
     margin-inline: unset;
     padding-inline: 1ch;
+  }
+
+  [data-icon] {
+    vertical-align: middle;
+    fill: currentColor;
+    pointer-events: none;
   }
 
   form-field {

@@ -70,7 +70,7 @@ tags:
     webc:if="showStock($data)"
     :data-title="this.title"
     :data-url="this.page.url"
-    :data-weight="this.lb"
+    :data-weight="this.lb || 2"
     :data-size="paddedSize(this.size, this.padding)"
     :data-price="this.set ? this.price / this.set : this.price"
     :data-stock="this.stock || 50"

@@ -34,7 +34,8 @@ nav:
 <main id="main" data-prose @raw="this.content"></main>
 
 <a href="#cart" id="cart-link" hidden>
-  Cart
+  <fa-cart></fa-cart>
+  cart
   <shop-output
     data-stat="count"
     hide-zero
@@ -56,12 +57,12 @@ nav:
   </noscript>
 </aside>
 
-<!---- <shipping-rates
+<shipping-rates
   show-when="defined"
   data-from="80205"
   data-global="true"
   hidden
-></shipping-rates> ---->
+></shipping-rates>
 
 <check-out>
   <p>
@@ -207,13 +208,17 @@ nav:
 
   #cart-link {
     background: var(--feature-gradient);
-    bottom: var(--gap);
+    border: medium solid;
+    border-radius: 6px;
+    bottom: calc(var(--gap) / 2);
     color: var(--background-color);
-    grid-column: wide;
-    text-decoration-color: currentColor;
+    grid-column: full;
+    margin-inline: calc(var(--gap) / 2);
     padding: 0 1ch;
-    place-self: end;
+    place-self: start;
     position: sticky;
+    text-decoration-color: currentColor;
+    z-index: 2;
   }
 
   #contentinfo {

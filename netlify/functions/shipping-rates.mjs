@@ -5,7 +5,7 @@ const apiOptions = {
 	prod: 'apis.usps.com',
 }
 
-const api = apiOptions.test;
+const api = apiOptions.prod;
 
 let authToken;
 

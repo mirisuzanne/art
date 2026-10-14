@@ -2,7 +2,7 @@
   <thead>
     <th>Name</th>
     <th>Count</th>
-    <th>Pay what you want</th>
+    <th>Per-item</th>
     <th>Cost</th>
   </thead>
   <tbody cart-list></tbody>
@@ -34,15 +34,23 @@
     <th>
       <a href="" item-title>Item title</a>
     </th>
-    <td>
-      <cart-control data-name="count">
-        <visually-hidden>In your cart</visually-hidden>
-      </cart-control>
+    <td data-cell="input">
+      <cart-cell>
+        <cart-control data-name="count">
+          <visually-hidden>In your cart</visually-hidden>
+        </cart-control>
+        <button type="button" remove-item>
+          <fa-trash></fa-trash>
+          <visually-hidden>remove</visually-hidden>
+        </button>
+      </cart-cell>
     </td>
-    <td>
-      <cart-control data-name="userPrice">
-        <visually-hidden>Name your price</visually-hidden>
-      </cart-control>
+    <td data-cell="input">
+      <cart-cell>
+        <cart-control data-name="userPrice">
+          <visually-hidden>Name your price</visually-hidden>
+        </cart-control>
+      </cart-cell>
     </td>
     <td>
       $<shop-output data-stat="itemSubTotal"></shop-output>
@@ -66,6 +74,36 @@
       tfoot {
         background: var(--callout-color);
         font-weight: bold;
+      }
+
+      [data-cell=input] {
+        vertical-align: middle;
+        padding-block: unset;
+      }
+
+      cart-cell {
+        align-items: stretch;
+        column-gap: 1ch;
+        display: flex;
+        flex-flow: wrap;
+      }
+
+      cart-control {
+        display: flex;
+        flex: auto;
+        align-items: stretch;
+
+        &::part(input) {
+          box-sizing: border-box;
+          font: unset;
+          inline-size: 100%;
+        }
+      }
+
+      [remove-item] {
+        &:focus, &:hover, &:active {
+          box-shadow: 0 0 8px var(--danger-color);
+        }
       }
     }
   }
@@ -171,11 +209,20 @@ class ShoppingCart extends HTMLElement {
     rowTitle.href = itemData.url;
     rowTitle.textContent = itemData.title;
 
+    newRow.addEventListener('click', this.#rowClick);
+
     this.#cartList.appendChild(fragment);
   }
 
   #removeLineItem = (itemElement) => {
+    itemElement.removeEventListener('click', this.#rowClick)
     itemElement.remove();
+  }
+
+  #rowClick = (event) => {
+    if (!event.target.hasAttribute('remove-item')) return;
+    this.#shop.removeItem(event.currentTarget.dataset.item);
+    this.#updateFromCart();
   }
 
   // can't get this to work with ifEmpty

@@ -17,6 +17,10 @@ gallery:
     wiring diagrams,
     and heredity charts.
 
+- image: ./P1020940.jpg
+- image: ./P1020941.jpg
+- image: ./P1020942.jpg
+
 summary: >
   A novel on 250 shuffled note cards.
   Memories from a group of queer friends,
