@@ -222,6 +222,7 @@ class ShoppingCart extends HTMLElement {
   #rowClick = (event) => {
     if (!event.target.hasAttribute('remove-item')) return;
     this.#shop.removeItem(event.currentTarget.dataset.item);
+    this.#removeLineItem(event.currentTarget);
     this.#updateFromCart();
   }
 

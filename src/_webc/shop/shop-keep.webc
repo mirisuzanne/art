@@ -50,8 +50,12 @@
   );
 	getItemIndex = (url) => this.cart.findIndex((item) => item.url === url);
 
-  getItemPrice = (item) => Number(item.userPrice || item.price);
-  getItemSubTotal = (item) => Number(item.count) * this.getItemPrice(item);
+  getItemPrice = (item) => item
+    ? Number(item.userPrice || item.price)
+    : undefined;
+  getItemSubTotal = (item) => item
+    ? Number(item.count) * this.getItemPrice(item)
+    : undefined;
 
   setItem = (to) => {
     let item = this.validItem(to);
