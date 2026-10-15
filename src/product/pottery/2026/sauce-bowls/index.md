@@ -5,7 +5,7 @@ clay: bmx
 tags:
   - Erin's dots
 
-stock: 1
+stock: 0
 size: [2,3.5,3.5]
 price: 20
 

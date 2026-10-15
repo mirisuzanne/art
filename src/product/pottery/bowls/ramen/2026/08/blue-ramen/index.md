@@ -3,7 +3,7 @@ title: Blue speckled ramen bowls
 date: 2026-08-13
 clay: trout
 
-stock: 2
+stock: 0
 price: 50
 size: [8,8,4.5]
 
