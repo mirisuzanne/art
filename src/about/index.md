@@ -9,16 +9,8 @@ image:
     and large neon lighting bolt earrings.
 ---
 
-I'm an artist and teacher
+I'm a queer artist and teacher
 living and making in Denver, CO.
-After studying pottery in college
-(along with theater & writing)
-I spent 20 years without access to a studio.
-After covid lock-down,
-I decided to find my way back --
-first weekly,
-then bi-weekly.
-Now I spend most afternoons at Kinship Studio.
 
 ![{{ image.alt }}]({{ image.src }})
 
