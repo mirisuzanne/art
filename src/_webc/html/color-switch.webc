@@ -1,4 +1,43 @@
-<button><slot>Invert colors</slot></button>
+<button>
+	<fa-sun></fa-sun>
+	<fa-moon></fa-moon>
+	<visually-hidden>light/dark</visually-hidden>
+</button>
+
+<style webc:bucket="page">
+@layer page {
+	color-switch {
+		button {
+			align-items: center;
+			display: grid;
+			gap: 0.2ch;
+			grid-template: 'icon';
+			overflow: clip;
+		}
+
+		[data-icon] {
+			display: none;
+			block-size: 1lh;
+			grid-area: icon;
+			opacity: 0;
+			transition: all 300ms ease-out;
+			transform:
+				rotate(calc(45deg * var(--right, -1)))
+				translate(calc(200% * var(--right, -1)))
+			;
+		}
+
+		[data-icon=moon] { --right: 1; }
+
+		&[data-scheme] [data-icon] { display: block; }
+		&[data-scheme=light] [data-icon=sun],
+		&[data-scheme=dark] [data-icon=moon] {
+			opacity: 1;
+			transform: rotate(0deg) translate(0px);
+		}
+	}
+}
+</style>
 
 <script>
 class ColorSwitch extends HTMLElement {
@@ -58,6 +97,7 @@ class ColorSwitch extends HTMLElement {
 
 	setState = () => {
 		const pressed = this.scheme != this.preference;
+		this.dataset.scheme = this.scheme;
 		this.toggle?.setAttribute('aria-pressed', pressed);
 	}
 

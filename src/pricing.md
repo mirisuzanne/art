@@ -1,26 +1,17 @@
 ---
-title: There's no reasonable price for art
-sub: Everyone should have more of it
+title: Listed Prices are Suggestions
+sub: Everyone should have more art
 ---
 
-I post prices for each piece,
-estimating where I think they
-fit in the market.
-But all prices are suggested,
-and you should pay what feels viable to you
-(plus shipping).
+If you can't afford something you love,
+pay what you can.
+Or if you can pay a bit extra,
+that helps cover the difference.
 
-No need to negotiate,
-just _pay what you want_
-(plus shipping).
+The checkout page just sends me an email
+with everything in your cart.
+Once I've confirmed the order,
+you can pay through [Venmo](https://account.venmo.com/u/miriamsuzanne),
+or some alternative.
 
-Here's my
-[Venmo account](https://account.venmo.com/u/miriamsuzanne),
-but there are other options too.
-
-If you're able to pay
-more than the suggestion,
-that helps cover people
-who can't afford as much --
-and it also helps me to keep making.
-Thank you!
+Thanks!

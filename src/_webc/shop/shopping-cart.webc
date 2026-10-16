@@ -1,4 +1,8 @@
-<table>
+<p cart-empty>
+  Your cart is currently empty…
+</p>
+
+<table cart-table>
   <thead>
     <th>Name</th>
     <th>Count</th>
@@ -6,13 +10,6 @@
     <th>Cost</th>
   </thead>
   <tbody cart-list></tbody>
-  <tbody cart-empty>
-    <tr >
-      <td colspan="4">
-        Your cart is currently empty
-      </td>
-    </tr>
-  </tbody>
   <tfoot>
     <tr>
       <th>Total</th>
@@ -61,11 +58,13 @@
 <style webc:bucket="page">
   @layer tools {
     shopping-cart {
-      border-block-start: medium solid var(--accent-color);
-      border-image: var(--feature-gradient) 1;
       display: grid;
-      margin-block-start: var(--gap);
-      padding: var(--gap);
+
+      [cart-empty] {
+        border: thin dotted var(--border-color);
+        font-style: italic;
+        padding: var(--gap);
+      }
 
       thead, tfoot {
         font-size: smaller;
@@ -89,14 +88,11 @@
       }
 
       cart-control {
-        display: flex;
-        flex: auto;
         align-items: stretch;
+        flex: auto;
 
         &::part(input) {
-          box-sizing: border-box;
-          font: unset;
-          inline-size: 100%;
+          flex: 1;
         }
       }
 
@@ -118,6 +114,7 @@ class ShoppingCart extends HTMLElement {
 	}
 
   #shop;
+  #cartTable;
   #cartList;
   #cartEmpty;
   #lineItemTemplate;
@@ -156,6 +153,7 @@ class ShoppingCart extends HTMLElement {
 
   connectedCallback() {
     this.#shop = document.querySelector('shop-keep');
+    this.#cartTable = this.querySelector('[cart-table]');
     this.#cartList = this.querySelector('[cart-list]');
     this.#cartEmpty = this.querySelector('[cart-empty]');
     this.#lineItemTemplate = this.querySelector('template#line-item-template');
@@ -239,10 +237,10 @@ class ShoppingCart extends HTMLElement {
   }
 
   #ifEmpty = () => {
-    this.#cartEmpty.toggleAttribute(
-      'hidden',
-      this.#cartList.children.length > 0
-    );
+    const isEmpty = this.#cartList.children.length === 0;
+
+    this.#cartTable.toggleAttribute('hidden', isEmpty);
+    this.#cartEmpty.toggleAttribute('hidden', !isEmpty);
   }
 
   // shipping

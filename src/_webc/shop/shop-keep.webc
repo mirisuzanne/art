@@ -101,6 +101,10 @@
     return item;
   }
 
+  removeAll = () => {
+    this.cart = [];
+  }
+
   #onChange = () => {
     this.dispatchEvent(ShopKeep.cartChange);
   }

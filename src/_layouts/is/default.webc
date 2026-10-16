@@ -8,3 +8,11 @@ layout: is/page
 </header>
 
 <div webc:nokeep @raw="this.content"></div>
+
+<style webc:bucket="page">
+  @layer layout {
+    #main > header {
+      margin-block-end: var(--spacer);
+    }
+  }
+</style>

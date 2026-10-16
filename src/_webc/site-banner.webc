@@ -1,0 +1,85 @@
+<header id="banner" webc:root="override">
+  <a
+    href="/"
+    rel="home"
+    @attributes="({
+      'aria-current': $data.page.url === '/' ? 'page' : null,
+    })"
+  >shop</a>
+  <nav id="main-nav" webc:if="$data.nav">
+    <a
+      webc:for="(name, url) in $data.nav"
+      :href="url"
+      @text="name"
+      @attributes="({
+        'aria-current': url === $data.page.url ? 'page' : null,
+      })"
+    ></a>
+    <a
+      href="/checkout/cart/"
+      id="cart-link"
+      @attributes="({
+        'aria-current': $data.page.url === '/checkout/cart/' ? 'page' : null,
+      })"
+    >
+      <fa-cart></fa-cart>
+      cart
+      <shop-output
+        data-stat="count"
+        hide-zero
+      ></shop-output>
+    </a>
+  </nav>
+  <color-switch show-when="js"></color-switch>
+</header>
+
+<style webc:bucket="page">
+  @layer layout {
+    #banner {
+      --name: banner;
+      display: grid;
+      gap: var(--shim);
+      grid-template:
+        'home colors' auto
+        'nav nav' auto
+        / 1fr auto
+      ;
+
+      @media (width > 45em) {
+        --justify-nav: end;
+        grid-template:
+          'home nav colors' auto
+          / auto 1fr auto
+        ;
+      }
+
+      [rel=home] {
+        font-family: var(--fonts-serif);
+        font-style: italic;
+        grid-area: home;
+      }
+    }
+
+    #main-nav {
+      display: flex;
+      gap: var(--shim);
+      grid-area: nav;
+      justify-content: var(--justify-nav);
+    }
+
+    #cart-link {
+      border: thin solid var(--border-color);
+      border-radius: 3px;
+      padding: 0 1ch;
+
+      &[aria-current=page] {
+        text-decoration: none;
+      }
+
+      shop-output {
+        &::before { content: ' ('; }
+        &::after { content: ')'; }
+      }
+    }
+  }
+</style>

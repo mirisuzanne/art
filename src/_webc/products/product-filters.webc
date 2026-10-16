@@ -33,10 +33,13 @@
 <style webc:bucket="page">
   @layer layout {
     product-filters {
-      display: block;
+      display: contents;
       font-size: smaller;
-      justify-self: end;
-      margin-block-start: var(--spacer);
+
+      switch-group {
+        justify-self: end;
+        margin-block-start: var(--spacer);
+      }
     }
 
     [data-stock=demand]:not([show-restock=true] *) {

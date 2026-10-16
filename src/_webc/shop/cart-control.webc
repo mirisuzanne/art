@@ -1,3 +1,18 @@
+<style webc:bucket="page">
+  @layer tools {
+    cart-control {
+      align-items: baseline;
+      display: flex;
+      gap: 1ch;
+
+      &::part(input) {
+        box-sizing: border-box;
+        font: unset;
+      }
+    }
+  }
+</style>
+
 <script>
 class CartControl extends HTMLElement {
 	static register(tagName) {

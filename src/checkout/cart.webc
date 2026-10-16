@@ -1,0 +1,34 @@
+---
+title: Shopping cart
+---
+
+<noscript>
+  <p>
+    The shopping cart requires Javascript,
+    but you can email me your order:
+    <a href="mailto:miriam@miriamsuzanne.com">miriam@miriamsuzanne.com</a>
+  </p>
+</noscript>
+
+<shopping-cart
+  show-when="defined"
+  grid-container="pull"
+  id="cart"
+></shopping-cart>
+
+<shipping-rates
+  show-when="defined"
+  data-from="80205"
+  data-global="true"
+  hidden
+></shipping-rates>
+
+<check-out>
+  <p>
+    Drop me a note.
+    I'll be in touch
+    to confirm the order,
+    or answer any questions you have.
+    We'll sort out payment from there.
+  </p>
+</check-out>

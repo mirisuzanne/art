@@ -11,7 +11,8 @@ summary: >
   or overturn on the table and use for toppings.
 
 stock: 0
-price: 75
+restock: true
+price: 80
 size: [9,9,5.5]
 
 gallery:

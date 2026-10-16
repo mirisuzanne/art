@@ -7,23 +7,52 @@ tags:
 <header>
   <h1 @html="mdInline(this.title)"></h1>
   <sub-title webc:if="this.sub" @html="mdInline(this.sub)"></sub-title>
-
-  <div>
-    <span webc:if="inStock($data)">
-      <time
-        :datetime="this.page.date.toISOString()"
-        @text="dateFormat(this.page.date)"
-      ></time>
-      –
-    </span>
-    <em webc:if="reStock($data)">Made to order</em>
-    <em
-      webc:elseif="inStock($data)"
-      @text="`${this.stock} in stock`"
-    ></em>
-    <em webc:else>Sold</em>
-  </div>
 </header>
+
+<product-details>
+  <dl>
+    <div>
+      <dt>stock</dt>
+      <dd webc:if="reStock($data)">made to order</dd>
+      <dd
+        webc:elseif="inStock($data)"
+        @text="`${this.stock} in stock`"
+      ></dd>
+      <dd webc:else><strong>Sold</strong></dd>
+    </div>
+    <div webc:if="sizeToString(this.size)">
+      <dt>size</dt>
+      <dd @text="`${sizeToString(this.size)} inches`"></dd>
+    </div>
+    <div webc:if="this.lb">
+      <dt>weight</dt>
+      <dd @text="`${this.lb}lb`"></dd>
+    </div>
+    <div webc:if="this.price && this.showStock($data)">
+      <dt><a href="/pricing/">suggested price</a></dt>
+      <dd>
+        $<span @text="this.price"></span>
+        <span
+          webc:if="this.set"
+          @text="`for a set of ${this.set}`"
+        ></span>
+        <span webc:elseif="this.stock > 1 || this.restock">each</span>
+      </dd>
+    </div>
+  </dl>
+
+  <add-to-cart
+    webc:if="showStock($data)"
+    show-when="defined"
+    :data-title="this.title"
+    :data-url="this.page.url"
+    :data-weight="this.lb || 2"
+    :data-size="paddedSize(this.size, this.padding)"
+    :data-price="this.set ? this.price / this.set : this.price"
+    :data-stock="this.stock || 50"
+    :data-count="this.set || 1"
+  ></add-to-cart>
+</product-details>
 
 <div webc:if="this.summary" @html="mdBlock(this.summary)"></div>
 
@@ -41,43 +70,6 @@ tags:
 </figure>
 
 <div webc:nokeep @raw="this.content"></div>
-
-<product-details webc:if="showStock($data) && (this.size || this.lb || this.price)">
-  <strong>Details…</strong>
-  <dl>
-    <div webc:if="sizeToString(this.size)">
-      <dt>size</dt>
-      <dd @text="`${sizeToString(this.size)} inches`"></dd>
-    </div>
-    <div webc:if="this.lb">
-      <dt>weight</dt>
-      <dd @text="`${this.lb}lb`"></dd>
-    </div>
-    <div webc:if="this.price">
-      <dt><a href="/pricing/">suggested price</a></dt>
-      <dd>
-        $<span @text="this.price"></span>
-        <span
-          webc:if="this.set"
-          @text="`for a set of ${this.set}`"
-        ></span>
-        <span webc:elseif="this.stock > 1 || this.restock">each</span>
-      </dd>
-    </div>
-  </dl>
-
-  <add-to-cart
-    webc:if="showStock($data)"
-    :data-title="this.title"
-    :data-url="this.page.url"
-    :data-weight="this.lb || 2"
-    :data-size="paddedSize(this.size, this.padding)"
-    :data-price="this.set ? this.price / this.set : this.price"
-    :data-stock="this.stock || 50"
-    :data-count="this.set || 1"
-    show-when="defined"
-  ></add-to-cart>
-</product-details>
 
 <tag-list></tag-list>
 
@@ -103,20 +95,11 @@ tags:
   product-details {
     background: var(--callout-color);
     display: grid;
-    gap: var(--shim);
-    grid-template-columns: var(--shim) 1fr var(--shim);
-    padding-block-end: var(--shim);
+    gap: var(--gap);
+    padding: var(--gap);
 
     & > * {
       margin-block: unset;
-      grid-column: 2;
-    }
-
-    strong {
-      background: var(--feature-gradient);
-      color: var(--background-color);
-      grid-column: 1 / -1;
-      padding: calc(var(--shim) / 2) var(--shim);
     }
 
     dt, dd { display: inline; }
@@ -128,6 +111,11 @@ tags:
     }
 
     dd { margin: unset; }
+  }
+
+  purchase-item {
+    display: flex;
+    gap: 1ch;
   }
 }
 </style>

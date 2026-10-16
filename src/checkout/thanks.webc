@@ -1,0 +1,25 @@
+---
+title: Thanks for your order!
+---
+
+<call-out>
+  <p>
+    I'll get back to you soon
+    with an order confirmation,
+    and answers to any questions.
+    We can work out
+    shipping and payment from there.
+  </p>
+</call-out>
+
+<script>
+  const clearShop = async () => {
+    const shop = document.querySelector('shop-keep');
+    await customElements.whenDefined(shop.localName);
+    console.log(shop);
+
+    shop.removeAll();
+  }
+
+  clearShop();
+</script>

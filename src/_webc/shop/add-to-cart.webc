@@ -1,6 +1,20 @@
-<button aria-pressed="false">
-  Add to cart
-</button>
+<button aria-pressed="false">Add to cart</button>
+<cart-control
+  hidden
+  data-name="count"
+  :data-item="this.dataUrl"
+>
+  In cart…
+</cart-control>
+
+<style webc:bucket="page">
+  @layer tools {
+    add-to-cart {
+      display: flex;
+      gap: 1ch;
+    }
+  }
+</style>
 
 <script>
 class AddToCart extends HTMLElement {
@@ -12,6 +26,7 @@ class AddToCart extends HTMLElement {
 
   #shop;
 	#button;
+  #controls;
 
   get url() {
     return this.dataset.url;
@@ -33,9 +48,14 @@ class AddToCart extends HTMLElement {
     return this.#shop.getItem(this.item.url)?.count;
   }
 
+  get isInCart() {
+    return this.inCart > 0;
+  }
+
 	connectedCallback() {
     this.#shop = document.querySelector('shop-keep');
     this.#button = this.querySelector('button');
+    this.#controls = this.querySelectorAll('cart-control');
 
     if (!this.#shop) throw new Error('This shopping cart needs a shop!');
     if (!this.#button) throw new Error('Need a button for adding to cart');
@@ -45,7 +65,7 @@ class AddToCart extends HTMLElement {
 
 	disconnectedCallback() {
 		this.#button.removeEventListener("click", this.#AddToCart);
-    document.removeEventListener('cartChange', (e) => this.#SetButtonState());
+    document.removeEventListener('cartChange', (e) => this.#SetItemState());
 	}
 
 	// private methods
@@ -53,23 +73,26 @@ class AddToCart extends HTMLElement {
     await customElements.whenDefined(this.#shop.localName);
 
     this.#button.addEventListener("click", (e) => this.#AddToCart());
-    document.addEventListener('cartChange', (e) => this.#SetButtonState());
+    document.addEventListener('cartChange', (e) => this.#SetItemState());
 
-    this.#SetButtonState();
+    this.#SetItemState();
   }
 
 	#AddToCart = () => {
-    if (this.inCart > 0) return;
+    if (this.isInCart) {
+      this.#shop.removeItem(this.url);
+      return;
+    }
 
     this.#shop.setItem(this.item);
 	}
 
-  #SetButtonState = () => {
-    this.#button.setAttribute('aria-pressed', this.inCart > 0);
-
-    this.#button.textContent = this.inCart > 0
-      ? `${this.inCart} in cart`
-      : `Add to cart`;
+  #SetItemState = () => {
+    this.#button.setAttribute('aria-pressed', this.isInCart);
+    this.#controls.forEach((control) => {
+      if (control.matches(':focus')) return;
+      control.toggleAttribute('hidden', !this.isInCart);
+    });
 	}
 }
 

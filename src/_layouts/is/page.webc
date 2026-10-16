@@ -9,74 +9,8 @@ nav:
 ---
 
 <shop-keep></shop-keep>
-
-<header id="banner">
-  <a
-    href="/"
-    rel="home"
-    @attributes="({
-      'aria-current': this.page.url === '/' ? 'page' : null,
-    })"
-  >shop</a>
-  <nav id="main-nav" webc:if="this.nav">
-    <a
-      webc:for="(name, url) in this.nav"
-      :href="url"
-      @text="name"
-      @attributes="({
-        'aria-current': url === this.page.url ? 'page' : null,
-      })"
-    ></a>
-  </nav>
-  <color-switch show-when="js">light/dark</color-switch>
-</header>
-
+<site-banner></site-banner>
 <main id="main" data-prose @raw="this.content"></main>
-
-<a href="#cart" id="cart-link" hidden>
-  <fa-cart></fa-cart>
-  cart
-  <shop-output
-    data-stat="count"
-    hide-zero
-  ></shop-output>
-</a>
-
-<aside shopping-cart>
-  <shopping-cart
-    show-when="defined"
-    id="cart"
-  ></shopping-cart>
-
-  <noscript>
-    <p>
-      The shopping cart requires Javascript,
-      but you can email me instead:
-      <a href="mailto:miriam@miriamsuzanne.com">miriam@miriamsuzanne.com</a>
-    </p>
-  </noscript>
-</aside>
-
-<shipping-rates
-  show-when="defined"
-  data-from="80205"
-  data-global="true"
-  hidden
-></shipping-rates>
-
-<check-out>
-  <p>
-    Drop me a note.
-    I'll be in touch
-    to confirm the order,
-    or answer any questions you have.
-    You can
-    <a href="https://account.venmo.com/u/miriamsuzanne">
-      pay me on Venmo
-    </a>
-    once the order is confirmed.
-  </p>
-</check-out>
 
 <footer id="contentinfo">
   <p>
@@ -120,10 +54,14 @@ nav:
       minmax(0, var(--pull, 1fr)) [pull-end]
       minmax(0, 1fr) [wide-end]
       var(--gap) [full-end];
+    align-items: start;
+    box-sizing: border-box;
     display: grid;
     row-gap: var(--spacer);
     grid-template-columns: var(--content-grid-columns);
-    margin: 1lh 0;
+    grid-template-rows: auto 1fr;
+    padding: 1lh 0;
+    min-block-size: 100%;
 
     @media (width > 50em) {
       --pull: 8ch;
@@ -132,38 +70,6 @@ nav:
     & > * {
       grid-column: var(--grid-column, content);
     }
-  }
-
-  #banner {
-    --name: banner;
-    display: grid;
-    gap: var(--shim);
-    grid-template:
-      'home colors' auto
-      'nav nav' auto
-      / 1fr auto
-    ;
-
-    @media (width > 45em) {
-      --justify-nav: end;
-      grid-template:
-        'home nav colors' auto
-        / auto 1fr auto
-      ;
-    }
-
-    [rel=home] {
-      font-family: var(--fonts-serif);
-      font-style: italic;
-      grid-area: home;
-    }
-  }
-
-  #main-nav {
-    display: flex;
-    gap: var(--shim);
-    grid-area: nav;
-    justify-content: var(--justify-nav);
   }
 
   main {
@@ -204,21 +110,6 @@ nav:
 
   [shopping-cart] {
     --grid-column: full;
-  }
-
-  #cart-link {
-    background: var(--feature-gradient);
-    border: medium solid;
-    border-radius: 6px;
-    bottom: calc(var(--gap) / 2);
-    color: var(--background-color);
-    grid-column: full;
-    margin-inline: calc(var(--gap) / 2);
-    padding: 0 1ch;
-    place-self: start;
-    position: sticky;
-    text-decoration-color: currentColor;
-    z-index: 2;
   }
 
   #contentinfo {
