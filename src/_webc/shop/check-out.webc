@@ -2,6 +2,7 @@
   name="checkout"
   method="POST"
   data-netlify="true"
+  action="/checkout/thanks/"
   data-prose
 >
   <slot></slot>
