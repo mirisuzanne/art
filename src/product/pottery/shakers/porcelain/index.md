@@ -5,7 +5,7 @@ clay: frost
 
 stock: 0
 size: [3.5,2,2]
-price: 54
+price: 60
 set: 2
 restock: true
 
