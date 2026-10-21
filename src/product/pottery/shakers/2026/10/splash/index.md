@@ -3,7 +3,7 @@ title: Salt 'n pepper
 date: 2026-10-20
 clay: frost
 
-stock: 2
+stock: 0
 size: [3.25,2.5,2.5]
 price: 60
 set: 2

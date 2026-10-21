@@ -1,7 +1,5 @@
 ---
-title: Two-tone bottles & pumps
 date: 2026-03-31
-clay: [ironstone, bmx]
 
 stock: 2
 restock: true
@@ -57,14 +55,8 @@ summary: >
   Great as a bud vase, bottle,
   or pump dispenser --
   these are available in various sizes and shapes.
-  Let me know if there's a specific shape you're interested in.
-  Includes the optional pump
-  and no-slip rubber foot.
 ---
 
-Many of these have sold,
-but two are still available:
-
-1. back row right, with an angular inset waist
-   (with additional pictures)
-2. back row center-right, cylindrical
+Let me know if there's a specific shape you're interested in.
+Includes the optional pump
+and no-slip rubber foot.
