@@ -2,7 +2,6 @@
 title: Two tone bottle vase
 date: 2026-10-14
 
-size: [7,3,3]
 stock: 1
 
 gallery:

@@ -30,7 +30,13 @@
       <a
         product-title
         :href="item.url"
-      ><span @text="item.data.title"></span></a>
+      >
+        <span @text="item.data.title"></span>
+      </a>
+      <product-price
+        webc:if="item.data.price"
+        @text="`$${item.data.price}`"
+      ></product-price>
       <product-flag
         webc:if="reStock(item.data)"
         @text="item.data.flag || 'made to order'"
@@ -61,9 +67,9 @@
     [product-card] {
       display: grid;
       grid-template:
-        'image flag' auto
-        'title title' auto
-        / 1fr auto
+        'image flag flag' auto
+        'title title price' auto
+        / 1fr auto auto
       ;
     }
 
@@ -82,6 +88,12 @@
       span {
         grid-area: title;
       }
+    }
+
+    product-price {
+      grid-area: price;
+      z-index: 1;
+      opacity: 0.75;
     }
 
     product-flag {

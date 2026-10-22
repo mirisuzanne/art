@@ -1,14 +1,12 @@
 ---
+layout: is/collection
 title: Two-tone bottles & pumps
 date: 2026-03-31
+list: bottles
+override:tags: [list]
 
-stock: 2
-restock: true
-price: 60
-size: [7,3.25,3.25]
-
-gallery:
-- image: ./P1020511.jpg
+image:
+  src: ./P1020511.jpg
   alt: >
     Six ceramic bottles,
     each with a black clay base
@@ -23,13 +21,5 @@ gallery:
     but a couple have an extra angular waist
     either pulled in like an hourglass
     or pushed out like a diamond.
-
-summary: >
-  Great as a bud vase, bottle,
-  or pump dispenser --
-  these are available in various sizes and shapes.
 ---
 
-Let me know if there's a specific shape you're interested in.
-Includes the optional pump
-and no-slip rubber foot.

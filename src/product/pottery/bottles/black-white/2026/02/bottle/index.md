@@ -2,8 +2,6 @@
 date: 2026-02-12
 
 stock: 1
-price: 60
-size: [7,3.5,3.5]
 
 gallery:
 - image: ./P1020925.jpg
