@@ -1,4 +1,5 @@
 ---
+title: Two-tone bottles & pumps
 date: 2026-03-31
 
 stock: 2
@@ -22,34 +23,6 @@ gallery:
     but a couple have an extra angular waist
     either pulled in like an hourglass
     or pushed out like a diamond.
-
-- image: ./P1020854.jpg
-  option: 1
-  alt: >
-    Bottle one has a cinched waist
-    with clean angles.
-    The black clay comes nearly to the waist,
-    just below center.
-
-- image: ./P1020925.jpg
-  option: 2
-  alt: >
-    Bottle two is cylindrical,
-    slightly wider at the shoulder than the base.
-    The black clay comes about
-    a third of the main body.
-
-- image: ./P1020852.jpg
-  alt: >
-    Bottle one from above,
-    with a slightly tapered neck
-    to hold a cark and pump.
-
-- image: ./P1020855.jpg
-  alt: >
-    The bottom of bottle one,
-    with a shallow clay foot ring
-    that hides a non-slip rubber sticker.
 
 summary: >
   Great as a bud vase, bottle,
