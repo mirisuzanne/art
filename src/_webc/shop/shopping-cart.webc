@@ -257,6 +257,7 @@ class ShoppingCart extends HTMLElement {
       id: item.url.slice(1,-1).replaceAll('/', '_'),
       size: item.size.split(',').map((d) => Number(d)),
       weight: Number(item.weight),
+      count: Number(item.count),
     }));
 
     this.#shipping.items = all;

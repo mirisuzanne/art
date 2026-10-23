@@ -101,7 +101,7 @@ const rateForItem = async (shipping, item) => {
 		? await domesticRates(shipping, item)
 		: await globalRates(shipping, item);
 
-	return Number(reply.totalBasePrice);
+	return Number(reply.totalBasePrice) * item.count;
 }
 
 const getRatesForItems = async (shipping, items) => {
@@ -112,11 +112,13 @@ const getRatesForItems = async (shipping, items) => {
 const numberSort = (list) => list.toSorted((a,b) => b - a);
 
 const expandItem = (str) => {
-	const parts = str.split('@');
-	const size = numberSort(parts[0].split('x').map((n) => Number(n)));
+	const count = str.split('*');
+	const details = count[0].split('@');
+	const size = numberSort(details[0].split('x').map((n) => Number(n)));
 
 	let item = {
-		weight: Number(parts[1]),
+		count: Number(count[1] || 1),
+		weight: Number(details[1]),
 		length: size[0],
 		height: size[1],
 		width: size[2],

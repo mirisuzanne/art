@@ -4,6 +4,7 @@ clay: trout
 date: 2026-08-09
 
 stock: 2
+oz: 31.1
 price: 50
 size: [8,8,4]
 

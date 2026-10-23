@@ -326,7 +326,9 @@ class ShippingRates extends HTMLElement {
 		this.items.forEach((item) => {
 			const inSitu = this.#findInput(item.id);
 			const itemInput = inSitu || this.#buildInput(item.id);
-			itemInput.value = `${item.size.join('x')}@${item.weight}`;
+			console.log(item);
+
+			itemInput.value = `${item.size.join('x')}@${item.weight}*${item.count}`;
 
 			if (!inSitu) this.#formItemList.appendChild(itemInput);
 		});
@@ -357,6 +359,7 @@ class ShippingRates extends HTMLElement {
 		this.updateItem({
 			id: 'dataset',
 			weight: Number(this.dataset.weight),
+			count: Number(this.dataset.count) || 1,
 			size: this.dataset.size
 				? this.#sizeFromString(this.dataset.size)
 				: this.#validSize([
