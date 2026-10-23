@@ -33,14 +33,15 @@ gallery:
     towards the neck,
     bare white clay with occasional spray of color.
 - image: ./P1020893.jpg
-  # alt: >
-  #   @
-- image: ./P1020894.jpg
-  # alt: >
-  #   @
+  alt: >
+    The top is a bare white clay
+    with only subtle splashes of burning -
+    and a small chip on the inside of the rim.
 - image: ./P1020895.jpg
-  # alt: >
-  #   @
+  alt: >
+    The base has a shallow angular foot ring,
+    and an interesting high-contrast burn mark
+    on an otherwise sepia field.
 ---
 
 The plaster-like texturing

@@ -17,9 +17,14 @@ gallery:
     wiring diagrams,
     and heredity charts.
 
-- image: ./P1020940.jpg
 - image: ./P1020941.jpg
-- image: ./P1020942.jpg
+  alt: >
+    The box opens in two parts,
+    the upper section sliding off
+    to reveal 250-some note cards
+    with text and images.
+    Inside the box is written
+    it's hard to say what happened first.
 
 summary: >
   A novel on 250 shuffled note cards.
