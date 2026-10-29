@@ -4,7 +4,7 @@ sub: No cops, no cages, no borders
 date: 2026-04-01
 clay: mix
 
-stock: 1
+stock: 0
 restock: true
 size: [3.75,4.5,4.5]
 price: 45
