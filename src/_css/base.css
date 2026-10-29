@@ -50,7 +50,6 @@
     --shim: calc(var(--gap) / 2);
 
     font-size: max(1em, 20px);
-    color-scheme: light;
     filter:
       brightness(var(--filter-brightness, 1))
       contrast(var(--filter-contrast, 1))
@@ -59,8 +58,6 @@
 
   html,
   [data-theme] {
-    color-scheme: light dark;
-
     @supports (color: light-dark(pink, teal)) {
       /* background colors */
       --background-color: oklch(from light-dark(
@@ -309,7 +306,6 @@
 @layer starter.reset {
   html {
     block-size: 100%;
-    color-scheme: light dark;
     overflow-wrap: break-word;
     -webkit-text-size-adjust: none;
     text-size-adjust: none;

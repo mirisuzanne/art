@@ -48,20 +48,22 @@ class ColorSwitch extends HTMLElement {
 	};
 
 	toggle;
+	meta;
+
+	#darkModePref;
 
 	get storage() {
 		return localStorage.getItem('color-scheme');
 	}
 
 	get preference() {
-		return window?.matchMedia?.('(prefers-color-scheme:dark)')?.matches
+		return this.#darkModePref?.matches
 			? 'dark'
 			: 'light';
 	}
 
 	get scheme() {
-		const rootStyle = window.getComputedStyle(document.documentElement);
-		const value = rootStyle.getPropertyValue('color-scheme');
+		const value = this.meta.getAttribute('content');
 
 		return value.includes(' ')
 			? this.preference
@@ -70,23 +72,26 @@ class ColorSwitch extends HTMLElement {
 
 	set scheme(mode) {
 		localStorage.setItem('color-scheme', mode);
-		document.documentElement.style.setProperty('color-scheme', mode);
-		this.setState();
+		this.meta.setAttribute('content', mode);
+		this.setToggleState();
 	};
 
 	connectedCallback() {
+		this.#darkModePref = window.matchMedia("(prefers-color-scheme: dark)");
+
     this.#findToggle();
-		this.#addToggleListener();
+    this.#findMeta();
+		this.#addListeners();
 
 		if (this.storage) {
 			this.scheme = this.storage;
 		} else {
-			this.scheme = this.preference;
+			this.setToggleState();
 		}
   };
 
   disconnectedCallback() {
-    this.#removeToggleListener();
+    this.#removeListeners();
   };
 
 	doToggle = () => {
@@ -95,7 +100,7 @@ class ColorSwitch extends HTMLElement {
 			: 'light';
 	}
 
-	setState = () => {
+	setToggleState = () => {
 		const pressed = this.scheme != this.preference;
 		this.dataset.scheme = this.scheme;
 		this.toggle?.setAttribute('aria-pressed', pressed);
@@ -106,12 +111,18 @@ class ColorSwitch extends HTMLElement {
 		this.toggle?.setAttribute('type', 'button');
 	}
 
-	#addToggleListener = () => {
-		this.toggle?.addEventListener('click', (e) => this.doToggle());
+	#findMeta = () => {
+		this.meta = document.querySelector('meta[name=color-scheme]');
 	}
 
-	#removeToggleListener = () => {
+	#addListeners = () => {
+		this.toggle?.addEventListener('click', (e) => this.doToggle());
+		this.#darkModePref?.addEventListener('change', (e) => this.setToggleState());
+	}
+
+	#removeListeners = () => {
 		this.toggle?.removeEventListener('click', (e) => this.doToggle());
+		this.#darkModePref?.removeEventListener('change', (e) => this.setToggleState());
 	}
 }
 
