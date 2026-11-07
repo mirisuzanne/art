@@ -1,7 +1,7 @@
 ---
 date: 2026-01-22
 
-stock: 1
+stock: 0
 
 gallery:
 
