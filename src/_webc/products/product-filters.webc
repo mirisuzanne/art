@@ -10,7 +10,7 @@
 <switch-group
   webc:if="showFilters(this.stockData)"
 >
-  <em>Show…</em>
+  <em>Include…</em>
 
   <switch-control
     webc:if="this.stockData.restock > 0"
@@ -18,7 +18,11 @@
     data-attr="show-restock"
     data-on="true"
   >
-    <button aria-pressed="true">made to order</button>
+    <button
+      @attributes="({
+        'aria-pressed': !this.stockData.stock,
+      })"
+    >made to order</button>
   </switch-control>
 
   <switch-control
