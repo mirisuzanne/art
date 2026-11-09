@@ -17,10 +17,11 @@
     data-for="#product-list"
     data-attr="show-restock"
     data-on="true"
+    :@stock-data="this.stockData"
   >
     <button
       @attributes="({
-        'aria-pressed': !this.stockData.stock,
+        'aria-pressed': !stockData.stock,
       })"
     >made to order</button>
   </switch-control>
@@ -29,6 +30,7 @@
     data-for="#product-list"
     data-attr="show-sold"
     data-on="true"
+    :@stock-data="this.stockData"
   >
     <button>sold</button>
   </switch-control>
