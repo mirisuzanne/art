@@ -3,9 +3,9 @@ title: Utensil jar
 date: 2026-09-25
 clay: chocolate
 
-price: 60
+price: 80
 size: [7.5,5.25,5.25]
-stock: 1
+stock: 0
 
 gallery:
 - image: ./P1020938.jpg

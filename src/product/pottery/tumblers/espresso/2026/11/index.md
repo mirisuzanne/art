@@ -4,7 +4,7 @@ date: 2026-11-04
 clay: bmx
 
 size: [2.5,2,2]
-stock: 8
+stock: 7
 price: 20
 restock: true
 

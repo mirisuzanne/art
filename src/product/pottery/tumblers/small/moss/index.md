@@ -3,7 +3,7 @@ title: Small Tumblers
 date: 2026-01-09
 clay: mix
 
-price: 25
+price: 30
 size: [3.5,3,3]
 restock: true
 

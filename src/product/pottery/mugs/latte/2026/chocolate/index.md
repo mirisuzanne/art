@@ -5,7 +5,7 @@ clay: chocolate
 
 price: 40
 size: [3,4.5,6.5]
-stock: 2
+stock: 0
 
 gallery:
 - image: ./P1020292.jpg
