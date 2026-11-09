@@ -24,7 +24,7 @@
         : 'stock';
       const collection = data.collections[from].toReversed();
       const latest = collection.find((page) => page.data.gallery);
-      imageData = getImage(latest.data.gallery, latest.page.url);
+      if (latest) imageData = getImage(latest.data.gallery, latest.page.url);
     }
 
     return imageData;
